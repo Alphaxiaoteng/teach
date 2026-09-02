@@ -1,0 +1,128 @@
+{
+  "schema_version": "2.0",
+  "story_id": "story_53715ada30",
+  "title": "气球飞走了",
+  "category": "4张图的故事",
+  "suitable_age": [
+    "large"
+  ],
+  "scene_theme": "互助 / 分享 / 意外变化",
+  "themes": [
+    "互助",
+    "分享",
+    "意外变化"
+  ],
+  "quality": {
+    "status": "ready",
+    "flags": [
+      "sequence_title_tension"
+    ],
+    "notes": [
+      "画面显示部分气球受风影响并在伙伴间转移，并非全部气球飞走。"
+    ]
+  },
+  "sequence_policy": {
+    "use_image_order": true,
+    "allow_inference": true,
+    "must_mark_uncertain": true,
+    "do_not_override_visible_facts_with_title": true
+  },
+  "images": [
+    {
+      "image_id": "story_53715ada30_frame_1",
+      "order": 1,
+      "file": "1.jpg",
+      "image_url": "/story-assets/4张图的故事/气球飞走了/1.jpg",
+      "private_annotations": {
+        "visible_summary": "小熊手里牵着五只彩色气球，小兔在旁边高兴地举手。",
+        "tags": [
+          "角色:小熊",
+          "角色:小兔",
+          "动作:拿着气球",
+          "物体:五只气球",
+          "场景:户外",
+          "表情:开心"
+        ],
+        "uncertainties": [],
+        "sensitivity": []
+      },
+      "visual_clues": [
+        "小熊手里有几只气球？",
+        "它们有哪些颜色？"
+      ]
+    },
+    {
+      "image_id": "story_53715ada30_frame_2",
+      "order": 2,
+      "file": "2.jpg",
+      "image_url": "/story-assets/4张图的故事/气球飞走了/2.jpg",
+      "private_annotations": {
+        "visible_summary": "风吹起来，小熊用力抓住三只气球，小兔在旁边皱眉。",
+        "tags": [
+          "角色:小熊",
+          "角色:小兔",
+          "动作:抓紧气球",
+          "物体:三只气球",
+          "场景:户外",
+          "天气:大风",
+          "表情:担心"
+        ],
+        "uncertainties": [],
+        "sensitivity": []
+      },
+      "visual_clues": [
+        "第二张里天气发生了什么变化？",
+        "比一比，气球数量有没有变化？"
+      ]
+    },
+    {
+      "image_id": "story_53715ada30_frame_3",
+      "order": 3,
+      "file": "3.jpg",
+      "image_url": "/story-assets/4张图的故事/气球飞走了/3.jpg",
+      "private_annotations": {
+        "visible_summary": "小兔抱着四只气球，小熊站在旁边拍手。",
+        "tags": [
+          "角色:小兔",
+          "角色:小熊",
+          "动作:抱住气球",
+          "动作:拍手",
+          "物体:四只气球",
+          "场景:户外",
+          "表情:微笑"
+        ],
+        "uncertainties": [],
+        "sensitivity": []
+      },
+      "visual_clues": [
+        "现在气球到了谁的手里？",
+        "小熊做了什么动作？"
+      ]
+    },
+    {
+      "image_id": "story_53715ada30_frame_4",
+      "order": 4,
+      "file": "4.jpg",
+      "image_url": "/story-assets/4张图的故事/气球飞走了/4.jpg",
+      "private_annotations": {
+        "visible_summary": "小熊和小兔坐在地上，小熊把一朵花递给抱着气球的小兔。",
+        "tags": [
+          "角色:小熊",
+          "角色:小兔",
+          "动作:递花",
+          "物体:花",
+          "物体:四只气球",
+          "场景:户外",
+          "关系:感谢"
+        ],
+        "uncertainties": [
+          "花与气球变化之间的因果关系不可见"
+        ],
+        "sensitivity": []
+      },
+      "visual_clues": [
+        "最后小熊把什么送给小兔？"
+      ]
+    }
+  ]
+}

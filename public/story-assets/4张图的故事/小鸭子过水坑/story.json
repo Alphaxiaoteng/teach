@@ -1,0 +1,116 @@
+{
+  "schema_version": "2.0",
+  "story_id": "story_a5e43611f6",
+  "title": "小鸭子过水坑",
+  "category": "4张图的故事",
+  "suitable_age": [
+    "large"
+  ],
+  "scene_theme": "互助 / 解决问题 / 合作",
+  "themes": [
+    "互助",
+    "解决问题",
+    "合作"
+  ],
+  "quality": {
+    "status": "ready",
+    "flags": [],
+    "notes": []
+  },
+  "sequence_policy": {
+    "use_image_order": true,
+    "allow_inference": true,
+    "must_mark_uncertain": true,
+    "do_not_override_visible_facts_with_title": true
+  },
+  "images": [
+    {
+      "image_id": "story_a5e43611f6_frame_1",
+      "order": 1,
+      "file": "1.jpg",
+      "image_url": "/story-assets/4张图的故事/小鸭子过水坑/1.jpg",
+      "private_annotations": {
+        "visible_summary": "小兔抱着一根木头来到水坑边，小鸭子站在另一侧。",
+        "tags": [
+          "角色:小兔",
+          "角色:小鸭子",
+          "动作:搬木头",
+          "物体:木头",
+          "物体:水坑",
+          "场景:小路"
+        ],
+        "uncertainties": [],
+        "sensitivity": []
+      },
+      "visual_clues": [
+        "小兔抱来了什么？",
+        "路中间挡着什么？"
+      ]
+    },
+    {
+      "image_id": "story_a5e43611f6_frame_2",
+      "order": 2,
+      "file": "2.jpg",
+      "image_url": "/story-assets/4张图的故事/小鸭子过水坑/2.jpg",
+      "private_annotations": {
+        "visible_summary": "小兔把木头横放在水坑上，搭成一座窄桥。",
+        "tags": [
+          "角色:小兔",
+          "动作:搭木桥",
+          "物体:木头",
+          "物体:水坑",
+          "场景:小路",
+          "关系:木头像桥"
+        ],
+        "uncertainties": [],
+        "sensitivity": []
+      },
+      "visual_clues": [
+        "小兔把木头放在了水坑的什么位置？"
+      ]
+    },
+    {
+      "image_id": "story_a5e43611f6_frame_3",
+      "order": 3,
+      "file": "3.jpg",
+      "image_url": "/story-assets/4张图的故事/小鸭子过水坑/3.jpg",
+      "private_annotations": {
+        "visible_summary": "小鸭子踩着木头从水坑上方走过去。",
+        "tags": [
+          "角色:小鸭子",
+          "动作:走过木桥",
+          "物体:木桥",
+          "物体:水坑",
+          "场景:小路"
+        ],
+        "uncertainties": [],
+        "sensitivity": []
+      },
+      "visual_clues": [
+        "小鸭子怎样没有踩进水里就过了水坑？"
+      ]
+    },
+    {
+      "image_id": "story_a5e43611f6_frame_4",
+      "order": 4,
+      "file": "4.jpg",
+      "image_url": "/story-assets/4张图的故事/小鸭子过水坑/4.jpg",
+      "private_annotations": {
+        "visible_summary": "过坑后，小鸭子和小兔面对面挥手。",
+        "tags": [
+          "角色:小鸭子",
+          "角色:小兔",
+          "动作:挥手感谢",
+          "场景:小路",
+          "表情:微笑",
+          "关系:互助"
+        ],
+        "uncertainties": [],
+        "sensitivity": []
+      },
+      "visual_clues": [
+        "过了水坑以后，小鸭子对小兔做了什么动作？"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,50 @@
+{
+  "schema_version": "2.0",
+  "story_id": "story_4867ef0f31",
+  "title": "小猫去钓鱼",
+  "category": "1张图的故事",
+  "suitable_age": [
+    "small"
+  ],
+  "scene_theme": "观察 / 耐心",
+  "themes": [
+    "观察",
+    "耐心"
+  ],
+  "quality": {
+    "status": "ready",
+    "flags": [],
+    "notes": []
+  },
+  "sequence_policy": {
+    "use_image_order": true,
+    "allow_inference": true,
+    "must_mark_uncertain": true,
+    "do_not_override_visible_facts_with_title": true
+  },
+  "images": [
+    {
+      "image_id": "story_4867ef0f31_frame_1",
+      "order": 1,
+      "file": "1.jpg",
+      "image_url": "/story-assets/1张图的故事/小猫去钓鱼/1.jpg",
+      "private_annotations": {
+        "visible_summary": "小猫坐在水边拿着鱼竿，鱼线垂进水里。",
+        "tags": [
+          "角色:小猫",
+          "动作:钓鱼",
+          "物体:鱼竿",
+          "物体:鱼线",
+          "场景:水边",
+          "姿态:坐着"
+        ],
+        "uncertainties": [],
+        "sensitivity": []
+      },
+      "visual_clues": [
+        "小猫坐在什么地方？",
+        "顺着它手里的长竿看一看，线伸到哪里？"
+      ]
+    }
+  ]
+}

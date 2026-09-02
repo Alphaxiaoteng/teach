@@ -1,0 +1,118 @@
+{
+  "schema_version": "2.0",
+  "story_id": "story_693f55c93a",
+  "title": "小青花找花纹",
+  "category": "4张图的故事",
+  "suitable_age": [
+    "large"
+  ],
+  "scene_theme": "青花瓷 / 传统艺术 / 创造",
+  "themes": [
+    "青花瓷",
+    "传统艺术",
+    "创造"
+  ],
+  "quality": {
+    "status": "ready",
+    "flags": [],
+    "notes": []
+  },
+  "sequence_policy": {
+    "use_image_order": true,
+    "allow_inference": true,
+    "must_mark_uncertain": true,
+    "do_not_override_visible_facts_with_title": true
+  },
+  "images": [
+    {
+      "image_id": "story_693f55c93a_frame_1",
+      "order": 1,
+      "file": "1.jpg",
+      "image_url": "/story-assets/4张图的故事/小青花找花纹/1.jpg",
+      "private_annotations": {
+        "visible_summary": "老师和孩子拿着一只空白盘子，桌上放着画笔和颜料。",
+        "tags": [
+          "角色:老师",
+          "角色:孩子",
+          "动作:观察空白盘",
+          "物体:白盘",
+          "物体:画笔",
+          "场景:美工室"
+        ],
+        "uncertainties": [],
+        "sensitivity": []
+      },
+      "visual_clues": [
+        "这个盘子现在有花纹吗？",
+        "桌上有什么绘画工具？"
+      ]
+    },
+    {
+      "image_id": "story_693f55c93a_frame_2",
+      "order": 2,
+      "file": "2.jpg",
+      "image_url": "/story-assets/4张图的故事/小青花找花纹/2.jpg",
+      "private_annotations": {
+        "visible_summary": "孩子用画笔在白盘上画蓝色花纹，老师在旁边指导。",
+        "tags": [
+          "角色:老师",
+          "角色:孩子",
+          "动作:画蓝色花纹",
+          "物体:画笔",
+          "物体:白盘",
+          "颜色:蓝白",
+          "场景:美工室"
+        ],
+        "uncertainties": [],
+        "sensitivity": []
+      },
+      "visual_clues": [
+        "孩子给盘子添上了什么颜色的花纹？"
+      ]
+    },
+    {
+      "image_id": "story_693f55c93a_frame_3",
+      "order": 3,
+      "file": "3.jpg",
+      "image_url": "/story-assets/4张图的故事/小青花找花纹/3.jpg",
+      "private_annotations": {
+        "visible_summary": "几个孩子举起各自画好的蓝白花纹盘子。",
+        "tags": [
+          "角色:孩子们",
+          "动作:展示盘子",
+          "物体:青花盘",
+          "颜色:蓝白",
+          "场景:美工室",
+          "表情:微笑"
+        ],
+        "uncertainties": [],
+        "sensitivity": []
+      },
+      "visual_clues": [
+        "每个孩子盘子上的花纹都一样吗？"
+      ]
+    },
+    {
+      "image_id": "story_693f55c93a_frame_4",
+      "order": 4,
+      "file": "4.jpg",
+      "image_url": "/story-assets/4张图的故事/小青花找花纹/4.jpg",
+      "private_annotations": {
+        "visible_summary": "老师和孩子们一起观看摆好的蓝白色瓷器作品。",
+        "tags": [
+          "角色:老师",
+          "角色:孩子们",
+          "动作:参观作品",
+          "物体:青花瓷器",
+          "颜色:蓝白",
+          "场景:展示区"
+        ],
+        "uncertainties": [],
+        "sensitivity": []
+      },
+      "visual_clues": [
+        "最后展示区里摆出了哪些蓝白色作品？"
+      ]
+    }
+  ]
+}

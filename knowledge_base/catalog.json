@@ -1,0 +1,1189 @@
+{
+  "schema_version": "2.0",
+  "story_count": 58,
+  "image_count": 157,
+  "stories": [
+    {
+      "story_id": "story_e7801555e3",
+      "title": "小兔子拔萝卜",
+      "category": "1张图的故事",
+      "suitable_age": [
+        "small"
+      ],
+      "themes": [
+        "观察",
+        "劳动"
+      ],
+      "image_count": 1,
+      "cover_url": "/story-assets/1张图的故事/小兔子拔萝卜/1.jpg",
+      "quality": {
+        "status": "ready",
+        "flags": [],
+        "notes": []
+      }
+    },
+    {
+      "story_id": "story_1af454cfee",
+      "title": "小熊猫吃竹子",
+      "category": "1张图的故事",
+      "suitable_age": [
+        "small"
+      ],
+      "themes": [
+        "观察",
+        "动物习性"
+      ],
+      "image_count": 1,
+      "cover_url": "/story-assets/1张图的故事/小熊猫吃竹子/1.jpg",
+      "quality": {
+        "status": "ready",
+        "flags": [],
+        "notes": []
+      }
+    },
+    {
+      "story_id": "story_fe6f98918f",
+      "title": "小狐狸的星星朋友",
+      "category": "1张图的故事",
+      "suitable_age": [
+        "small"
+      ],
+      "themes": [
+        "想象",
+        "友谊"
+      ],
+      "image_count": 1,
+      "cover_url": "/story-assets/1张图的故事/小狐狸的星星朋友/1.jpg",
+      "quality": {
+        "status": "ready",
+        "flags": [],
+        "notes": []
+      }
+    },
+    {
+      "story_id": "story_4867ef0f31",
+      "title": "小猫去钓鱼",
+      "category": "1张图的故事",
+      "suitable_age": [
+        "small"
+      ],
+      "themes": [
+        "观察",
+        "耐心"
+      ],
+      "image_count": 1,
+      "cover_url": "/story-assets/1张图的故事/小猫去钓鱼/1.jpg",
+      "quality": {
+        "status": "ready",
+        "flags": [],
+        "notes": []
+      }
+    },
+    {
+      "story_id": "story_192e726f64",
+      "title": "小猫和小鱼",
+      "category": "1张图的故事",
+      "suitable_age": [
+        "small"
+      ],
+      "themes": [
+        "观察",
+        "关爱动物"
+      ],
+      "image_count": 1,
+      "cover_url": "/story-assets/1张图的故事/小猫和小鱼/1.jpg",
+      "quality": {
+        "status": "ready",
+        "flags": [],
+        "notes": []
+      }
+    },
+    {
+      "story_id": "story_84976d1c49",
+      "title": "小猴和小球",
+      "category": "1张图的故事",
+      "suitable_age": [
+        "small"
+      ],
+      "themes": [
+        "观察",
+        "玩耍"
+      ],
+      "image_count": 1,
+      "cover_url": "/story-assets/1张图的故事/小猴和小球/1.jpg",
+      "quality": {
+        "status": "teacher_review_required",
+        "flags": [
+          "title_content_mismatch",
+          "teacher_review_required"
+        ],
+        "notes": [
+          "标题写“小猴”，画面可见角色更像黄色小狗；运行时以画面标签为准。"
+        ]
+      }
+    },
+    {
+      "story_id": "story_56d551eaa8",
+      "title": "小虫子和苹果",
+      "category": "1张图的故事",
+      "suitable_age": [
+        "small"
+      ],
+      "themes": [
+        "观察",
+        "发现"
+      ],
+      "image_count": 1,
+      "cover_url": "/story-assets/1张图的故事/小虫子和苹果/1.jpg",
+      "quality": {
+        "status": "ready",
+        "flags": [],
+        "notes": []
+      }
+    },
+    {
+      "story_id": "story_0af620b4fe",
+      "title": "小青蛙的荷叶船",
+      "category": "1张图的故事",
+      "suitable_age": [
+        "small"
+      ],
+      "themes": [
+        "想象",
+        "探索"
+      ],
+      "image_count": 1,
+      "cover_url": "/story-assets/1张图的故事/小青蛙的荷叶船/1.jpg",
+      "quality": {
+        "status": "ready",
+        "flags": [],
+        "notes": []
+      }
+    },
+    {
+      "story_id": "story_a0b708a56d",
+      "title": "小鸟吃虫子",
+      "category": "1张图的故事",
+      "suitable_age": [
+        "small"
+      ],
+      "themes": [
+        "观察",
+        "动物习性"
+      ],
+      "image_count": 1,
+      "cover_url": "/story-assets/1张图的故事/小鸟吃虫子/1.jpg",
+      "quality": {
+        "status": "ready",
+        "flags": [],
+        "notes": []
+      }
+    },
+    {
+      "story_id": "story_8cfa245a98",
+      "title": "小鸭子的小雨伞",
+      "category": "1张图的故事",
+      "suitable_age": [
+        "small"
+      ],
+      "themes": [
+        "观察",
+        "雨天"
+      ],
+      "image_count": 1,
+      "cover_url": "/story-assets/1张图的故事/小鸭子的小雨伞/1.jpg",
+      "quality": {
+        "status": "ready",
+        "flags": [],
+        "notes": []
+      }
+    },
+    {
+      "story_id": "story_2ed2b83036",
+      "title": "荷叶雨伞",
+      "category": "1张图的故事",
+      "suitable_age": [
+        "small"
+      ],
+      "themes": [
+        "想象",
+        "雨天"
+      ],
+      "image_count": 1,
+      "cover_url": "/story-assets/1张图的故事/荷叶雨伞/1.jpg",
+      "quality": {
+        "status": "ready",
+        "flags": [],
+        "notes": []
+      }
+    },
+    {
+      "story_id": "story_1f6bfd9549",
+      "title": "魔法被子",
+      "category": "1张图的故事",
+      "suitable_age": [
+        "small"
+      ],
+      "themes": [
+        "想象",
+        "睡前故事"
+      ],
+      "image_count": 1,
+      "cover_url": "/story-assets/1张图的故事/魔法被子/1.jpg",
+      "quality": {
+        "status": "ready",
+        "flags": [],
+        "notes": []
+      }
+    },
+    {
+      "story_id": "story_fb09142abd",
+      "title": "一起吹泡泡",
+      "category": "2张图的故事",
+      "suitable_age": [
+        "small",
+        "middle"
+      ],
+      "themes": [
+        "玩耍",
+        "观察"
+      ],
+      "image_count": 2,
+      "cover_url": "/story-assets/2张图的故事/一起吹泡泡/1.jpg",
+      "quality": {
+        "status": "teacher_review_required",
+        "flags": [
+          "duplicate_images",
+          "teacher_review_required"
+        ],
+        "notes": [
+          "两张图片文件内容完全相同，缺少情节变化。"
+        ]
+      }
+    },
+    {
+      "story_id": "story_8a2b951106",
+      "title": "一起玩皮球",
+      "category": "2张图的故事",
+      "suitable_age": [
+        "small",
+        "middle"
+      ],
+      "themes": [
+        "合作",
+        "运动"
+      ],
+      "image_count": 2,
+      "cover_url": "/story-assets/2张图的故事/一起玩皮球/1.jpg",
+      "quality": {
+        "status": "ready",
+        "flags": [],
+        "notes": []
+      }
+    },
+    {
+      "story_id": "story_3b1d12c8eb",
+      "title": "小企鹅送礼物",
+      "category": "2张图的故事",
+      "suitable_age": [
+        "small",
+        "middle"
+      ],
+      "themes": [
+        "友谊",
+        "分享"
+      ],
+      "image_count": 2,
+      "cover_url": "/story-assets/2张图的故事/小企鹅送礼物/1.jpg",
+      "quality": {
+        "status": "ready",
+        "flags": [],
+        "notes": []
+      }
+    },
+    {
+      "story_id": "story_9495ddc0d9",
+      "title": "小兔去浇水",
+      "category": "2张图的故事",
+      "suitable_age": [
+        "small",
+        "middle"
+      ],
+      "themes": [
+        "劳动",
+        "照顾植物"
+      ],
+      "image_count": 2,
+      "cover_url": "/story-assets/2张图的故事/小兔去浇水/1.jpg",
+      "quality": {
+        "status": "ready",
+        "flags": [],
+        "notes": []
+      }
+    },
+    {
+      "story_id": "story_afec25a918",
+      "title": "小兔种树苗",
+      "category": "2张图的故事",
+      "suitable_age": [
+        "small",
+        "middle"
+      ],
+      "themes": [
+        "劳动",
+        "爱护环境"
+      ],
+      "image_count": 2,
+      "cover_url": "/story-assets/2张图的故事/小兔种树苗/1.png",
+      "quality": {
+        "status": "ready",
+        "flags": [],
+        "notes": []
+      }
+    },
+    {
+      "story_id": "story_743f642163",
+      "title": "小熊与蜂蜜",
+      "category": "2张图的故事",
+      "suitable_age": [
+        "small",
+        "middle"
+      ],
+      "themes": [
+        "观察",
+        "动物习性"
+      ],
+      "image_count": 2,
+      "cover_url": "/story-assets/2张图的故事/小熊与蜂蜜/1.png",
+      "quality": {
+        "status": "ready",
+        "flags": [],
+        "notes": []
+      }
+    },
+    {
+      "story_id": "story_a3755dbbef",
+      "title": "小熊的手套",
+      "category": "2张图的故事",
+      "suitable_age": [
+        "small",
+        "middle"
+      ],
+      "themes": [
+        "互助",
+        "物归原主"
+      ],
+      "image_count": 2,
+      "cover_url": "/story-assets/2张图的故事/小熊的手套/1.jpg",
+      "quality": {
+        "status": "ready",
+        "flags": [],
+        "notes": []
+      }
+    },
+    {
+      "story_id": "story_68408dccab",
+      "title": "小猴爱整理",
+      "category": "2张图的故事",
+      "suitable_age": [
+        "small",
+        "middle"
+      ],
+      "themes": [
+        "整理",
+        "生活习惯"
+      ],
+      "image_count": 2,
+      "cover_url": "/story-assets/2张图的故事/小猴爱整理/1.jpg",
+      "quality": {
+        "status": "ready",
+        "flags": [],
+        "notes": []
+      }
+    },
+    {
+      "story_id": "story_266977dfa7",
+      "title": "快乐踩水",
+      "category": "2张图的故事",
+      "suitable_age": [
+        "small",
+        "middle"
+      ],
+      "themes": [
+        "雨天",
+        "玩耍"
+      ],
+      "image_count": 2,
+      "cover_url": "/story-assets/2张图的故事/快乐踩水/1.jpg",
+      "quality": {
+        "status": "ready",
+        "flags": [],
+        "notes": []
+      }
+    },
+    {
+      "story_id": "story_e6e5ca2d9a",
+      "title": "我来帮助你",
+      "category": "2张图的故事",
+      "suitable_age": [
+        "small",
+        "middle"
+      ],
+      "themes": [
+        "互助",
+        "关爱动物"
+      ],
+      "image_count": 2,
+      "cover_url": "/story-assets/2张图的故事/我来帮助你/1.jpg",
+      "quality": {
+        "status": "ready",
+        "flags": [],
+        "notes": []
+      }
+    },
+    {
+      "story_id": "story_17284dc424",
+      "title": "我能行",
+      "category": "2张图的故事",
+      "suitable_age": [
+        "small",
+        "middle"
+      ],
+      "themes": [
+        "坚持",
+        "自信"
+      ],
+      "image_count": 2,
+      "cover_url": "/story-assets/2张图的故事/我能行/1.jpg",
+      "quality": {
+        "status": "ready",
+        "flags": [],
+        "notes": []
+      }
+    },
+    {
+      "story_id": "story_059a4ec595",
+      "title": "甜甜的果子",
+      "category": "2张图的故事",
+      "suitable_age": [
+        "small",
+        "middle"
+      ],
+      "themes": [
+        "分享",
+        "收获"
+      ],
+      "image_count": 2,
+      "cover_url": "/story-assets/2张图的故事/甜甜的果子/1.jpg",
+      "quality": {
+        "status": "ready",
+        "flags": [],
+        "notes": []
+      }
+    },
+    {
+      "story_id": "story_1b0695f142",
+      "title": "荷叶遮阳伞",
+      "category": "2张图的故事",
+      "suitable_age": [
+        "small",
+        "middle"
+      ],
+      "themes": [
+        "想象",
+        "互助"
+      ],
+      "image_count": 2,
+      "cover_url": "/story-assets/2张图的故事/荷叶遮阳伞/1.jpg",
+      "quality": {
+        "status": "ready",
+        "flags": [],
+        "notes": []
+      }
+    },
+    {
+      "story_id": "story_831353b487",
+      "title": "落叶小船",
+      "category": "2张图的故事",
+      "suitable_age": [
+        "small",
+        "middle"
+      ],
+      "themes": [
+        "想象",
+        "解决问题"
+      ],
+      "image_count": 2,
+      "cover_url": "/story-assets/2张图的故事/落叶小船/1.jpg",
+      "quality": {
+        "status": "ready",
+        "flags": [],
+        "notes": []
+      }
+    },
+    {
+      "story_id": "story_846dd5b6e9",
+      "title": "一起分享真快乐",
+      "category": "3张图的故事",
+      "suitable_age": [
+        "middle"
+      ],
+      "themes": [
+        "分享",
+        "友谊"
+      ],
+      "image_count": 3,
+      "cover_url": "/story-assets/3张图的故事/一起分享真快乐/1.jpg",
+      "quality": {
+        "status": "ready",
+        "flags": [],
+        "notes": []
+      }
+    },
+    {
+      "story_id": "story_52af7dd354",
+      "title": "勇敢的小企鹅",
+      "category": "3张图的故事",
+      "suitable_age": [
+        "middle"
+      ],
+      "themes": [
+        "交朋友",
+        "勇敢表达"
+      ],
+      "image_count": 3,
+      "cover_url": "/story-assets/3张图的故事/勇敢的小企鹅/1.jpg",
+      "quality": {
+        "status": "teacher_review_required",
+        "flags": [
+          "title_content_mismatch",
+          "teacher_review_required"
+        ],
+        "notes": [
+          "三张图未出现企鹅；主要角色是绿色鳄鱼、白兔和松鼠。"
+        ]
+      }
+    },
+    {
+      "story_id": "story_c55fc4ca8d",
+      "title": "小月亮找朋友",
+      "category": "3张图的故事",
+      "suitable_age": [
+        "middle"
+      ],
+      "themes": [
+        "想象",
+        "陪伴"
+      ],
+      "image_count": 3,
+      "cover_url": "/story-assets/3张图的故事/小月亮找朋友/1.jpg",
+      "quality": {
+        "status": "ready",
+        "flags": [],
+        "notes": []
+      }
+    },
+    {
+      "story_id": "story_2b3c95270b",
+      "title": "小松鼠学捏面人",
+      "category": "3张图的故事",
+      "suitable_age": [
+        "middle"
+      ],
+      "themes": [
+        "非遗",
+        "学习",
+        "坚持"
+      ],
+      "image_count": 3,
+      "cover_url": "/story-assets/3张图的故事/小松鼠学捏面人/1.jpg",
+      "quality": {
+        "status": "ready",
+        "flags": [],
+        "notes": []
+      }
+    },
+    {
+      "story_id": "story_63fbca3a34",
+      "title": "小狐狸学做糖画",
+      "category": "3张图的故事",
+      "suitable_age": [
+        "middle"
+      ],
+      "themes": [
+        "非遗",
+        "学习",
+        "鼓励"
+      ],
+      "image_count": 3,
+      "cover_url": "/story-assets/3张图的故事/小狐狸学做糖画/1.jpg",
+      "quality": {
+        "status": "ready",
+        "flags": [],
+        "notes": []
+      }
+    },
+    {
+      "story_id": "story_78324d2bab",
+      "title": "小猪的大响屁",
+      "category": "3张图的故事",
+      "suitable_age": [
+        "middle"
+      ],
+      "themes": [
+        "幽默",
+        "同伴相处"
+      ],
+      "image_count": 3,
+      "cover_url": "/story-assets/3张图的故事/小猪的大响屁/1.jpg",
+      "quality": {
+        "status": "teacher_review_required",
+        "flags": [
+          "sequence_uncertain",
+          "teacher_review_required"
+        ],
+        "notes": [
+          "第三张游泳画面与前两张的因果关系不清楚，不应自动补写原因。"
+        ]
+      }
+    },
+    {
+      "story_id": "story_d555838b55",
+      "title": "小鸭子找泡泡",
+      "category": "3张图的故事",
+      "suitable_age": [
+        "middle"
+      ],
+      "themes": [
+        "清洁",
+        "互助"
+      ],
+      "image_count": 3,
+      "cover_url": "/story-assets/3张图的故事/小鸭子找泡泡/1.jpg",
+      "quality": {
+        "status": "ready",
+        "flags": [],
+        "notes": []
+      }
+    },
+    {
+      "story_id": "story_54ded78f83",
+      "title": "森林接力赛",
+      "category": "3张图的故事",
+      "suitable_age": [
+        "middle"
+      ],
+      "themes": [
+        "运动",
+        "合作",
+        "规则"
+      ],
+      "image_count": 3,
+      "cover_url": "/story-assets/3张图的故事/森林接力赛/1.jpg",
+      "quality": {
+        "status": "ready",
+        "flags": [],
+        "notes": []
+      }
+    },
+    {
+      "story_id": "story_34872a6885",
+      "title": "森林运动会",
+      "category": "3张图的故事",
+      "suitable_age": [
+        "middle"
+      ],
+      "themes": [
+        "运动",
+        "合作",
+        "公平"
+      ],
+      "image_count": 3,
+      "cover_url": "/story-assets/3张图的故事/森林运动会/1.jpg",
+      "quality": {
+        "status": "ready",
+        "flags": [],
+        "notes": []
+      }
+    },
+    {
+      "story_id": "story_fab9d1e1af",
+      "title": "游泳比赛",
+      "category": "3张图的故事",
+      "suitable_age": [
+        "middle"
+      ],
+      "themes": [
+        "运动",
+        "坚持",
+        "规则"
+      ],
+      "image_count": 3,
+      "cover_url": "/story-assets/3张图的故事/游泳比赛/1.jpg",
+      "quality": {
+        "status": "ready",
+        "flags": [],
+        "notes": []
+      }
+    },
+    {
+      "story_id": "story_e885e6bf56",
+      "title": "胆小的小松鼠",
+      "category": "3张图的故事",
+      "suitable_age": [
+        "middle"
+      ],
+      "themes": [
+        "勇气",
+        "尝试",
+        "友谊"
+      ],
+      "image_count": 3,
+      "cover_url": "/story-assets/3张图的故事/胆小的小松鼠/1.jpg",
+      "quality": {
+        "status": "ready",
+        "flags": [],
+        "notes": []
+      }
+    },
+    {
+      "story_id": "story_029795f489",
+      "title": "云朵面包店的彩虹密码",
+      "category": "4张图的故事",
+      "suitable_age": [
+        "large"
+      ],
+      "themes": [
+        "想象",
+        "合作",
+        "分享"
+      ],
+      "image_count": 4,
+      "cover_url": "/story-assets/4张图的故事/云朵面包店的彩虹密码/1.jpg",
+      "quality": {
+        "status": "ready",
+        "flags": [],
+        "notes": []
+      }
+    },
+    {
+      "story_id": "story_c1d26d5741",
+      "title": "圆圆的月饼",
+      "category": "4张图的故事",
+      "suitable_age": [
+        "large"
+      ],
+      "themes": [
+        "中秋",
+        "家庭",
+        "传统美食"
+      ],
+      "image_count": 4,
+      "cover_url": "/story-assets/4张图的故事/圆圆的月饼/1.jpg",
+      "quality": {
+        "status": "ready",
+        "flags": [],
+        "notes": []
+      }
+    },
+    {
+      "story_id": "story_cfbf927e9d",
+      "title": "小兔子学编竹篮",
+      "category": "4张图的故事",
+      "suitable_age": [
+        "large"
+      ],
+      "themes": [
+        "传统手工",
+        "学习",
+        "坚持"
+      ],
+      "image_count": 4,
+      "cover_url": "/story-assets/4张图的故事/小兔子学编竹篮/1.jpg",
+      "quality": {
+        "status": "ready",
+        "flags": [],
+        "notes": []
+      }
+    },
+    {
+      "story_id": "story_21322cb618",
+      "title": "小兔灯笼找朋友",
+      "category": "4张图的故事",
+      "suitable_age": [
+        "large"
+      ],
+      "themes": [
+        "元宵",
+        "手工",
+        "交朋友"
+      ],
+      "image_count": 4,
+      "cover_url": "/story-assets/4张图的故事/小兔灯笼找朋友/1.jpg",
+      "quality": {
+        "status": "ready",
+        "flags": [],
+        "notes": []
+      }
+    },
+    {
+      "story_id": "story_327418a128",
+      "title": "小熊猫学剪纸",
+      "category": "4张图的故事",
+      "suitable_age": [
+        "large"
+      ],
+      "themes": [
+        "非遗",
+        "学习",
+        "耐心"
+      ],
+      "image_count": 4,
+      "cover_url": "/story-assets/4张图的故事/小熊猫学剪纸/1.jpg",
+      "quality": {
+        "status": "ready",
+        "flags": [],
+        "notes": []
+      }
+    },
+    {
+      "story_id": "story_8171797742",
+      "title": "小狐狸的红色小围巾",
+      "category": "4张图的故事",
+      "suitable_age": [
+        "large"
+      ],
+      "themes": [
+        "友谊",
+        "互助",
+        "集体生活"
+      ],
+      "image_count": 4,
+      "cover_url": "/story-assets/4张图的故事/小狐狸的红色小围巾/1.jpg",
+      "quality": {
+        "status": "ready",
+        "flags": [
+          "generated_watermark"
+        ],
+        "notes": [
+          "第2张右下角可见生成式图片水印，正式参赛素材建议替换或取得合规来源。"
+        ]
+      }
+    },
+    {
+      "story_id": "story_15aceb529d",
+      "title": "小白兔的感谢",
+      "category": "4张图的故事",
+      "suitable_age": [
+        "large"
+      ],
+      "themes": [
+        "救助动物",
+        "感恩",
+        "生命关怀"
+      ],
+      "image_count": 4,
+      "cover_url": "/story-assets/4张图的故事/小白兔的感谢/1.jpg",
+      "quality": {
+        "status": "teacher_review_required",
+        "flags": [
+          "graphic_injury",
+          "sequence_uncertain",
+          "teacher_review_required"
+        ],
+        "notes": [
+          "第1张有可见血迹；第4张出现白鹿，与前面白兔的连续关系不明确。"
+        ]
+      }
+    },
+    {
+      "story_id": "story_0a4a1bacef",
+      "title": "小竹灯找朋友",
+      "category": "4张图的故事",
+      "suitable_age": [
+        "large"
+      ],
+      "themes": [
+        "传统手工",
+        "友谊",
+        "想象"
+      ],
+      "image_count": 4,
+      "cover_url": "/story-assets/4张图的故事/小竹灯找朋友/1.jpg",
+      "quality": {
+        "status": "ready",
+        "flags": [],
+        "notes": []
+      }
+    },
+    {
+      "story_id": "story_aabb1b53ca",
+      "title": "小纸鸢飞上天空",
+      "category": "4张图的故事",
+      "suitable_age": [
+        "large"
+      ],
+      "themes": [
+        "风筝",
+        "手工",
+        "合作"
+      ],
+      "image_count": 4,
+      "cover_url": "/story-assets/4张图的故事/小纸鸢飞上天空/1.jpg",
+      "quality": {
+        "status": "ready",
+        "flags": [],
+        "notes": []
+      }
+    },
+    {
+      "story_id": "story_70b497ea00",
+      "title": "小茶壶会唱歌",
+      "category": "4张图的故事",
+      "suitable_age": [
+        "large"
+      ],
+      "themes": [
+        "茶文化",
+        "生活观察",
+        "安全"
+      ],
+      "image_count": 4,
+      "cover_url": "/story-assets/4张图的故事/小茶壶会唱歌/1.jpg",
+      "quality": {
+        "status": "ready",
+        "flags": [],
+        "notes": []
+      }
+    },
+    {
+      "story_id": "story_d2096451bb",
+      "title": "小蜗牛的慢慢慢旅行",
+      "category": "4张图的故事",
+      "suitable_age": [
+        "large"
+      ],
+      "themes": [
+        "探索",
+        "坚持",
+        "自然"
+      ],
+      "image_count": 4,
+      "cover_url": "/story-assets/4张图的故事/小蜗牛的慢慢慢旅行/1.jpg",
+      "quality": {
+        "status": "ready",
+        "flags": [],
+        "notes": []
+      }
+    },
+    {
+      "story_id": "story_693f55c93a",
+      "title": "小青花找花纹",
+      "category": "4张图的故事",
+      "suitable_age": [
+        "large"
+      ],
+      "themes": [
+        "青花瓷",
+        "传统艺术",
+        "创造"
+      ],
+      "image_count": 4,
+      "cover_url": "/story-assets/4张图的故事/小青花找花纹/1.jpg",
+      "quality": {
+        "status": "ready",
+        "flags": [],
+        "notes": []
+      }
+    },
+    {
+      "story_id": "story_9e344f2a84",
+      "title": "小鸟回家了",
+      "category": "4张图的故事",
+      "suitable_age": [
+        "large"
+      ],
+      "themes": [
+        "互助",
+        "关爱动物",
+        "回家"
+      ],
+      "image_count": 4,
+      "cover_url": "/story-assets/4张图的故事/小鸟回家了/1.jpg",
+      "quality": {
+        "status": "ready",
+        "flags": [],
+        "notes": []
+      }
+    },
+    {
+      "story_id": "story_a5e43611f6",
+      "title": "小鸭子过水坑",
+      "category": "4张图的故事",
+      "suitable_age": [
+        "large"
+      ],
+      "themes": [
+        "互助",
+        "解决问题",
+        "合作"
+      ],
+      "image_count": 4,
+      "cover_url": "/story-assets/4张图的故事/小鸭子过水坑/1.jpg",
+      "quality": {
+        "status": "ready",
+        "flags": [],
+        "notes": []
+      }
+    },
+    {
+      "story_id": "story_4cb30fcc52",
+      "title": "小龙舟向前划",
+      "category": "4张图的故事",
+      "suitable_age": [
+        "large"
+      ],
+      "themes": [
+        "端午",
+        "龙舟",
+        "传统文化"
+      ],
+      "image_count": 4,
+      "cover_url": "/story-assets/4张图的故事/小龙舟向前划/1.jpg",
+      "quality": {
+        "status": "ready",
+        "flags": [],
+        "notes": []
+      }
+    },
+    {
+      "story_id": "story_047cc8f658",
+      "title": "掉在地上的苹果",
+      "category": "4张图的故事",
+      "suitable_age": [
+        "large"
+      ],
+      "themes": [
+        "互助",
+        "收拾",
+        "分享"
+      ],
+      "image_count": 4,
+      "cover_url": "/story-assets/4张图的故事/掉在地上的苹果/1.jpg",
+      "quality": {
+        "status": "ready",
+        "flags": [],
+        "notes": []
+      }
+    },
+    {
+      "story_id": "story_a407a13ce0",
+      "title": "暴躁的小火柴",
+      "category": "4张图的故事",
+      "suitable_age": [
+        "large"
+      ],
+      "themes": [
+        "消防安全",
+        "情绪管理",
+        "求助"
+      ],
+      "image_count": 4,
+      "cover_url": "/story-assets/4张图的故事/暴躁的小火柴/1.jpg",
+      "quality": {
+        "status": "teacher_review_required",
+        "flags": [
+          "fire_hazard",
+          "teacher_review_required"
+        ],
+        "notes": [
+          "多张图包含明火和蔓延场景，必须在教师陪同的安全模式下使用。"
+        ]
+      }
+    },
+    {
+      "story_id": "story_a596c9353c",
+      "title": "森林里的故事节",
+      "category": "4张图的故事",
+      "suitable_age": [
+        "large"
+      ],
+      "themes": [
+        "表达",
+        "倾听",
+        "集体活动"
+      ],
+      "image_count": 4,
+      "cover_url": "/story-assets/4张图的故事/森林里的故事节/1.jpg",
+      "quality": {
+        "status": "ready",
+        "flags": [],
+        "notes": []
+      }
+    },
+    {
+      "story_id": "story_53715ada30",
+      "title": "气球飞走了",
+      "category": "4张图的故事",
+      "suitable_age": [
+        "large"
+      ],
+      "themes": [
+        "互助",
+        "分享",
+        "意外变化"
+      ],
+      "image_count": 4,
+      "cover_url": "/story-assets/4张图的故事/气球飞走了/1.jpg",
+      "quality": {
+        "status": "ready",
+        "flags": [
+          "sequence_title_tension"
+        ],
+        "notes": [
+          "画面显示部分气球受风影响并在伙伴间转移，并非全部气球飞走。"
+        ]
+      }
+    },
+    {
+      "story_id": "story_727ded534c",
+      "title": "玩具小熊回家了",
+      "category": "4张图的故事",
+      "suitable_age": [
+        "large"
+      ],
+      "themes": [
+        "整理",
+        "责任",
+        "集体生活"
+      ],
+      "image_count": 4,
+      "cover_url": "/story-assets/4张图的故事/玩具小熊回家了/1.jpg",
+      "quality": {
+        "status": "ready",
+        "flags": [],
+        "notes": []
+      }
+    },
+    {
+      "story_id": "story_30f2ccaddf",
+      "title": "花瓶倒了以后",
+      "category": "4张图的故事",
+      "suitable_age": [
+        "large"
+      ],
+      "themes": [
+        "诚实",
+        "承担责任",
+        "修复"
+      ],
+      "image_count": 4,
+      "cover_url": "/story-assets/4张图的故事/花瓶倒了以后/1.jpg",
+      "quality": {
+        "status": "ready",
+        "flags": [],
+        "notes": []
+      }
+    }
+  ]
+}

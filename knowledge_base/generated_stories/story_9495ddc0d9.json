@@ -1,0 +1,71 @@
+{
+  "schema_version": "2.0",
+  "story_id": "story_9495ddc0d9",
+  "title": "小兔去浇水",
+  "category": "2张图的故事",
+  "suitable_age": [
+    "small",
+    "middle"
+  ],
+  "scene_theme": "劳动 / 照顾植物",
+  "themes": [
+    "劳动",
+    "照顾植物"
+  ],
+  "quality": {
+    "status": "ready",
+    "flags": [],
+    "notes": []
+  },
+  "sequence_policy": {
+    "use_image_order": true,
+    "allow_inference": true,
+    "must_mark_uncertain": true,
+    "do_not_override_visible_facts_with_title": true
+  },
+  "images": [
+    {
+      "image_id": "story_9495ddc0d9_frame_1",
+      "order": 1,
+      "file": "1.jpg",
+      "image_url": "/story-assets/2张图的故事/小兔去浇水/1.jpg",
+      "private_annotations": {
+        "visible_summary": "小兔来到花丛旁，看见地上的洒水壶。",
+        "tags": [
+          "角色:小兔",
+          "动作:看花和洒水壶",
+          "物体:花",
+          "物体:洒水壶",
+          "场景:花园"
+        ],
+        "uncertainties": [],
+        "sensitivity": []
+      },
+      "visual_clues": [
+        "小兔在花旁边发现了什么工具？"
+      ]
+    },
+    {
+      "image_id": "story_9495ddc0d9_frame_2",
+      "order": 2,
+      "file": "2.jpg",
+      "image_url": "/story-assets/2张图的故事/小兔去浇水/2.jpg",
+      "private_annotations": {
+        "visible_summary": "小兔拿起洒水壶给花浇水。",
+        "tags": [
+          "角色:小兔",
+          "动作:给花浇水",
+          "物体:洒水壶",
+          "物体:花",
+          "场景:花园"
+        ],
+        "uncertainties": [],
+        "sensitivity": []
+      },
+      "visual_clues": [
+        "洒水壶里的水流到了哪里？",
+        "花儿得到水以后会怎样？"
+      ]
+    }
+  ]
+}

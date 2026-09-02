@@ -1,0 +1,118 @@
+{
+  "schema_version": "2.0",
+  "story_id": "story_cfbf927e9d",
+  "title": "小兔子学编竹篮",
+  "category": "4张图的故事",
+  "suitable_age": [
+    "large"
+  ],
+  "scene_theme": "传统手工 / 学习 / 坚持",
+  "themes": [
+    "传统手工",
+    "学习",
+    "坚持"
+  ],
+  "quality": {
+    "status": "ready",
+    "flags": [],
+    "notes": []
+  },
+  "sequence_policy": {
+    "use_image_order": true,
+    "allow_inference": true,
+    "must_mark_uncertain": true,
+    "do_not_override_visible_facts_with_title": true
+  },
+  "images": [
+    {
+      "image_id": "story_cfbf927e9d_frame_1",
+      "order": 1,
+      "file": "1.jpg",
+      "image_url": "/story-assets/4张图的故事/小兔子学编竹篮/1.jpg",
+      "private_annotations": {
+        "visible_summary": "老人坐着编竹篮，小兔子站在旁边观看。",
+        "tags": [
+          "角色:老人",
+          "角色:小兔子",
+          "动作:观看编竹篮",
+          "物体:竹条",
+          "物体:竹篮",
+          "场景:院子"
+        ],
+        "uncertainties": [],
+        "sensitivity": []
+      },
+      "visual_clues": [
+        "老人用一根根竹条在做什么？"
+      ]
+    },
+    {
+      "image_id": "story_cfbf927e9d_frame_2",
+      "order": 2,
+      "file": "2.jpg",
+      "image_url": "/story-assets/4张图的故事/小兔子学编竹篮/2.jpg",
+      "private_annotations": {
+        "visible_summary": "小兔子和老人一起摆弄竹条，学习编篮子。",
+        "tags": [
+          "角色:老人",
+          "角色:小兔子",
+          "动作:学习编竹篮",
+          "物体:竹条",
+          "场景:院子",
+          "关系:师生"
+        ],
+        "uncertainties": [],
+        "sensitivity": []
+      },
+      "visual_clues": [
+        "小兔子是怎样跟着老人学习的？"
+      ]
+    },
+    {
+      "image_id": "story_cfbf927e9d_frame_3",
+      "order": 3,
+      "file": "3.jpg",
+      "image_url": "/story-assets/4张图的故事/小兔子学编竹篮/3.jpg",
+      "private_annotations": {
+        "visible_summary": "小兔子举起编好的竹篮给老人看。",
+        "tags": [
+          "角色:老人",
+          "角色:小兔子",
+          "动作:展示竹篮",
+          "物体:竹篮",
+          "场景:院子",
+          "表情:微笑"
+        ],
+        "uncertainties": [],
+        "sensitivity": []
+      },
+      "visual_clues": [
+        "小兔子手里举着什么新作品？"
+      ]
+    },
+    {
+      "image_id": "story_cfbf927e9d_frame_4",
+      "order": 4,
+      "file": "4.jpg",
+      "image_url": "/story-assets/4张图的故事/小兔子学编竹篮/4.jpg",
+      "private_annotations": {
+        "visible_summary": "小兔子提着竹篮离开，老人站在门口挥手。",
+        "tags": [
+          "角色:老人",
+          "角色:小兔子",
+          "动作:提篮离开",
+          "动作:挥手",
+          "物体:竹篮",
+          "场景:院门",
+          "关系:告别"
+        ],
+        "uncertainties": [],
+        "sensitivity": []
+      },
+      "visual_clues": [
+        "离开时，小兔子把竹篮放在哪里？",
+        "老人做了什么动作？"
+      ]
+    }
+  ]
+}

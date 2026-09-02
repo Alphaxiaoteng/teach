@@ -1,0 +1,73 @@
+{
+  "schema_version": "2.0",
+  "story_id": "story_68408dccab",
+  "title": "小猴爱整理",
+  "category": "2张图的故事",
+  "suitable_age": [
+    "small",
+    "middle"
+  ],
+  "scene_theme": "整理 / 生活习惯",
+  "themes": [
+    "整理",
+    "生活习惯"
+  ],
+  "quality": {
+    "status": "ready",
+    "flags": [],
+    "notes": []
+  },
+  "sequence_policy": {
+    "use_image_order": true,
+    "allow_inference": true,
+    "must_mark_uncertain": true,
+    "do_not_override_visible_facts_with_title": true
+  },
+  "images": [
+    {
+      "image_id": "story_68408dccab_frame_1",
+      "order": 1,
+      "file": "1.jpg",
+      "image_url": "/story-assets/2张图的故事/小猴爱整理/1.jpg",
+      "private_annotations": {
+        "visible_summary": "小猴坐在凌乱的桌边，桌上和地上散着果皮等东西。",
+        "tags": [
+          "角色:小猴",
+          "动作:看着杂物",
+          "物体:桌子",
+          "物体:果皮",
+          "场景:室内",
+          "状态:凌乱"
+        ],
+        "uncertainties": [],
+        "sensitivity": []
+      },
+      "visual_clues": [
+        "桌上和地上看起来整齐吗？",
+        "你发现了哪些需要收拾的东西？"
+      ]
+    },
+    {
+      "image_id": "story_68408dccab_frame_2",
+      "order": 2,
+      "file": "2.jpg",
+      "image_url": "/story-assets/2张图的故事/小猴爱整理/2.jpg",
+      "private_annotations": {
+        "visible_summary": "小猴把果皮和杂物放进垃圾桶。",
+        "tags": [
+          "角色:小猴",
+          "动作:收拾垃圾",
+          "物体:垃圾桶",
+          "物体:果皮",
+          "场景:室内",
+          "状态:整理中"
+        ],
+        "uncertainties": [],
+        "sensitivity": []
+      },
+      "visual_clues": [
+        "小猴把地上的东西放到了哪里？"
+      ]
+    }
+  ]
+}

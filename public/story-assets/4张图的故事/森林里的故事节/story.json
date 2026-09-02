@@ -1,0 +1,114 @@
+{
+  "schema_version": "2.0",
+  "story_id": "story_a596c9353c",
+  "title": "森林里的故事节",
+  "category": "4张图的故事",
+  "suitable_age": [
+    "large"
+  ],
+  "scene_theme": "表达 / 倾听 / 集体活动",
+  "themes": [
+    "表达",
+    "倾听",
+    "集体活动"
+  ],
+  "quality": {
+    "status": "ready",
+    "flags": [],
+    "notes": []
+  },
+  "sequence_policy": {
+    "use_image_order": true,
+    "allow_inference": true,
+    "must_mark_uncertain": true,
+    "do_not_override_visible_facts_with_title": true
+  },
+  "images": [
+    {
+      "image_id": "story_a596c9353c_frame_1",
+      "order": 1,
+      "file": "1.jpg",
+      "image_url": "/story-assets/4张图的故事/森林里的故事节/1.jpg",
+      "private_annotations": {
+        "visible_summary": "森林空地上，小动物们围成一圈，小狐狸拿着书讲故事。",
+        "tags": [
+          "角色:小狐狸",
+          "角色:小动物们",
+          "动作:讲故事",
+          "物体:书",
+          "场景:森林空地",
+          "关系:倾听"
+        ],
+        "uncertainties": [],
+        "sensitivity": []
+      },
+      "visual_clues": [
+        "谁站在中间讲故事？",
+        "其他小动物怎样听？"
+      ]
+    },
+    {
+      "image_id": "story_a596c9353c_frame_2",
+      "order": 2,
+      "file": "2.jpg",
+      "image_url": "/story-assets/4张图的故事/森林里的故事节/2.jpg",
+      "private_annotations": {
+        "visible_summary": "小兔站到圆圈中间讲述，其他动物面向它坐着。",
+        "tags": [
+          "角色:小兔",
+          "角色:小动物们",
+          "动作:轮流讲述",
+          "场景:森林空地",
+          "关系:倾听"
+        ],
+        "uncertainties": [],
+        "sensitivity": []
+      },
+      "visual_clues": [
+        "第二位走到中间讲故事的是谁？"
+      ]
+    },
+    {
+      "image_id": "story_a596c9353c_frame_3",
+      "order": 3,
+      "file": "3.jpg",
+      "image_url": "/story-assets/4张图的故事/森林里的故事节/3.jpg",
+      "private_annotations": {
+        "visible_summary": "小狐狸再次面向大家讲话，小动物们继续听。",
+        "tags": [
+          "角色:小狐狸",
+          "角色:小动物们",
+          "动作:继续讲述",
+          "场景:森林空地",
+          "关系:倾听"
+        ],
+        "uncertainties": [],
+        "sensitivity": []
+      },
+      "visual_clues": [
+        "讲故事的人说话时，听众的身体朝向哪里？"
+      ]
+    },
+    {
+      "image_id": "story_a596c9353c_frame_4",
+      "order": 4,
+      "file": "4.jpg",
+      "image_url": "/story-assets/4张图的故事/森林里的故事节/4.jpg",
+      "private_annotations": {
+        "visible_summary": "傍晚，小动物们仍围坐在一起，为故事节收尾。",
+        "tags": [
+          "角色:小动物们",
+          "动作:围坐结束活动",
+          "场景:森林空地",
+          "时间:傍晚",
+          "关系:集体"
+        ],
+        "uncertainties": [],
+        "sensitivity": []
+      },
+      "visual_clues": [
+        "太阳落下时，故事节进行到了什么时候？"
+      ]
+    }
+  ]
+}

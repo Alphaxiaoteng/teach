@@ -1,0 +1,50 @@
+{
+  "schema_version": "2.0",
+  "story_id": "story_fe6f98918f",
+  "title": "小狐狸的星星朋友",
+  "category": "1张图的故事",
+  "suitable_age": [
+    "small"
+  ],
+  "scene_theme": "想象 / 友谊",
+  "themes": [
+    "想象",
+    "友谊"
+  ],
+  "quality": {
+    "status": "ready",
+    "flags": [],
+    "notes": []
+  },
+  "sequence_policy": {
+    "use_image_order": true,
+    "allow_inference": true,
+    "must_mark_uncertain": true,
+    "do_not_override_visible_facts_with_title": true
+  },
+  "images": [
+    {
+      "image_id": "story_fe6f98918f_frame_1",
+      "order": 1,
+      "file": "1.jpg",
+      "image_url": "/story-assets/1张图的故事/小狐狸的星星朋友/1.jpg",
+      "private_annotations": {
+        "visible_summary": "夜空下，小狐狸坐在草地上仰头看一颗发亮的星星。",
+        "tags": [
+          "角色:小狐狸",
+          "动作:仰头看",
+          "物体:星星",
+          "场景:草地",
+          "时间:夜晚",
+          "表情:微笑"
+        ],
+        "uncertainties": [],
+        "sensitivity": []
+      },
+      "visual_clues": [
+        "天空是什么时候的样子？",
+        "小狐狸正抬头看什么？"
+      ]
+    }
+  ]
+}

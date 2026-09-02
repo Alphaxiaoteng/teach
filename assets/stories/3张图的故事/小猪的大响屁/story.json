@@ -1,0 +1,104 @@
+{
+  "schema_version": "2.0",
+  "story_id": "story_78324d2bab",
+  "title": "小猪的大响屁",
+  "category": "3张图的故事",
+  "suitable_age": [
+    "middle"
+  ],
+  "scene_theme": "幽默 / 同伴相处",
+  "themes": [
+    "幽默",
+    "同伴相处"
+  ],
+  "quality": {
+    "status": "teacher_review_required",
+    "flags": [
+      "sequence_uncertain",
+      "teacher_review_required"
+    ],
+    "notes": [
+      "第三张游泳画面与前两张的因果关系不清楚，不应自动补写原因。"
+    ]
+  },
+  "sequence_policy": {
+    "use_image_order": true,
+    "allow_inference": true,
+    "must_mark_uncertain": true,
+    "do_not_override_visible_facts_with_title": true
+  },
+  "images": [
+    {
+      "image_id": "story_78324d2bab_frame_1",
+      "order": 1,
+      "file": "1.jpg",
+      "image_url": "/story-assets/3张图的故事/小猪的大响屁/1.jpg",
+      "private_annotations": {
+        "visible_summary": "小猪独自在树林里，身后出现一团气体。",
+        "tags": [
+          "角色:小猪",
+          "动作:放屁",
+          "物体:气体云",
+          "场景:树林"
+        ],
+        "uncertainties": [],
+        "sensitivity": [
+          "如厕与身体话题，使用自然、不羞辱的表达"
+        ]
+      },
+      "visual_clues": [
+        "小猪身后出现了什么特别的东西？"
+      ]
+    },
+    {
+      "image_id": "story_78324d2bab_frame_2",
+      "order": 2,
+      "file": "2.jpg",
+      "image_url": "/story-assets/3张图的故事/小猪的大响屁/2.jpg",
+      "private_annotations": {
+        "visible_summary": "小兔和小松鼠靠近小猪，面对一团气体做出反应。",
+        "tags": [
+          "角色:小猪",
+          "角色:小兔",
+          "角色:小松鼠",
+          "动作:闻到气味后反应",
+          "物体:气体云",
+          "场景:树林",
+          "表情:吃惊"
+        ],
+        "uncertainties": [],
+        "sensitivity": [
+          "不嘲笑角色，不把身体反应说成错误"
+        ]
+      },
+      "visual_clues": [
+        "谁来到了小猪身边？",
+        "看看它们的脸，像是发现了什么？"
+      ]
+    },
+    {
+      "image_id": "story_78324d2bab_frame_3",
+      "order": 3,
+      "file": "3.jpg",
+      "image_url": "/story-assets/3张图的故事/小猪的大响屁/3.jpg",
+      "private_annotations": {
+        "visible_summary": "小猪戴着游泳圈在水里，旁边有水中动物。",
+        "tags": [
+          "角色:小猪",
+          "角色:水中动物",
+          "动作:在水里游玩",
+          "物体:游泳圈",
+          "场景:水面"
+        ],
+        "uncertainties": [
+          "与前两张画面的因果关系不可见"
+        ],
+        "sensitivity": []
+      },
+      "visual_clues": [
+        "第三张图的地点换到了哪里？",
+        "小猪身上套着什么？"
+      ]
+    }
+  ]
+}

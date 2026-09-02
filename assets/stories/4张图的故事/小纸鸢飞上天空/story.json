@@ -1,0 +1,116 @@
+{
+  "schema_version": "2.0",
+  "story_id": "story_aabb1b53ca",
+  "title": "小纸鸢飞上天空",
+  "category": "4张图的故事",
+  "suitable_age": [
+    "large"
+  ],
+  "scene_theme": "风筝 / 手工 / 合作",
+  "themes": [
+    "风筝",
+    "手工",
+    "合作"
+  ],
+  "quality": {
+    "status": "ready",
+    "flags": [],
+    "notes": []
+  },
+  "sequence_policy": {
+    "use_image_order": true,
+    "allow_inference": true,
+    "must_mark_uncertain": true,
+    "do_not_override_visible_facts_with_title": true
+  },
+  "images": [
+    {
+      "image_id": "story_aabb1b53ca_frame_1",
+      "order": 1,
+      "file": "1.jpg",
+      "image_url": "/story-assets/4张图的故事/小纸鸢飞上天空/1.jpg",
+      "private_annotations": {
+        "visible_summary": "老师和孩子们围着桌子制作燕子形状的风筝。",
+        "tags": [
+          "角色:老师",
+          "角色:孩子们",
+          "动作:做风筝",
+          "物体:燕子风筝",
+          "物体:桌子",
+          "场景:教室"
+        ],
+        "uncertainties": [],
+        "sensitivity": []
+      },
+      "visual_clues": [
+        "桌上的风筝像哪一种小动物？"
+      ]
+    },
+    {
+      "image_id": "story_aabb1b53ca_frame_2",
+      "order": 2,
+      "file": "2.jpg",
+      "image_url": "/story-assets/4张图的故事/小纸鸢飞上天空/2.jpg",
+      "private_annotations": {
+        "visible_summary": "孩子们给燕子风筝涂颜色、添装饰。",
+        "tags": [
+          "角色:孩子们",
+          "动作:装饰风筝",
+          "物体:颜料",
+          "物体:燕子风筝",
+          "场景:教室"
+        ],
+        "uncertainties": [],
+        "sensitivity": []
+      },
+      "visual_clues": [
+        "孩子们用哪些颜色装饰风筝？"
+      ]
+    },
+    {
+      "image_id": "story_aabb1b53ca_frame_3",
+      "order": 3,
+      "file": "3.jpg",
+      "image_url": "/story-assets/4张图的故事/小纸鸢飞上天空/3.jpg",
+      "private_annotations": {
+        "visible_summary": "一个孩子在户外奔跑，手中的风筝线连着天上的燕子风筝。",
+        "tags": [
+          "角色:孩子",
+          "动作:跑着放风筝",
+          "物体:风筝线",
+          "物体:燕子风筝",
+          "场景:草地",
+          "天气:晴天"
+        ],
+        "uncertainties": [],
+        "sensitivity": []
+      },
+      "visual_clues": [
+        "要让风筝飞起来，孩子做了什么动作？"
+      ]
+    },
+    {
+      "image_id": "story_aabb1b53ca_frame_4",
+      "order": 4,
+      "file": "4.jpg",
+      "image_url": "/story-assets/4张图的故事/小纸鸢飞上天空/4.jpg",
+      "private_annotations": {
+        "visible_summary": "孩子们抬头看着燕子风筝在天空中高高飞翔。",
+        "tags": [
+          "角色:孩子们",
+          "动作:抬头看风筝",
+          "物体:燕子风筝",
+          "场景:草地",
+          "天气:晴天",
+          "位置:天空高处"
+        ],
+        "uncertainties": [],
+        "sensitivity": []
+      },
+      "visual_clues": [
+        "最后风筝飞到了哪里？",
+        "孩子们的目光都看向哪儿？"
+      ]
+    }
+  ]
+}

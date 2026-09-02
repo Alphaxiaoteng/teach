@@ -1,0 +1,112 @@
+{
+  "schema_version": "2.0",
+  "story_id": "story_727ded534c",
+  "title": "玩具小熊回家了",
+  "category": "4张图的故事",
+  "suitable_age": [
+    "large"
+  ],
+  "scene_theme": "整理 / 责任 / 集体生活",
+  "themes": [
+    "整理",
+    "责任",
+    "集体生活"
+  ],
+  "quality": {
+    "status": "ready",
+    "flags": [],
+    "notes": []
+  },
+  "sequence_policy": {
+    "use_image_order": true,
+    "allow_inference": true,
+    "must_mark_uncertain": true,
+    "do_not_override_visible_facts_with_title": true
+  },
+  "images": [
+    {
+      "image_id": "story_727ded534c_frame_1",
+      "order": 1,
+      "file": "1.jpg",
+      "image_url": "/story-assets/4张图的故事/玩具小熊回家了/1.jpg",
+      "private_annotations": {
+        "visible_summary": "一只玩具小熊独自留在幼儿园地面上，周围没有孩子。",
+        "tags": [
+          "角色:玩具小熊",
+          "动作:留在地上",
+          "场景:幼儿园",
+          "状态:无人收拾"
+        ],
+        "uncertainties": [],
+        "sensitivity": []
+      },
+      "visual_clues": [
+        "教室里谁还留在地上？"
+      ]
+    },
+    {
+      "image_id": "story_727ded534c_frame_2",
+      "order": 2,
+      "file": "2.jpg",
+      "image_url": "/story-assets/4张图的故事/玩具小熊回家了/2.jpg",
+      "private_annotations": {
+        "visible_summary": "一个女孩弯腰把地上的玩具小熊捡起来。",
+        "tags": [
+          "角色:女孩",
+          "角色:玩具小熊",
+          "动作:捡起玩具",
+          "场景:幼儿园"
+        ],
+        "uncertainties": [],
+        "sensitivity": []
+      },
+      "visual_clues": [
+        "女孩看见小熊后做了什么？"
+      ]
+    },
+    {
+      "image_id": "story_727ded534c_frame_3",
+      "order": 3,
+      "file": "3.jpg",
+      "image_url": "/story-assets/4张图的故事/玩具小熊回家了/3.jpg",
+      "private_annotations": {
+        "visible_summary": "孩子们把不同玩具放回收纳架和篮子。",
+        "tags": [
+          "角色:孩子们",
+          "动作:收拾玩具",
+          "物体:收纳架",
+          "物体:玩具",
+          "场景:幼儿园",
+          "关系:合作"
+        ],
+        "uncertainties": [],
+        "sensitivity": []
+      },
+      "visual_clues": [
+        "大家把玩具送回了哪里？"
+      ]
+    },
+    {
+      "image_id": "story_727ded534c_frame_4",
+      "order": 4,
+      "file": "4.jpg",
+      "image_url": "/story-assets/4张图的故事/玩具小熊回家了/4.jpg",
+      "private_annotations": {
+        "visible_summary": "收拾好后，孩子们和玩具小熊围成一圈一起玩。",
+        "tags": [
+          "角色:孩子们",
+          "角色:玩具小熊",
+          "动作:围圈游戏",
+          "场景:幼儿园",
+          "表情:开心",
+          "关系:集体"
+        ],
+        "uncertainties": [],
+        "sensitivity": []
+      },
+      "visual_clues": [
+        "玩具回家以后，大家又一起做什么？"
+      ]
+    }
+  ]
+}

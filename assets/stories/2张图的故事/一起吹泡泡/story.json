@@ -1,0 +1,78 @@
+{
+  "schema_version": "2.0",
+  "story_id": "story_fb09142abd",
+  "title": "一起吹泡泡",
+  "category": "2张图的故事",
+  "suitable_age": [
+    "small",
+    "middle"
+  ],
+  "scene_theme": "玩耍 / 观察",
+  "themes": [
+    "玩耍",
+    "观察"
+  ],
+  "quality": {
+    "status": "teacher_review_required",
+    "flags": [
+      "duplicate_images",
+      "teacher_review_required"
+    ],
+    "notes": [
+      "两张图片文件内容完全相同，缺少情节变化。"
+    ]
+  },
+  "sequence_policy": {
+    "use_image_order": true,
+    "allow_inference": true,
+    "must_mark_uncertain": true,
+    "do_not_override_visible_facts_with_title": true
+  },
+  "images": [
+    {
+      "image_id": "story_fb09142abd_frame_1",
+      "order": 1,
+      "file": "1.jpg",
+      "image_url": "/story-assets/2张图的故事/一起吹泡泡/1.jpg",
+      "private_annotations": {
+        "visible_summary": "小狐狸拿着泡泡工具，周围飘着许多泡泡。",
+        "tags": [
+          "角色:小狐狸",
+          "动作:吹泡泡",
+          "物体:泡泡棒",
+          "物体:泡泡",
+          "场景:户外"
+        ],
+        "uncertainties": [],
+        "sensitivity": []
+      },
+      "visual_clues": [
+        "小狐狸周围飘着什么？",
+        "它手里拿着什么工具？"
+      ]
+    },
+    {
+      "image_id": "story_fb09142abd_frame_2",
+      "order": 2,
+      "file": "2.jpg",
+      "image_url": "/story-assets/2张图的故事/一起吹泡泡/2.jpg",
+      "private_annotations": {
+        "visible_summary": "画面与第一张相同：小狐狸拿着泡泡工具，周围飘着泡泡。",
+        "tags": [
+          "角色:小狐狸",
+          "动作:吹泡泡",
+          "物体:泡泡棒",
+          "物体:泡泡",
+          "场景:户外"
+        ],
+        "uncertainties": [
+          "重复图片，不能据此推断后续情节"
+        ],
+        "sensitivity": []
+      },
+      "visual_clues": [
+        "再比一比，两张图有什么一样的地方？"
+      ]
+    }
+  ]
+}

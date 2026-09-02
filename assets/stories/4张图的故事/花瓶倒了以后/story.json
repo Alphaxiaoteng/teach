@@ -1,0 +1,129 @@
+{
+  "schema_version": "2.0",
+  "story_id": "story_30f2ccaddf",
+  "title": "花瓶倒了以后",
+  "category": "4张图的故事",
+  "suitable_age": [
+    "large"
+  ],
+  "scene_theme": "诚实 / 承担责任 / 修复",
+  "themes": [
+    "诚实",
+    "承担责任",
+    "修复"
+  ],
+  "quality": {
+    "status": "ready",
+    "flags": [],
+    "notes": []
+  },
+  "sequence_policy": {
+    "use_image_order": true,
+    "allow_inference": true,
+    "must_mark_uncertain": true,
+    "do_not_override_visible_facts_with_title": true
+  },
+  "images": [
+    {
+      "image_id": "story_30f2ccaddf_frame_1",
+      "order": 1,
+      "file": "1.jpg",
+      "image_url": "/story-assets/4张图的故事/花瓶倒了以后/1.jpg",
+      "private_annotations": {
+        "visible_summary": "老师把插着花的花瓶放在窗台上，一个男孩站在旁边看。",
+        "tags": [
+          "角色:老师",
+          "角色:男孩",
+          "动作:摆放花瓶",
+          "物体:花瓶",
+          "物体:花",
+          "场景:教室"
+        ],
+        "uncertainties": [],
+        "sensitivity": []
+      },
+      "visual_clues": [
+        "老师把花瓶放在了哪里？",
+        "谁站在旁边看着？"
+      ]
+    },
+    {
+      "image_id": "story_30f2ccaddf_frame_2",
+      "order": 2,
+      "file": "2.jpg",
+      "image_url": "/story-assets/4张图的故事/花瓶倒了以后/2.jpg",
+      "private_annotations": {
+        "visible_summary": "花瓶倒在地上并破损，花散落出来；男孩皱眉，老师和女孩站在旁边。",
+        "tags": [
+          "角色:老师",
+          "角色:男孩",
+          "角色:女孩",
+          "动作:看倒下的花瓶",
+          "物体:破损花瓶",
+          "物体:散落的花",
+          "场景:教室",
+          "表情:担心"
+        ],
+        "uncertainties": [],
+        "sensitivity": [
+          "破碎物可能割伤；应先请成人处理"
+        ]
+      },
+      "visual_clues": [
+        "第二张图里，花瓶的位置发生了什么变化？",
+        "地上散落了什么？"
+      ]
+    },
+    {
+      "image_id": "story_30f2ccaddf_frame_3",
+      "order": 3,
+      "file": "3.jpg",
+      "image_url": "/story-assets/4张图的故事/花瓶倒了以后/3.jpg",
+      "private_annotations": {
+        "visible_summary": "老师蹲下和低头的男孩说话，女孩拿着花，修好的花瓶放在旁边。",
+        "tags": [
+          "角色:老师",
+          "角色:男孩",
+          "角色:女孩",
+          "动作:交谈并收拾",
+          "物体:花",
+          "物体:修复的花瓶",
+          "场景:教室",
+          "表情:低头"
+        ],
+        "uncertainties": [],
+        "sensitivity": []
+      },
+      "visual_clues": [
+        "老师蹲下来在和谁说话？",
+        "大家开始怎样收拾画面里的东西？"
+      ]
+    },
+    {
+      "image_id": "story_30f2ccaddf_frame_4",
+      "order": 4,
+      "file": "4.jpg",
+      "image_url": "/story-assets/4张图的故事/花瓶倒了以后/4.jpg",
+      "private_annotations": {
+        "visible_summary": "老师轻拍微笑男孩的肩，男孩和女孩一起捧着恢复好的花瓶。",
+        "tags": [
+          "角色:老师",
+          "角色:男孩",
+          "角色:女孩",
+          "动作:共同捧花瓶",
+          "动作:拍肩鼓励",
+          "物体:花瓶",
+          "场景:教室",
+          "表情:微笑",
+          "关系:鼓励"
+        ],
+        "uncertainties": [],
+        "sensitivity": []
+      },
+      "visual_clues": [
+        "最后男孩和女孩一起拿着什么？",
+        "老师用什么动作鼓励男孩？"
+      ]
+    }
+  ]
+}

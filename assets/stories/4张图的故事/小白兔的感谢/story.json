@@ -1,0 +1,127 @@
+{
+  "schema_version": "2.0",
+  "story_id": "story_15aceb529d",
+  "title": "小白兔的感谢",
+  "category": "4张图的故事",
+  "suitable_age": [
+    "large"
+  ],
+  "scene_theme": "救助动物 / 感恩 / 生命关怀",
+  "themes": [
+    "救助动物",
+    "感恩",
+    "生命关怀"
+  ],
+  "quality": {
+    "status": "teacher_review_required",
+    "flags": [
+      "graphic_injury",
+      "sequence_uncertain",
+      "teacher_review_required"
+    ],
+    "notes": [
+      "第1张有可见血迹；第4张出现白鹿，与前面白兔的连续关系不明确。"
+    ]
+  },
+  "sequence_policy": {
+    "use_image_order": true,
+    "allow_inference": true,
+    "must_mark_uncertain": true,
+    "do_not_override_visible_facts_with_title": true
+  },
+  "images": [
+    {
+      "image_id": "story_15aceb529d_frame_1",
+      "order": 1,
+      "file": "1.jpg",
+      "image_url": "/story-assets/4张图的故事/小白兔的感谢/1.jpg",
+      "private_annotations": {
+        "visible_summary": "山间草地上，一个男孩靠近受伤的白兔，白兔身上有明显伤口和血迹。",
+        "tags": [
+          "角色:男孩",
+          "角色:受伤白兔",
+          "动作:靠近查看",
+          "物体:伤口",
+          "场景:山间草地"
+        ],
+        "uncertainties": [],
+        "sensitivity": [
+          "可见血迹；不要求幼儿描述伤口细节"
+        ]
+      },
+      "visual_clues": [
+        "男孩在草地上发现了谁？",
+        "它现在需要怎样的帮助？"
+      ]
+    },
+    {
+      "image_id": "story_15aceb529d_frame_2",
+      "order": 2,
+      "file": "2.jpg",
+      "image_url": "/story-assets/4张图的故事/小白兔的感谢/2.jpg",
+      "private_annotations": {
+        "visible_summary": "男孩和老人把白兔放在铺着草的桌面上，给它照料和食物。",
+        "tags": [
+          "角色:男孩",
+          "角色:老人",
+          "角色:白兔",
+          "动作:照料白兔",
+          "物体:食物",
+          "物体:草垫",
+          "场景:住处"
+        ],
+        "uncertainties": [],
+        "sensitivity": []
+      },
+      "visual_clues": [
+        "回到住处后，男孩和老人怎样照顾白兔？"
+      ]
+    },
+    {
+      "image_id": "story_15aceb529d_frame_3",
+      "order": 3,
+      "file": "3.jpg",
+      "image_url": "/story-assets/4张图的故事/小白兔的感谢/3.jpg",
+      "private_annotations": {
+        "visible_summary": "恢复后的白兔来到户外，男孩蹲下轻轻摸它，老人站在后面。",
+        "tags": [
+          "角色:男孩",
+          "角色:老人",
+          "角色:白兔",
+          "动作:放归并告别",
+          "场景:户外",
+          "表情:微笑"
+        ],
+        "uncertainties": [],
+        "sensitivity": []
+      },
+      "visual_clues": [
+        "比一比第一张，白兔现在看起来有什么变化？"
+      ]
+    },
+    {
+      "image_id": "story_15aceb529d_frame_4",
+      "order": 4,
+      "file": "4.jpg",
+      "image_url": "/story-assets/4张图的故事/小白兔的感谢/4.jpg",
+      "private_annotations": {
+        "visible_summary": "秋天，男孩和老人提着水果篮走在路上，看见一只白鹿。",
+        "tags": [
+          "角色:男孩",
+          "角色:老人",
+          "角色:白鹿",
+          "动作:提篮行走",
+          "物体:水果篮",
+          "场景:秋日山路"
+        ],
+        "uncertainties": [
+          "白鹿与前三张白兔的关系不可见，不能推断为同一角色"
+        ],
+        "sensitivity": []
+      },
+      "visual_clues": [
+        "第四张图里，他们在路上又看见了谁？"
+      ]
+    }
+  ]
+}

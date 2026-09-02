@@ -1,0 +1,116 @@
+{
+  "schema_version": "2.0",
+  "story_id": "story_0a4a1bacef",
+  "title": "小竹灯找朋友",
+  "category": "4张图的故事",
+  "suitable_age": [
+    "large"
+  ],
+  "scene_theme": "传统手工 / 友谊 / 想象",
+  "themes": [
+    "传统手工",
+    "友谊",
+    "想象"
+  ],
+  "quality": {
+    "status": "ready",
+    "flags": [],
+    "notes": []
+  },
+  "sequence_policy": {
+    "use_image_order": true,
+    "allow_inference": true,
+    "must_mark_uncertain": true,
+    "do_not_override_visible_facts_with_title": true
+  },
+  "images": [
+    {
+      "image_id": "story_0a4a1bacef_frame_1",
+      "order": 1,
+      "file": "1.jpg",
+      "image_url": "/story-assets/4张图的故事/小竹灯找朋友/1.jpg",
+      "private_annotations": {
+        "visible_summary": "小鹿在竹林里发现一盏发光的小竹灯。",
+        "tags": [
+          "角色:小鹿",
+          "动作:发现竹灯",
+          "物体:小竹灯",
+          "场景:竹林",
+          "时间:夜晚"
+        ],
+        "uncertainties": [],
+        "sensitivity": []
+      },
+      "visual_clues": [
+        "竹林里什么东西正在发光？"
+      ]
+    },
+    {
+      "image_id": "story_0a4a1bacef_frame_2",
+      "order": 2,
+      "file": "2.jpg",
+      "image_url": "/story-assets/4张图的故事/小竹灯找朋友/2.jpg",
+      "private_annotations": {
+        "visible_summary": "小鹿带着竹灯遇见小兔和小松鼠，大家围着灯观察。",
+        "tags": [
+          "角色:小鹿",
+          "角色:小兔",
+          "角色:小松鼠",
+          "动作:围灯相遇",
+          "物体:小竹灯",
+          "场景:竹林",
+          "时间:夜晚"
+        ],
+        "uncertainties": [],
+        "sensitivity": []
+      },
+      "visual_clues": [
+        "小竹灯先遇见了哪两位伙伴？"
+      ]
+    },
+    {
+      "image_id": "story_0a4a1bacef_frame_3",
+      "order": 3,
+      "file": "3.jpg",
+      "image_url": "/story-assets/4张图的故事/小竹灯找朋友/3.jpg",
+      "private_annotations": {
+        "visible_summary": "竹林里出现了更多发亮的小竹灯，小动物们走在灯旁。",
+        "tags": [
+          "角色:小动物们",
+          "动作:跟着灯行走",
+          "物体:许多竹灯",
+          "场景:竹林",
+          "时间:夜晚"
+        ],
+        "uncertainties": [],
+        "sensitivity": []
+      },
+      "visual_clues": [
+        "第三张里，一盏灯变成了多少盏？"
+      ]
+    },
+    {
+      "image_id": "story_0a4a1bacef_frame_4",
+      "order": 4,
+      "file": "4.jpg",
+      "image_url": "/story-assets/4张图的故事/小竹灯找朋友/4.jpg",
+      "private_annotations": {
+        "visible_summary": "月光下，小动物们围着许多竹灯聚在一起。",
+        "tags": [
+          "角色:小动物们",
+          "动作:围灯相聚",
+          "物体:竹灯",
+          "物体:月亮",
+          "场景:竹林空地",
+          "时间:夜晚",
+          "关系:朋友"
+        ],
+        "uncertainties": [],
+        "sensitivity": []
+      },
+      "visual_clues": [
+        "最后，竹灯和小动物们在哪里聚在一起？"
+      ]
+    }
+  ]
+}

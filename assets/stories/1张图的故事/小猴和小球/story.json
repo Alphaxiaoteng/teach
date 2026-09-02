@@ -1,0 +1,55 @@
+{
+  "schema_version": "2.0",
+  "story_id": "story_84976d1c49",
+  "title": "小猴和小球",
+  "category": "1张图的故事",
+  "suitable_age": [
+    "small"
+  ],
+  "scene_theme": "观察 / 玩耍",
+  "themes": [
+    "观察",
+    "玩耍"
+  ],
+  "quality": {
+    "status": "teacher_review_required",
+    "flags": [
+      "title_content_mismatch",
+      "teacher_review_required"
+    ],
+    "notes": [
+      "标题写“小猴”，画面可见角色更像黄色小狗；运行时以画面标签为准。"
+    ]
+  },
+  "sequence_policy": {
+    "use_image_order": true,
+    "allow_inference": true,
+    "must_mark_uncertain": true,
+    "do_not_override_visible_facts_with_title": true
+  },
+  "images": [
+    {
+      "image_id": "story_84976d1c49_frame_1",
+      "order": 1,
+      "file": "1.jpg",
+      "image_url": "/story-assets/1张图的故事/小猴和小球/1.jpg",
+      "private_annotations": {
+        "visible_summary": "一只黄色小狗在草地上靠近一个红色皮球。",
+        "tags": [
+          "角色:黄色小狗",
+          "动作:靠近皮球",
+          "物体:红色皮球",
+          "场景:草地"
+        ],
+        "uncertainties": [
+          "角色物种与故事标题不一致"
+        ],
+        "sensitivity": []
+      },
+      "visual_clues": [
+        "先看外形，这只小动物更像谁？",
+        "它旁边圆圆的红色东西是什么？"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,128 @@
+{
+  "schema_version": "2.0",
+  "story_id": "story_8171797742",
+  "title": "小狐狸的红色小围巾",
+  "category": "4张图的故事",
+  "suitable_age": [
+    "large"
+  ],
+  "scene_theme": "友谊 / 互助 / 集体生活",
+  "themes": [
+    "友谊",
+    "互助",
+    "集体生活"
+  ],
+  "quality": {
+    "status": "ready",
+    "flags": [
+      "generated_watermark"
+    ],
+    "notes": [
+      "第2张右下角可见生成式图片水印，正式参赛素材建议替换或取得合规来源。"
+    ]
+  },
+  "sequence_policy": {
+    "use_image_order": true,
+    "allow_inference": true,
+    "must_mark_uncertain": true,
+    "do_not_override_visible_facts_with_title": true
+  },
+  "images": [
+    {
+      "image_id": "story_8171797742_frame_1",
+      "order": 1,
+      "file": "1.jpg",
+      "image_url": "/story-assets/4张图的故事/小狐狸的红色小围巾/1.jpg",
+      "private_annotations": {
+        "visible_summary": "小狐狸戴着红围巾站在校门外，书包放在地上，眉毛下垂。",
+        "tags": [
+          "角色:小狐狸",
+          "动作:站在校门外",
+          "物体:红围巾",
+          "物体:书包",
+          "场景:学校门口",
+          "表情:皱眉"
+        ],
+        "uncertainties": [],
+        "sensitivity": []
+      },
+      "visual_clues": [
+        "小狐狸在哪里？",
+        "它的书包为什么放在地上？",
+        "你能先说说看见了什么吗？"
+      ]
+    },
+    {
+      "image_id": "story_8171797742_frame_2",
+      "order": 2,
+      "file": "2.jpg",
+      "image_url": "/story-assets/4张图的故事/小狐狸的红色小围巾/2.jpg",
+      "private_annotations": {
+        "visible_summary": "戴红围巾的小兔跑向门口微笑的小狐狸，小狐狸手里拿着一朵花。",
+        "tags": [
+          "角色:小狐狸",
+          "角色:小兔",
+          "动作:跑来见面",
+          "物体:红围巾",
+          "物体:花",
+          "场景:校门",
+          "表情:微笑"
+        ],
+        "uncertainties": [],
+        "sensitivity": []
+      },
+      "visual_clues": [
+        "谁跑到了小狐狸身边？",
+        "小狐狸手里拿着什么？"
+      ]
+    },
+    {
+      "image_id": "story_8171797742_frame_3",
+      "order": 3,
+      "file": "3.jpg",
+      "image_url": "/story-assets/4张图的故事/小狐狸的红色小围巾/3.jpg",
+      "private_annotations": {
+        "visible_summary": "草地上，小狐狸和小鹿一起拿着一条红围巾，其他伙伴也拿着围巾。",
+        "tags": [
+          "角色:小狐狸",
+          "角色:小鹿",
+          "角色:伙伴们",
+          "动作:一起拿围巾",
+          "物体:红围巾",
+          "场景:草地",
+          "关系:合作"
+        ],
+        "uncertainties": [],
+        "sensitivity": []
+      },
+      "visual_clues": [
+        "伙伴们手里一起拿着什么？",
+        "它们是一个人做还是一起做？"
+      ]
+    },
+    {
+      "image_id": "story_8171797742_frame_4",
+      "order": 4,
+      "file": "4.jpg",
+      "image_url": "/story-assets/4张图的故事/小狐狸的红色小围巾/4.jpg",
+      "private_annotations": {
+        "visible_summary": "小狐狸戴着红围巾，在校门口和伙伴们一起挥手。",
+        "tags": [
+          "角色:小狐狸",
+          "角色:伙伴们",
+          "动作:挥手",
+          "物体:红围巾",
+          "场景:学校门口",
+          "时间:傍晚",
+          "表情:微笑"
+        ],
+        "uncertainties": [],
+        "sensitivity": []
+      },
+      "visual_clues": [
+        "最后小狐狸身边有了谁？",
+        "大家用什么动作告别？"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,120 @@
+{
+  "schema_version": "2.0",
+  "story_id": "story_c1d26d5741",
+  "title": "圆圆的月饼",
+  "category": "4张图的故事",
+  "suitable_age": [
+    "large"
+  ],
+  "scene_theme": "中秋 / 家庭 / 传统美食",
+  "themes": [
+    "中秋",
+    "家庭",
+    "传统美食"
+  ],
+  "quality": {
+    "status": "ready",
+    "flags": [],
+    "notes": []
+  },
+  "sequence_policy": {
+    "use_image_order": true,
+    "allow_inference": true,
+    "must_mark_uncertain": true,
+    "do_not_override_visible_facts_with_title": true
+  },
+  "images": [
+    {
+      "image_id": "story_c1d26d5741_frame_1",
+      "order": 1,
+      "file": "1.jpg",
+      "image_url": "/story-assets/4张图的故事/圆圆的月饼/1.jpg",
+      "private_annotations": {
+        "visible_summary": "满月下，老人和孩子们在桌边准备做月饼的材料。",
+        "tags": [
+          "角色:老人",
+          "角色:孩子们",
+          "动作:准备材料",
+          "物体:面团",
+          "物体:圆月",
+          "场景:庭院",
+          "时间:夜晚"
+        ],
+        "uncertainties": [],
+        "sensitivity": []
+      },
+      "visual_clues": [
+        "天空中的月亮是什么形状？",
+        "桌上摆着哪些材料？"
+      ]
+    },
+    {
+      "image_id": "story_c1d26d5741_frame_2",
+      "order": 2,
+      "file": "2.jpg",
+      "image_url": "/story-assets/4张图的故事/圆圆的月饼/2.jpg",
+      "private_annotations": {
+        "visible_summary": "老人和孩子们一起把面团压进模具，制作月饼。",
+        "tags": [
+          "角色:老人",
+          "角色:孩子们",
+          "动作:做月饼",
+          "物体:面团",
+          "物体:模具",
+          "场景:庭院",
+          "关系:合作"
+        ],
+        "uncertainties": [],
+        "sensitivity": []
+      },
+      "visual_clues": [
+        "大家用什么工具把月饼压出花纹？"
+      ]
+    },
+    {
+      "image_id": "story_c1d26d5741_frame_3",
+      "order": 3,
+      "file": "3.jpg",
+      "image_url": "/story-assets/4张图的故事/圆圆的月饼/3.jpg",
+      "private_annotations": {
+        "visible_summary": "做好的圆月饼被摆到盘子里，大家围着桌子观看。",
+        "tags": [
+          "角色:老人",
+          "角色:孩子们",
+          "动作:摆放月饼",
+          "物体:月饼",
+          "物体:盘子",
+          "场景:庭院"
+        ],
+        "uncertainties": [],
+        "sensitivity": []
+      },
+      "visual_clues": [
+        "盘子里的月饼是什么形状？"
+      ]
+    },
+    {
+      "image_id": "story_c1d26d5741_frame_4",
+      "order": 4,
+      "file": "4.jpg",
+      "image_url": "/story-assets/4张图的故事/圆圆的月饼/4.jpg",
+      "private_annotations": {
+        "visible_summary": "大家在圆月下坐在一起吃月饼。",
+        "tags": [
+          "角色:家人们",
+          "动作:一起吃月饼",
+          "物体:月饼",
+          "物体:圆月",
+          "场景:庭院",
+          "时间:夜晚",
+          "关系:团聚"
+        ],
+        "uncertainties": [],
+        "sensitivity": []
+      },
+      "visual_clues": [
+        "最后大家在月亮下面一起做什么？"
+      ]
+    }
+  ]
+}

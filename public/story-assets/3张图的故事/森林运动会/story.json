@@ -1,0 +1,92 @@
+{
+  "schema_version": "2.0",
+  "story_id": "story_34872a6885",
+  "title": "森林运动会",
+  "category": "3张图的故事",
+  "suitable_age": [
+    "middle"
+  ],
+  "scene_theme": "运动 / 合作 / 公平",
+  "themes": [
+    "运动",
+    "合作",
+    "公平"
+  ],
+  "quality": {
+    "status": "ready",
+    "flags": [],
+    "notes": []
+  },
+  "sequence_policy": {
+    "use_image_order": true,
+    "allow_inference": true,
+    "must_mark_uncertain": true,
+    "do_not_override_visible_facts_with_title": true
+  },
+  "images": [
+    {
+      "image_id": "story_34872a6885_frame_1",
+      "order": 1,
+      "file": "1.jpg",
+      "image_url": "/story-assets/3张图的故事/森林运动会/1.jpg",
+      "private_annotations": {
+        "visible_summary": "小动物们在跑道上参加跑步比赛。",
+        "tags": [
+          "角色:小动物们",
+          "动作:跑步比赛",
+          "物体:跑道",
+          "场景:森林运动场"
+        ],
+        "uncertainties": [],
+        "sensitivity": []
+      },
+      "visual_clues": [
+        "第一项比赛要用身体的哪个部位向前跑？"
+      ]
+    },
+    {
+      "image_id": "story_34872a6885_frame_2",
+      "order": 2,
+      "file": "2.jpg",
+      "image_url": "/story-assets/3张图的故事/森林运动会/2.jpg",
+      "private_annotations": {
+        "visible_summary": "两队小动物抓住绳子进行拔河。",
+        "tags": [
+          "角色:两队小动物",
+          "动作:拔河",
+          "物体:绳子",
+          "场景:森林运动场",
+          "关系:团队"
+        ],
+        "uncertainties": [],
+        "sensitivity": []
+      },
+      "visual_clues": [
+        "第二项比赛中，大家一起拉着什么？"
+      ]
+    },
+    {
+      "image_id": "story_34872a6885_frame_3",
+      "order": 3,
+      "file": "3.jpg",
+      "image_url": "/story-assets/3张图的故事/森林运动会/3.jpg",
+      "private_annotations": {
+        "visible_summary": "获奖的小动物站在领奖台上，戴着奖牌。",
+        "tags": [
+          "角色:获奖动物",
+          "动作:领奖",
+          "物体:领奖台",
+          "物体:奖牌",
+          "场景:森林运动场",
+          "表情:开心"
+        ],
+        "uncertainties": [],
+        "sensitivity": []
+      },
+      "visual_clues": [
+        "最后谁站上了高高的台子？",
+        "它们胸前戴着什么？"
+      ]
+    }
+  ]
+}

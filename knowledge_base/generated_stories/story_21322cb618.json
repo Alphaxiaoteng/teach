@@ -1,0 +1,115 @@
+{
+  "schema_version": "2.0",
+  "story_id": "story_21322cb618",
+  "title": "小兔灯笼找朋友",
+  "category": "4张图的故事",
+  "suitable_age": [
+    "large"
+  ],
+  "scene_theme": "元宵 / 手工 / 交朋友",
+  "themes": [
+    "元宵",
+    "手工",
+    "交朋友"
+  ],
+  "quality": {
+    "status": "ready",
+    "flags": [],
+    "notes": []
+  },
+  "sequence_policy": {
+    "use_image_order": true,
+    "allow_inference": true,
+    "must_mark_uncertain": true,
+    "do_not_override_visible_facts_with_title": true
+  },
+  "images": [
+    {
+      "image_id": "story_21322cb618_frame_1",
+      "order": 1,
+      "file": "1.jpg",
+      "image_url": "/story-assets/4张图的故事/小兔灯笼找朋友/1.jpg",
+      "private_annotations": {
+        "visible_summary": "老师和孩子们围在桌边制作兔子形状的灯笼。",
+        "tags": [
+          "角色:老师",
+          "角色:孩子们",
+          "动作:做灯笼",
+          "物体:兔子灯笼",
+          "物体:桌子",
+          "场景:教室"
+        ],
+        "uncertainties": [],
+        "sensitivity": []
+      },
+      "visual_clues": [
+        "大家正在做什么形状的灯笼？"
+      ]
+    },
+    {
+      "image_id": "story_21322cb618_frame_2",
+      "order": 2,
+      "file": "2.jpg",
+      "image_url": "/story-assets/4张图的故事/小兔灯笼找朋友/2.jpg",
+      "private_annotations": {
+        "visible_summary": "孩子们把做好的兔子灯笼举起来展示。",
+        "tags": [
+          "角色:孩子们",
+          "动作:展示灯笼",
+          "物体:兔子灯笼",
+          "场景:教室",
+          "表情:微笑"
+        ],
+        "uncertainties": [],
+        "sensitivity": []
+      },
+      "visual_clues": [
+        "第二张图里，灯笼做好了吗？",
+        "你从哪里看出来？"
+      ]
+    },
+    {
+      "image_id": "story_21322cb618_frame_3",
+      "order": 3,
+      "file": "3.jpg",
+      "image_url": "/story-assets/4张图的故事/小兔灯笼找朋友/3.jpg",
+      "private_annotations": {
+        "visible_summary": "夜晚，一个孩子提着发亮的兔子灯笼走在街上。",
+        "tags": [
+          "角色:孩子",
+          "动作:提灯笼走路",
+          "物体:兔子灯笼",
+          "场景:街道",
+          "时间:夜晚"
+        ],
+        "uncertainties": [],
+        "sensitivity": []
+      },
+      "visual_clues": [
+        "孩子把灯笼带到了什么时间的街上？"
+      ]
+    },
+    {
+      "image_id": "story_21322cb618_frame_4",
+      "order": 4,
+      "file": "4.jpg",
+      "image_url": "/story-assets/4张图的故事/小兔灯笼找朋友/4.jpg",
+      "private_annotations": {
+        "visible_summary": "灯会中，许多孩子提着不同的灯笼聚在一起。",
+        "tags": [
+          "角色:孩子们",
+          "动作:参加灯会",
+          "物体:各种灯笼",
+          "场景:灯会",
+          "时间:夜晚",
+          "关系:相聚"
+        ],
+        "uncertainties": [],
+        "sensitivity": []
+      },
+      "visual_clues": [
+        "最后，小兔灯笼身边多了哪些新伙伴？"
+      ]
+    }
+  ]
+}

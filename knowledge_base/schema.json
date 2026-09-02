@@ -1,0 +1,114 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "StoryKnowledgeBase",
+  "type": "object",
+  "required": [
+    "story_id",
+    "title",
+    "suitable_age",
+    "scene_theme",
+    "images",
+    "standard_story_answers",
+    "stuck_recovery_rules"
+  ],
+  "properties": {
+    "story_id": { "type": "string" },
+    "title": { "type": "string" },
+    "suitable_age": {
+      "type": "array",
+      "items": { "type": "string", "enum": ["small", "middle", "large"] }
+    },
+    "scene_theme": { "type": "string" },
+    "images": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["image_id", "order", "image_url", "annotations", "visual_clues", "progressive_questions"],
+        "properties": {
+          "image_id": { "type": "string" },
+          "order": { "type": "integer" },
+          "image_url": { "type": "string" },
+          "thumbnail_url": { "type": "string" },
+          "annotations": {
+            "type": "object",
+            "required": ["characters", "location", "action"],
+            "properties": {
+              "characters": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "required": ["name", "features", "aliases"],
+                  "properties": {
+                    "name": { "type": "string" },
+                    "features": { "type": "string" },
+                    "aliases": { "type": "array", "items": { "type": "string" } }
+                  }
+                }
+              },
+              "time_weather": { "type": "string" },
+              "location": { "type": "string" },
+              "action": { "type": "string" },
+              "emotion_psychology": { "type": "string" },
+              "key_props": { "type": "array", "items": { "type": "string" } }
+            }
+          },
+          "visual_clues": {
+            "type": "array",
+            "items": { "type": "string" }
+          },
+          "progressive_questions": {
+            "type": "object",
+            "properties": {
+              "small": { "type": "object" },
+              "middle": { "type": "object" },
+              "large": { "type": "object" }
+            }
+          }
+        }
+      }
+    },
+    "standard_story_answers": {
+      "type": "object",
+      "properties": {
+        "small": {
+          "type": "object",
+          "required": ["elements_required", "reference_story", "keywords"],
+          "properties": {
+            "elements_required": { "type": "array", "items": { "type": "string" } },
+            "reference_story": { "type": "string" },
+            "keywords": { "type": "array", "items": { "type": "string" } }
+          }
+        },
+        "middle": {
+          "type": "object",
+          "required": ["elements_required", "reference_story", "keywords"],
+          "properties": {
+            "elements_required": { "type": "array", "items": { "type": "string" } },
+            "reference_story": { "type": "string" },
+            "keywords": { "type": "array", "items": { "type": "string" } }
+          }
+        },
+        "large": {
+          "type": "object",
+          "required": ["elements_required", "reference_story", "keywords"],
+          "properties": {
+            "elements_required": { "type": "array", "items": { "type": "string" } },
+            "reference_story": { "type": "string" },
+            "keywords": { "type": "array", "items": { "type": "string" } }
+          }
+        }
+      }
+    },
+    "stuck_recovery_rules": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["trigger", "clue"],
+        "properties": {
+          "trigger": { "type": "string" },
+          "clue": { "type": "string" }
+        }
+      }
+    }
+  }
+}

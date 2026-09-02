@@ -1,0 +1,49 @@
+{
+  "schema_version": "2.0",
+  "story_id": "story_8cfa245a98",
+  "title": "小鸭子的小雨伞",
+  "category": "1张图的故事",
+  "suitable_age": [
+    "small"
+  ],
+  "scene_theme": "观察 / 雨天",
+  "themes": [
+    "观察",
+    "雨天"
+  ],
+  "quality": {
+    "status": "ready",
+    "flags": [],
+    "notes": []
+  },
+  "sequence_policy": {
+    "use_image_order": true,
+    "allow_inference": true,
+    "must_mark_uncertain": true,
+    "do_not_override_visible_facts_with_title": true
+  },
+  "images": [
+    {
+      "image_id": "story_8cfa245a98_frame_1",
+      "order": 1,
+      "file": "1.jpg",
+      "image_url": "/story-assets/1张图的故事/小鸭子的小雨伞/1.jpg",
+      "private_annotations": {
+        "visible_summary": "雨中，小鸭子举着一把小雨伞走在路上。",
+        "tags": [
+          "角色:小鸭子",
+          "动作:撑伞走路",
+          "物体:雨伞",
+          "场景:小路",
+          "天气:下雨"
+        ],
+        "uncertainties": [],
+        "sensitivity": []
+      },
+      "visual_clues": [
+        "天空落下了什么？",
+        "小鸭子用什么挡雨？"
+      ]
+    }
+  ]
+}

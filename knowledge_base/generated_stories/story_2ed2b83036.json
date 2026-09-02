@@ -1,0 +1,52 @@
+{
+  "schema_version": "2.0",
+  "story_id": "story_2ed2b83036",
+  "title": "荷叶雨伞",
+  "category": "1张图的故事",
+  "suitable_age": [
+    "small"
+  ],
+  "scene_theme": "想象 / 雨天",
+  "themes": [
+    "想象",
+    "雨天"
+  ],
+  "quality": {
+    "status": "ready",
+    "flags": [],
+    "notes": []
+  },
+  "sequence_policy": {
+    "use_image_order": true,
+    "allow_inference": true,
+    "must_mark_uncertain": true,
+    "do_not_override_visible_facts_with_title": true
+  },
+  "images": [
+    {
+      "image_id": "story_2ed2b83036_frame_1",
+      "order": 1,
+      "file": "1.jpg",
+      "image_url": "/story-assets/1张图的故事/荷叶雨伞/1.jpg",
+      "private_annotations": {
+        "visible_summary": "雨中，小动物躲在一片大荷叶下面，荷叶挡住了雨。",
+        "tags": [
+          "角色:小动物",
+          "动作:躲雨",
+          "物体:大荷叶",
+          "场景:池塘边",
+          "天气:下雨",
+          "关系:荷叶像雨伞"
+        ],
+        "uncertainties": [
+          "角色种类不作为必答项"
+        ],
+        "sensitivity": []
+      },
+      "visual_clues": [
+        "雨点落下来时，小动物躲在哪里？",
+        "大荷叶像生活中的什么东西？"
+      ]
+    }
+  ]
+}

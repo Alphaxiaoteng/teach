@@ -1,0 +1,118 @@
+{
+  "schema_version": "2.0",
+  "story_id": "story_029795f489",
+  "title": "云朵面包店的彩虹密码",
+  "category": "4张图的故事",
+  "suitable_age": [
+    "large"
+  ],
+  "scene_theme": "想象 / 合作 / 分享",
+  "themes": [
+    "想象",
+    "合作",
+    "分享"
+  ],
+  "quality": {
+    "status": "ready",
+    "flags": [],
+    "notes": []
+  },
+  "sequence_policy": {
+    "use_image_order": true,
+    "allow_inference": true,
+    "must_mark_uncertain": true,
+    "do_not_override_visible_facts_with_title": true
+  },
+  "images": [
+    {
+      "image_id": "story_029795f489_frame_1",
+      "order": 1,
+      "file": "1.jpg",
+      "image_url": "/story-assets/4张图的故事/云朵面包店的彩虹密码/1.jpg",
+      "private_annotations": {
+        "visible_summary": "小熊猫来到一间面包店，店里摆着面包和烘焙用品。",
+        "tags": [
+          "角色:小熊猫",
+          "动作:来到面包店",
+          "物体:面包",
+          "场景:面包店"
+        ],
+        "uncertainties": [],
+        "sensitivity": []
+      },
+      "visual_clues": [
+        "小熊猫来到了什么店？",
+        "架子上摆着什么？"
+      ]
+    },
+    {
+      "image_id": "story_029795f489_frame_2",
+      "order": 2,
+      "file": "2.jpg",
+      "image_url": "/story-assets/4张图的故事/云朵面包店的彩虹密码/2.jpg",
+      "private_annotations": {
+        "visible_summary": "面包店里出现彩虹般的光，小松鼠和小熊猫一起看着它。",
+        "tags": [
+          "角色:小熊猫",
+          "角色:小松鼠",
+          "动作:观察彩虹光",
+          "物体:彩虹光",
+          "场景:面包店",
+          "氛围:梦幻"
+        ],
+        "uncertainties": [],
+        "sensitivity": []
+      },
+      "visual_clues": [
+        "店里出现了哪些特别的颜色？",
+        "又有谁来到了店里？"
+      ]
+    },
+    {
+      "image_id": "story_029795f489_frame_3",
+      "order": 3,
+      "file": "3.jpg",
+      "image_url": "/story-assets/4张图的故事/云朵面包店的彩虹密码/3.jpg",
+      "private_annotations": {
+        "visible_summary": "几只小动物围在桌边，把彩色材料放进碗里制作食物。",
+        "tags": [
+          "角色:小动物们",
+          "动作:一起制作",
+          "物体:碗",
+          "物体:彩色材料",
+          "场景:面包店",
+          "关系:合作"
+        ],
+        "uncertainties": [],
+        "sensitivity": []
+      },
+      "visual_clues": [
+        "大家围着桌子一起做什么？",
+        "碗里的颜色有什么变化？"
+      ]
+    },
+    {
+      "image_id": "story_029795f489_frame_4",
+      "order": 4,
+      "file": "4.jpg",
+      "image_url": "/story-assets/4张图的故事/云朵面包店的彩虹密码/4.jpg",
+      "private_annotations": {
+        "visible_summary": "小动物们围着发出彩虹光的面包，一起展示成果。",
+        "tags": [
+          "角色:小动物们",
+          "动作:展示面包",
+          "物体:彩虹面包",
+          "场景:面包店",
+          "表情:开心",
+          "关系:分享"
+        ],
+        "uncertainties": [],
+        "sensitivity": []
+      },
+      "visual_clues": [
+        "最后做出来的面包有什么特别？",
+        "大家的表情怎么样？"
+      ]
+    }
+  ]
+}

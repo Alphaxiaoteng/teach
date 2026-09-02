@@ -1,0 +1,49 @@
+{
+  "schema_version": "2.0",
+  "story_id": "story_0af620b4fe",
+  "title": "小青蛙的荷叶船",
+  "category": "1张图的故事",
+  "suitable_age": [
+    "small"
+  ],
+  "scene_theme": "想象 / 探索",
+  "themes": [
+    "想象",
+    "探索"
+  ],
+  "quality": {
+    "status": "ready",
+    "flags": [],
+    "notes": []
+  },
+  "sequence_policy": {
+    "use_image_order": true,
+    "allow_inference": true,
+    "must_mark_uncertain": true,
+    "do_not_override_visible_facts_with_title": true
+  },
+  "images": [
+    {
+      "image_id": "story_0af620b4fe_frame_1",
+      "order": 1,
+      "file": "1.jpg",
+      "image_url": "/story-assets/1张图的故事/小青蛙的荷叶船/1.jpg",
+      "private_annotations": {
+        "visible_summary": "小青蛙坐在水面的一片荷叶上，荷叶像小船一样漂着。",
+        "tags": [
+          "角色:小青蛙",
+          "动作:坐在荷叶上",
+          "物体:荷叶",
+          "场景:池塘",
+          "关系:荷叶像小船"
+        ],
+        "uncertainties": [],
+        "sensitivity": []
+      },
+      "visual_clues": [
+        "小青蛙坐在什么上面？",
+        "这片叶子漂在水上像什么？"
+      ]
+    }
+  ]
+}

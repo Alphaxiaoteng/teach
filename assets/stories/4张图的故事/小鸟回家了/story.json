@@ -1,0 +1,113 @@
+{
+  "schema_version": "2.0",
+  "story_id": "story_9e344f2a84",
+  "title": "小鸟回家了",
+  "category": "4张图的故事",
+  "suitable_age": [
+    "large"
+  ],
+  "scene_theme": "互助 / 关爱动物 / 回家",
+  "themes": [
+    "互助",
+    "关爱动物",
+    "回家"
+  ],
+  "quality": {
+    "status": "ready",
+    "flags": [],
+    "notes": []
+  },
+  "sequence_policy": {
+    "use_image_order": true,
+    "allow_inference": true,
+    "must_mark_uncertain": true,
+    "do_not_override_visible_facts_with_title": true
+  },
+  "images": [
+    {
+      "image_id": "story_9e344f2a84_frame_1",
+      "order": 1,
+      "file": "1.jpg",
+      "image_url": "/story-assets/4张图的故事/小鸟回家了/1.jpg",
+      "private_annotations": {
+        "visible_summary": "小猴在树林地面附近发现一只小鸟。",
+        "tags": [
+          "角色:小猴",
+          "角色:小鸟",
+          "动作:发现小鸟",
+          "场景:树林"
+        ],
+        "uncertainties": [],
+        "sensitivity": []
+      },
+      "visual_clues": [
+        "小猴在地上附近发现了谁？"
+      ]
+    },
+    {
+      "image_id": "story_9e344f2a84_frame_2",
+      "order": 2,
+      "file": "2.jpg",
+      "image_url": "/story-assets/4张图的故事/小鸟回家了/2.jpg",
+      "private_annotations": {
+        "visible_summary": "小鸟站在小猴的手上，小猴小心地托着它。",
+        "tags": [
+          "角色:小猴",
+          "角色:小鸟",
+          "动作:托住小鸟",
+          "场景:树林",
+          "关系:帮助"
+        ],
+        "uncertainties": [],
+        "sensitivity": []
+      },
+      "visual_clues": [
+        "小猴用什么地方轻轻托住小鸟？"
+      ]
+    },
+    {
+      "image_id": "story_9e344f2a84_frame_3",
+      "order": 3,
+      "file": "3.jpg",
+      "image_url": "/story-assets/4张图的故事/小鸟回家了/3.jpg",
+      "private_annotations": {
+        "visible_summary": "小猴抬手指向树上的鸟窝，小鸟也朝上看。",
+        "tags": [
+          "角色:小猴",
+          "角色:小鸟",
+          "动作:指向鸟窝",
+          "物体:鸟窝",
+          "场景:树林",
+          "位置:树上"
+        ],
+        "uncertainties": [],
+        "sensitivity": []
+      },
+      "visual_clues": [
+        "顺着小猴的手指看，树上有什么？"
+      ]
+    },
+    {
+      "image_id": "story_9e344f2a84_frame_4",
+      "order": 4,
+      "file": "4.jpg",
+      "image_url": "/story-assets/4张图的故事/小鸟回家了/4.jpg",
+      "private_annotations": {
+        "visible_summary": "小猴把小鸟送回树上的鸟窝。",
+        "tags": [
+          "角色:小猴",
+          "角色:小鸟",
+          "动作:送回鸟窝",
+          "物体:鸟窝",
+          "场景:树林",
+          "关系:帮助"
+        ],
+        "uncertainties": [],
+        "sensitivity": []
+      },
+      "visual_clues": [
+        "最后小鸟回到了哪里？"
+      ]
+    }
+  ]
+}

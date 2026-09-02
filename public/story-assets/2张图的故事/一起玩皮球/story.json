@@ -1,0 +1,71 @@
+{
+  "schema_version": "2.0",
+  "story_id": "story_8a2b951106",
+  "title": "一起玩皮球",
+  "category": "2张图的故事",
+  "suitable_age": [
+    "small",
+    "middle"
+  ],
+  "scene_theme": "合作 / 运动",
+  "themes": [
+    "合作",
+    "运动"
+  ],
+  "quality": {
+    "status": "ready",
+    "flags": [],
+    "notes": []
+  },
+  "sequence_policy": {
+    "use_image_order": true,
+    "allow_inference": true,
+    "must_mark_uncertain": true,
+    "do_not_override_visible_facts_with_title": true
+  },
+  "images": [
+    {
+      "image_id": "story_8a2b951106_frame_1",
+      "order": 1,
+      "file": "1.jpg",
+      "image_url": "/story-assets/2张图的故事/一起玩皮球/1.jpg",
+      "private_annotations": {
+        "visible_summary": "几个孩子围在皮球旁，准备一起玩。",
+        "tags": [
+          "角色:孩子们",
+          "动作:围着皮球",
+          "物体:皮球",
+          "场景:户外"
+        ],
+        "uncertainties": [],
+        "sensitivity": []
+      },
+      "visual_clues": [
+        "孩子们中间有什么？",
+        "他们站在一起像要做什么？"
+      ]
+    },
+    {
+      "image_id": "story_8a2b951106_frame_2",
+      "order": 2,
+      "file": "2.jpg",
+      "image_url": "/story-assets/2张图的故事/一起玩皮球/2.jpg",
+      "private_annotations": {
+        "visible_summary": "孩子们围成一圈传玩皮球。",
+        "tags": [
+          "角色:孩子们",
+          "动作:一起玩球",
+          "物体:皮球",
+          "场景:户外",
+          "关系:合作"
+        ],
+        "uncertainties": [],
+        "sensitivity": []
+      },
+      "visual_clues": [
+        "第二张里，孩子们站成了什么形状？",
+        "皮球到了谁的身边？"
+      ]
+    }
+  ]
+}

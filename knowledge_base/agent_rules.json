@@ -1,0 +1,80 @@
+{
+  "schema_version": "1.0",
+  "product_goal": "让幼儿自己看、自己想、自己讲；智能体只做分龄提问、观察线索和原话整理。",
+  "age_profiles": {
+    "small": {
+      "label": "小班 3–4岁",
+      "image_count": [1, 2],
+      "target_elements": ["谁", "做什么"],
+      "question_max_chars": 20,
+      "one_question_per_turn": true,
+      "language": "短句、具体名词、可指认动作"
+    },
+    "middle": {
+      "label": "中班 4–5岁",
+      "image_count": [2, 3],
+      "target_elements": ["谁", "在哪里", "做什么", "先后变化"],
+      "question_max_chars": 28,
+      "one_question_per_turn": true,
+      "language": "引导地点、变化和简单因果"
+    },
+    "large": {
+      "label": "大班 5–6岁",
+      "image_count": [4],
+      "target_elements": ["谁", "什么时候", "在哪里", "做什么", "表情与想法", "结果"],
+      "question_max_chars": 36,
+      "one_question_per_turn": true,
+      "language": "引导顺序词、合理推测和完整结尾"
+    }
+  },
+  "runtime_states": ["SELECTING", "GUIDING", "STUCK_ASSIST", "COMPLETED"],
+  "guidance_policy": {
+    "normal_turn": [
+      "先用一句具体表扬回应孩子刚说出的内容",
+      "每轮只推进一张图、只问一个问题",
+      "问题优先使用当前图片的 visual_clues",
+      "标题不能覆盖 private_annotations 中的画面事实"
+    ],
+    "clue_ladder": [
+      "第1次：提示观察区域、颜色、数量或外形",
+      "第2次：提示角色手边的物体或身体动作",
+      "第3次：允许孩子跳过当前问题，不能公布标准答案"
+    ],
+    "stuck_triggers": ["空输入", "不知道", "不会", "没看出来", "忘了", "卡住"],
+    "forbidden": [
+      "把 visible_summary 原句当作提示念给孩子",
+      "替孩子补写画面中不存在的新角色、新事件或因果",
+      "一次连续追问两个以上问题",
+      "使用分数、排名、否定性评价或同伴比较",
+      "把不确定推断说成画面事实"
+    ]
+  },
+  "completion_policy": {
+    "minimum": "每张已选图片至少获得一次幼儿有效讲述，或由教师明确跳过",
+    "replay": "只按图片顺序连接幼儿原话；可补标点和最少连接词，不新增情节",
+    "feedback": "指出一个具体优点并给出一个可选的再讲建议，不输出标准答案"
+  },
+  "quality_policy": {
+    "ready": "可直接进入分龄故事列表",
+    "teacher_review_required": "仍接入目录，但在封面展示待复核标识，由教师决定是否使用",
+    "uncertainty": "运行时允许孩子开放表达，不以唯一答案纠错"
+  },
+  "safety_policy": {
+    "graphic_injury": "不引导描述血迹和伤口细节，转向求助与照料",
+    "fire_hazard": "明确不能模仿；真实火灾应远离、呼叫成人并报警，不让幼儿自行灭火",
+    "hot_water": "热水只由成人操作，饮用前确认温度",
+    "broken_object": "远离碎片并请成人处理",
+    "body_topics": "自然、中性、不羞辱"
+  },
+  "privacy_policy": {
+    "default_storage": "仅保存在当前浏览器会话",
+    "audio": "默认不上传、不持久化，只把浏览器识别出的文字交给故事引擎",
+    "identity": "不采集真实姓名、班级名单和人脸"
+  },
+  "model_boundary": {
+    "required": false,
+    "allowed": ["最终回放的最小语言润色", "正向反馈措辞"],
+    "not_allowed": ["生成卡壳线索", "覆盖人工图片标签", "添加幼儿未说出的故事情节"],
+    "fallback": "无云端模型时，全部核心流程仍由本地规则完成"
+  }
+}

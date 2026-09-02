@@ -1,0 +1,93 @@
+{
+  "schema_version": "2.0",
+  "story_id": "story_846dd5b6e9",
+  "title": "一起分享真快乐",
+  "category": "3张图的故事",
+  "suitable_age": [
+    "middle"
+  ],
+  "scene_theme": "分享 / 友谊",
+  "themes": [
+    "分享",
+    "友谊"
+  ],
+  "quality": {
+    "status": "ready",
+    "flags": [],
+    "notes": []
+  },
+  "sequence_policy": {
+    "use_image_order": true,
+    "allow_inference": true,
+    "must_mark_uncertain": true,
+    "do_not_override_visible_facts_with_title": true
+  },
+  "images": [
+    {
+      "image_id": "story_846dd5b6e9_frame_1",
+      "order": 1,
+      "file": "1.jpg",
+      "image_url": "/story-assets/3张图的故事/一起分享真快乐/1.jpg",
+      "private_annotations": {
+        "visible_summary": "小松鼠在树林里收集坚果，篮子里已经装了一些。",
+        "tags": [
+          "角色:小松鼠",
+          "动作:收集坚果",
+          "物体:坚果",
+          "物体:篮子",
+          "场景:树林"
+        ],
+        "uncertainties": [],
+        "sensitivity": []
+      },
+      "visual_clues": [
+        "小松鼠正把什么放进篮子？"
+      ]
+    },
+    {
+      "image_id": "story_846dd5b6e9_frame_2",
+      "order": 2,
+      "file": "2.jpg",
+      "image_url": "/story-assets/3张图的故事/一起分享真快乐/2.jpg",
+      "private_annotations": {
+        "visible_summary": "小松鼠把坚果递给小刺猬。",
+        "tags": [
+          "角色:小松鼠",
+          "角色:小刺猬",
+          "动作:分享坚果",
+          "物体:坚果",
+          "场景:树林",
+          "关系:分享"
+        ],
+        "uncertainties": [],
+        "sensitivity": []
+      },
+      "visual_clues": [
+        "小松鼠把收来的坚果递给了谁？"
+      ]
+    },
+    {
+      "image_id": "story_846dd5b6e9_frame_3",
+      "order": 3,
+      "file": "3.jpg",
+      "image_url": "/story-assets/3张图的故事/一起分享真快乐/3.jpg",
+      "private_annotations": {
+        "visible_summary": "小松鼠和小刺猬各自提着装有坚果的篮子，一起往前走。",
+        "tags": [
+          "角色:小松鼠",
+          "角色:小刺猬",
+          "动作:提篮同行",
+          "物体:篮子",
+          "物体:坚果",
+          "场景:树林",
+          "关系:伙伴"
+        ],
+        "uncertainties": [],
+        "sensitivity": []
+      },
+      "visual_clues": [
+        "最后两位好朋友手里各提着什么？"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,71 @@
+{
+  "schema_version": "2.0",
+  "story_id": "story_afec25a918",
+  "title": "小兔种树苗",
+  "category": "2张图的故事",
+  "suitable_age": [
+    "small",
+    "middle"
+  ],
+  "scene_theme": "劳动 / 爱护环境",
+  "themes": [
+    "劳动",
+    "爱护环境"
+  ],
+  "quality": {
+    "status": "ready",
+    "flags": [],
+    "notes": []
+  },
+  "sequence_policy": {
+    "use_image_order": true,
+    "allow_inference": true,
+    "must_mark_uncertain": true,
+    "do_not_override_visible_facts_with_title": true
+  },
+  "images": [
+    {
+      "image_id": "story_afec25a918_frame_1",
+      "order": 1,
+      "file": "1.png",
+      "image_url": "/story-assets/2张图的故事/小兔种树苗/1.png",
+      "private_annotations": {
+        "visible_summary": "小兔拿着铲子，把一棵小树苗栽进土里。",
+        "tags": [
+          "角色:小兔",
+          "动作:种树苗",
+          "物体:铲子",
+          "物体:树苗",
+          "场景:土地"
+        ],
+        "uncertainties": [],
+        "sensitivity": []
+      },
+      "visual_clues": [
+        "小兔用什么工具挖土？",
+        "土里栽下了什么？"
+      ]
+    },
+    {
+      "image_id": "story_afec25a918_frame_2",
+      "order": 2,
+      "file": "2.png",
+      "image_url": "/story-assets/2张图的故事/小兔种树苗/2.png",
+      "private_annotations": {
+        "visible_summary": "小兔拿洒水壶给刚栽好的树苗浇水。",
+        "tags": [
+          "角色:小兔",
+          "动作:给树苗浇水",
+          "物体:洒水壶",
+          "物体:树苗",
+          "场景:土地"
+        ],
+        "uncertainties": [],
+        "sensitivity": []
+      },
+      "visual_clues": [
+        "种好树苗以后，小兔又拿来了什么？"
+      ]
+    }
+  ]
+}

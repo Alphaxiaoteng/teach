@@ -1,0 +1,74 @@
+{
+  "schema_version": "2.0",
+  "story_id": "story_266977dfa7",
+  "title": "快乐踩水",
+  "category": "2张图的故事",
+  "suitable_age": [
+    "small",
+    "middle"
+  ],
+  "scene_theme": "雨天 / 玩耍",
+  "themes": [
+    "雨天",
+    "玩耍"
+  ],
+  "quality": {
+    "status": "ready",
+    "flags": [],
+    "notes": []
+  },
+  "sequence_policy": {
+    "use_image_order": true,
+    "allow_inference": true,
+    "must_mark_uncertain": true,
+    "do_not_override_visible_facts_with_title": true
+  },
+  "images": [
+    {
+      "image_id": "story_266977dfa7_frame_1",
+      "order": 1,
+      "file": "1.jpg",
+      "image_url": "/story-assets/2张图的故事/快乐踩水/1.jpg",
+      "private_annotations": {
+        "visible_summary": "雨中，孩子们穿着雨具在水坑旁踩水。",
+        "tags": [
+          "角色:孩子们",
+          "动作:踩水",
+          "物体:水坑",
+          "物体:雨具",
+          "场景:户外",
+          "天气:下雨"
+        ],
+        "uncertainties": [],
+        "sensitivity": []
+      },
+      "visual_clues": [
+        "下雨天，地上出现了什么？",
+        "孩子们脚上穿着什么？"
+      ]
+    },
+    {
+      "image_id": "story_266977dfa7_frame_2",
+      "order": 2,
+      "file": "2.jpg",
+      "image_url": "/story-assets/2张图的故事/快乐踩水/2.jpg",
+      "private_annotations": {
+        "visible_summary": "孩子们穿着雨衣、拿着雨伞，在水坑边一起玩。",
+        "tags": [
+          "角色:孩子们",
+          "动作:一起玩水",
+          "物体:水坑",
+          "物体:雨伞",
+          "物体:雨衣",
+          "场景:户外",
+          "天气:下雨"
+        ],
+        "uncertainties": [],
+        "sensitivity": []
+      },
+      "visual_clues": [
+        "第二张图里，大家用了哪些挡雨的东西？"
+      ]
+    }
+  ]
+}

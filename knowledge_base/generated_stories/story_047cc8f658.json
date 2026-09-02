@@ -1,0 +1,117 @@
+{
+  "schema_version": "2.0",
+  "story_id": "story_047cc8f658",
+  "title": "掉在地上的苹果",
+  "category": "4张图的故事",
+  "suitable_age": [
+    "large"
+  ],
+  "scene_theme": "互助 / 收拾 / 分享",
+  "themes": [
+    "互助",
+    "收拾",
+    "分享"
+  ],
+  "quality": {
+    "status": "ready",
+    "flags": [],
+    "notes": []
+  },
+  "sequence_policy": {
+    "use_image_order": true,
+    "allow_inference": true,
+    "must_mark_uncertain": true,
+    "do_not_override_visible_facts_with_title": true
+  },
+  "images": [
+    {
+      "image_id": "story_047cc8f658_frame_1",
+      "order": 1,
+      "file": "1.jpg",
+      "image_url": "/story-assets/4张图的故事/掉在地上的苹果/1.jpg",
+      "private_annotations": {
+        "visible_summary": "小熊站在果树旁，许多苹果掉在地上。",
+        "tags": [
+          "角色:小熊",
+          "动作:看掉落的苹果",
+          "物体:苹果",
+          "物体:果树",
+          "场景:果园"
+        ],
+        "uncertainties": [],
+        "sensitivity": []
+      },
+      "visual_clues": [
+        "果树下面掉了许多什么？"
+      ]
+    },
+    {
+      "image_id": "story_047cc8f658_frame_2",
+      "order": 2,
+      "file": "2.jpg",
+      "image_url": "/story-assets/4张图的故事/掉在地上的苹果/2.jpg",
+      "private_annotations": {
+        "visible_summary": "小熊看着满地苹果，眉毛下垂，双手垂在身边。",
+        "tags": [
+          "角色:小熊",
+          "动作:站着发愁",
+          "物体:苹果",
+          "场景:果园",
+          "表情:皱眉"
+        ],
+        "uncertainties": [],
+        "sensitivity": []
+      },
+      "visual_clues": [
+        "看看小熊的眉毛和动作，它现在的表情怎么样？"
+      ]
+    },
+    {
+      "image_id": "story_047cc8f658_frame_3",
+      "order": 3,
+      "file": "3.jpg",
+      "image_url": "/story-assets/4张图的故事/掉在地上的苹果/3.jpg",
+      "private_annotations": {
+        "visible_summary": "小鹿来到果园，和小熊一起把苹果捡进篮子。",
+        "tags": [
+          "角色:小熊",
+          "角色:小鹿",
+          "动作:一起捡苹果",
+          "物体:苹果",
+          "物体:篮子",
+          "场景:果园",
+          "关系:帮助"
+        ],
+        "uncertainties": [],
+        "sensitivity": []
+      },
+      "visual_clues": [
+        "后来谁来帮助小熊？",
+        "它们把苹果放进哪里？"
+      ]
+    },
+    {
+      "image_id": "story_047cc8f658_frame_4",
+      "order": 4,
+      "file": "4.jpg",
+      "image_url": "/story-assets/4张图的故事/掉在地上的苹果/4.jpg",
+      "private_annotations": {
+        "visible_summary": "小熊和小鹿一起抬着装满苹果的篮子离开果园。",
+        "tags": [
+          "角色:小熊",
+          "角色:小鹿",
+          "动作:合抬果篮",
+          "物体:苹果篮",
+          "场景:果园小路",
+          "关系:合作",
+          "表情:微笑"
+        ],
+        "uncertainties": [],
+        "sensitivity": []
+      },
+      "visual_clues": [
+        "装满苹果后，它们怎样搬动大篮子？"
+      ]
+    }
+  ]
+}

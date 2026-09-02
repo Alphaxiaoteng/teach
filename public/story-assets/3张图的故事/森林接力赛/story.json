@@ -1,0 +1,94 @@
+{
+  "schema_version": "2.0",
+  "story_id": "story_54ded78f83",
+  "title": "森林接力赛",
+  "category": "3张图的故事",
+  "suitable_age": [
+    "middle"
+  ],
+  "scene_theme": "运动 / 合作 / 规则",
+  "themes": [
+    "运动",
+    "合作",
+    "规则"
+  ],
+  "quality": {
+    "status": "ready",
+    "flags": [],
+    "notes": []
+  },
+  "sequence_policy": {
+    "use_image_order": true,
+    "allow_inference": true,
+    "must_mark_uncertain": true,
+    "do_not_override_visible_facts_with_title": true
+  },
+  "images": [
+    {
+      "image_id": "story_54ded78f83_frame_1",
+      "order": 1,
+      "file": "1.jpg",
+      "image_url": "/story-assets/3张图的故事/森林接力赛/1.jpg",
+      "private_annotations": {
+        "visible_summary": "森林跑道上，小动物们在起点排队准备比赛。",
+        "tags": [
+          "角色:小动物们",
+          "动作:起跑准备",
+          "物体:跑道",
+          "场景:森林运动场"
+        ],
+        "uncertainties": [],
+        "sensitivity": []
+      },
+      "visual_clues": [
+        "小动物们站在跑道的什么位置？",
+        "它们像在准备什么活动？"
+      ]
+    },
+    {
+      "image_id": "story_54ded78f83_frame_2",
+      "order": 2,
+      "file": "2.jpg",
+      "image_url": "/story-assets/3张图的故事/森林接力赛/2.jpg",
+      "private_annotations": {
+        "visible_summary": "小熊和小兔在跑道上奔跑并交接接力棒。",
+        "tags": [
+          "角色:小熊",
+          "角色:小兔",
+          "动作:跑步交棒",
+          "物体:接力棒",
+          "物体:跑道",
+          "场景:森林运动场",
+          "关系:合作"
+        ],
+        "uncertainties": [],
+        "sensitivity": []
+      },
+      "visual_clues": [
+        "跑步时，它们手里传递的是什么？"
+      ]
+    },
+    {
+      "image_id": "story_54ded78f83_frame_3",
+      "order": 3,
+      "file": "3.jpg",
+      "image_url": "/story-assets/3张图的故事/森林接力赛/3.jpg",
+      "private_annotations": {
+        "visible_summary": "参赛小动物到达终点，大家在终点处庆祝。",
+        "tags": [
+          "角色:参赛动物",
+          "动作:到达终点",
+          "物体:终点线",
+          "场景:森林运动场",
+          "表情:开心"
+        ],
+        "uncertainties": [],
+        "sensitivity": []
+      },
+      "visual_clues": [
+        "最后它们跑到了哪里？",
+        "周围的小动物在做什么？"
+      ]
+    }
+  ]
+}

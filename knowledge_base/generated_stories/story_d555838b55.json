@@ -1,0 +1,96 @@
+{
+  "schema_version": "2.0",
+  "story_id": "story_d555838b55",
+  "title": "小鸭子找泡泡",
+  "category": "3张图的故事",
+  "suitable_age": [
+    "middle"
+  ],
+  "scene_theme": "清洁 / 互助",
+  "themes": [
+    "清洁",
+    "互助"
+  ],
+  "quality": {
+    "status": "ready",
+    "flags": [],
+    "notes": []
+  },
+  "sequence_policy": {
+    "use_image_order": true,
+    "allow_inference": true,
+    "must_mark_uncertain": true,
+    "do_not_override_visible_facts_with_title": true
+  },
+  "images": [
+    {
+      "image_id": "story_d555838b55_frame_1",
+      "order": 1,
+      "file": "1.jpg",
+      "image_url": "/story-assets/3张图的故事/小鸭子找泡泡/1.jpg",
+      "private_annotations": {
+        "visible_summary": "小鸭子站在户外水龙头附近，身上沾有泥点。",
+        "tags": [
+          "角色:小鸭子",
+          "动作:站在水龙头旁",
+          "物体:水龙头",
+          "物体:泥点",
+          "场景:户外"
+        ],
+        "uncertainties": [],
+        "sensitivity": []
+      },
+      "visual_clues": [
+        "小鸭子的羽毛看起来干净吗？",
+        "旁边有什么可以出水？"
+      ]
+    },
+    {
+      "image_id": "story_d555838b55_frame_2",
+      "order": 2,
+      "file": "2.jpg",
+      "image_url": "/story-assets/3张图的故事/小鸭子找泡泡/2.jpg",
+      "private_annotations": {
+        "visible_summary": "小兔在浴盆边给小鸭子洗澡，盆里有许多泡泡。",
+        "tags": [
+          "角色:小鸭子",
+          "角色:小兔",
+          "动作:洗澡",
+          "物体:浴盆",
+          "物体:泡泡",
+          "场景:户外",
+          "关系:帮助"
+        ],
+        "uncertainties": [],
+        "sensitivity": []
+      },
+      "visual_clues": [
+        "是谁在帮助小鸭子洗澡？",
+        "浴盆里出现了什么？"
+      ]
+    },
+    {
+      "image_id": "story_d555838b55_frame_3",
+      "order": 3,
+      "file": "3.jpg",
+      "image_url": "/story-assets/3张图的故事/小鸭子找泡泡/3.jpg",
+      "private_annotations": {
+        "visible_summary": "洗干净的小鸭子和朋友们围在桌边，桌面附近还有泡泡。",
+        "tags": [
+          "角色:小鸭子",
+          "角色:朋友们",
+          "动作:围桌相聚",
+          "物体:桌子",
+          "物体:泡泡",
+          "场景:户外",
+          "状态:干净"
+        ],
+        "uncertainties": [],
+        "sensitivity": []
+      },
+      "visual_clues": [
+        "比一比第一张，小鸭子现在有什么变化？"
+      ]
+    }
+  ]
+}

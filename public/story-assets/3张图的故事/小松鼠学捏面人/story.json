@@ -1,0 +1,95 @@
+{
+  "schema_version": "2.0",
+  "story_id": "story_2b3c95270b",
+  "title": "小松鼠学捏面人",
+  "category": "3张图的故事",
+  "suitable_age": [
+    "middle"
+  ],
+  "scene_theme": "非遗 / 学习 / 坚持",
+  "themes": [
+    "非遗",
+    "学习",
+    "坚持"
+  ],
+  "quality": {
+    "status": "ready",
+    "flags": [],
+    "notes": []
+  },
+  "sequence_policy": {
+    "use_image_order": true,
+    "allow_inference": true,
+    "must_mark_uncertain": true,
+    "do_not_override_visible_facts_with_title": true
+  },
+  "images": [
+    {
+      "image_id": "story_2b3c95270b_frame_1",
+      "order": 1,
+      "file": "1.jpg",
+      "image_url": "/story-assets/3张图的故事/小松鼠学捏面人/1.jpg",
+      "private_annotations": {
+        "visible_summary": "一位老人坐在桌边捏面人，小松鼠站在旁边认真观看。",
+        "tags": [
+          "角色:老人",
+          "角色:小松鼠",
+          "动作:观看捏面人",
+          "物体:面人",
+          "物体:桌子",
+          "场景:手工作坊"
+        ],
+        "uncertainties": [],
+        "sensitivity": []
+      },
+      "visual_clues": [
+        "老人手里正在做什么？",
+        "小松鼠站在旁边做什么？"
+      ]
+    },
+    {
+      "image_id": "story_2b3c95270b_frame_2",
+      "order": 2,
+      "file": "2.jpg",
+      "image_url": "/story-assets/3张图的故事/小松鼠学捏面人/2.jpg",
+      "private_annotations": {
+        "visible_summary": "老人握着小松鼠的手，带它练习捏面人。",
+        "tags": [
+          "角色:老人",
+          "角色:小松鼠",
+          "动作:指导练习",
+          "物体:面团",
+          "场景:手工作坊",
+          "关系:师生"
+        ],
+        "uncertainties": [],
+        "sensitivity": []
+      },
+      "visual_clues": [
+        "小松鼠不会的时候，老人是怎样帮助它的？"
+      ]
+    },
+    {
+      "image_id": "story_2b3c95270b_frame_3",
+      "order": 3,
+      "file": "3.jpg",
+      "image_url": "/story-assets/3张图的故事/小松鼠学捏面人/3.jpg",
+      "private_annotations": {
+        "visible_summary": "桌上摆着做好的面人，小松鼠和老人一起展示作品。",
+        "tags": [
+          "角色:老人",
+          "角色:小松鼠",
+          "动作:展示作品",
+          "物体:面人",
+          "场景:手工作坊",
+          "表情:微笑"
+        ],
+        "uncertainties": [],
+        "sensitivity": []
+      },
+      "visual_clues": [
+        "最后桌上出现了哪些做好的作品？"
+      ]
+    }
+  ]
+}

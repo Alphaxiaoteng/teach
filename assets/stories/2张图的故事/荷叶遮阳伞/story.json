@@ -1,0 +1,70 @@
+{
+  "schema_version": "2.0",
+  "story_id": "story_1b0695f142",
+  "title": "荷叶遮阳伞",
+  "category": "2张图的故事",
+  "suitable_age": [
+    "small",
+    "middle"
+  ],
+  "scene_theme": "想象 / 互助",
+  "themes": [
+    "想象",
+    "互助"
+  ],
+  "quality": {
+    "status": "ready",
+    "flags": [],
+    "notes": []
+  },
+  "sequence_policy": {
+    "use_image_order": true,
+    "allow_inference": true,
+    "must_mark_uncertain": true,
+    "do_not_override_visible_facts_with_title": true
+  },
+  "images": [
+    {
+      "image_id": "story_1b0695f142_frame_1",
+      "order": 1,
+      "file": "1.jpg",
+      "image_url": "/story-assets/2张图的故事/荷叶遮阳伞/1.jpg",
+      "private_annotations": {
+        "visible_summary": "小鸭子站在池塘边的一片大荷叶旁。",
+        "tags": [
+          "角色:小鸭子",
+          "动作:看荷叶",
+          "物体:大荷叶",
+          "场景:池塘"
+        ],
+        "uncertainties": [],
+        "sensitivity": []
+      },
+      "visual_clues": [
+        "小鸭子身边有一片什么叶子？"
+      ]
+    },
+    {
+      "image_id": "story_1b0695f142_frame_2",
+      "order": 2,
+      "file": "2.jpg",
+      "image_url": "/story-assets/2张图的故事/荷叶遮阳伞/2.jpg",
+      "private_annotations": {
+        "visible_summary": "两只小鸭子躲在大荷叶下面，荷叶遮住阳光。",
+        "tags": [
+          "角色:两只小鸭子",
+          "动作:躲在荷叶下",
+          "物体:大荷叶",
+          "场景:池塘",
+          "天气:晴天",
+          "关系:荷叶像遮阳伞"
+        ],
+        "uncertainties": [],
+        "sensitivity": []
+      },
+      "visual_clues": [
+        "太阳晒着的时候，两只小鸭子躲到了哪里？"
+      ]
+    }
+  ]
+}

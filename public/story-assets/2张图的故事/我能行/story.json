@@ -1,0 +1,71 @@
+{
+  "schema_version": "2.0",
+  "story_id": "story_17284dc424",
+  "title": "我能行",
+  "category": "2张图的故事",
+  "suitable_age": [
+    "small",
+    "middle"
+  ],
+  "scene_theme": "坚持 / 自信",
+  "themes": [
+    "坚持",
+    "自信"
+  ],
+  "quality": {
+    "status": "ready",
+    "flags": [],
+    "notes": []
+  },
+  "sequence_policy": {
+    "use_image_order": true,
+    "allow_inference": true,
+    "must_mark_uncertain": true,
+    "do_not_override_visible_facts_with_title": true
+  },
+  "images": [
+    {
+      "image_id": "story_17284dc424_frame_1",
+      "order": 1,
+      "file": "1.jpg",
+      "image_url": "/story-assets/2张图的故事/我能行/1.jpg",
+      "private_annotations": {
+        "visible_summary": "小乌龟站在陡坡或树根下，仰头看向高处。",
+        "tags": [
+          "角色:小乌龟",
+          "动作:仰头看",
+          "物体:陡坡",
+          "场景:树林"
+        ],
+        "uncertainties": [
+          "高处物体的具体种类不明确"
+        ],
+        "sensitivity": []
+      },
+      "visual_clues": [
+        "小乌龟面前的路看起来平坦吗？",
+        "它正在看向哪里？"
+      ]
+    },
+    {
+      "image_id": "story_17284dc424_frame_2",
+      "order": 2,
+      "file": "2.jpg",
+      "image_url": "/story-assets/2张图的故事/我能行/2.jpg",
+      "private_annotations": {
+        "visible_summary": "小乌龟已经爬到更高的位置。",
+        "tags": [
+          "角色:小乌龟",
+          "动作:向上爬",
+          "场景:树林",
+          "位置:高处"
+        ],
+        "uncertainties": [],
+        "sensitivity": []
+      },
+      "visual_clues": [
+        "比一比两张图，小乌龟的位置发生了什么变化？"
+      ]
+    }
+  ]
+}

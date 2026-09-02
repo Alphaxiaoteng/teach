@@ -1,0 +1,435 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+  <title>故事小精灵 · 幼儿看图讲故事</title>
+  <link rel="stylesheet" href="style.css?v=20260902_42">
+  <script>
+    (function() {
+      var t = localStorage.getItem('app_theme') || 'candy';
+      document.addEventListener('DOMContentLoaded', function() {
+        document.body.className = 'theme-' + t;
+      });
+    })();
+  </script>
+</head>
+<body class="theme-candy">
+  <div id="app" class="app-layout">
+    <!-- Top Classic Header -->
+    <header class="app-header">
+      <!-- 1. Click Left Logo/Title to Return Home -->
+      <div class="header-left clickable-home" onclick="resetToHome()" title="点击直接回到首页重新选班级">
+        <div class="logo-badge">
+          <svg width="26" height="26" viewBox="0 0 36 36" fill="none">
+            <defs>
+              <linearGradient id="starGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" stop-color="#FFD93D"/>
+                <stop offset="100%" stop-color="#FF9F1C"/>
+              </linearGradient>
+              <filter id="glow" x="-20%" y="-20%" width="140%" height="140%">
+                <feDropShadow dx="0" dy="2" stdDeviation="3" flood-color="#FF9F1C" flood-opacity="0.4"/>
+              </filter>
+            </defs>
+            <path d="M18 2L22.5 12.5L34 14L25.5 22L28 33.5L18 27.5L8 33.5L10.5 22L2 14L13.5 12.5L18 2Z" fill="url(#starGrad)" filter="url(#glow)"/>
+            <circle cx="14" cy="16" r="2" fill="#2D3748"/>
+            <circle cx="22" cy="16" r="2" fill="#2D3748"/>
+            <path d="M15 21Q18 24 21 21" stroke="#2D3748" stroke-width="1.8" stroke-linecap="round" fill="none"/>
+          </svg>
+        </div>
+        <span class="logo-title">故事小精灵</span>
+      </div>
+
+      <!-- Header Right: Clean Settings & Story Switch -->
+      <div class="header-right">
+        <button id="btnOpenSettings" class="btn-settings-icon" onclick="openLLMModal()" title="系统设置与皮肤切换">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="12" cy="12" r="3"></circle>
+            <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"></path>
+          </svg>
+          <span id="statusDot" class="status-dot-mini online"></span>
+        </button>
+
+        <button id="btnRestart" class="btn-mini-nav hidden" onclick="handleRestartOrChangeStory()" title="换一本绘本">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+            <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"></path>
+            <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"></path>
+          </svg>
+          <span>换故事</span>
+        </button>
+      </div>
+    </header>
+
+    <!-- Main Content Canvas -->
+    <main class="app-main-canvas">
+      <!-- STEP 1: Select Class -->
+      <section id="stepAge" class="step-panel active">
+        <div class="hero-box">
+          <h2 class="hero-title">请选择你的班级</h2>
+        </div>
+
+        <div class="age-cards-grid">
+          <!-- Small Class -->
+          <div class="age-card theme-small" onclick="selectAge('small')">
+            <div class="age-badge-icon">
+              <svg width="46" height="46" viewBox="0 0 48 48" fill="none">
+                <defs>
+                  <linearGradient id="faceGrad1" x1="0%" y1="0%" x2="100%" y2="100%">
+                    <stop offset="0%" stop-color="#FFA8A8"/>
+                    <stop offset="100%" stop-color="#FF6B6B"/>
+                  </linearGradient>
+                </defs>
+                <circle cx="24" cy="26" r="18" fill="url(#faceGrad1)"/>
+                <ellipse cx="16" cy="11" rx="5" ry="10" fill="#FF8787"/>
+                <ellipse cx="16" cy="11" rx="2.5" ry="6" fill="#FFE3E3"/>
+                <ellipse cx="32" cy="11" rx="5" ry="10" fill="#FF8787"/>
+                <ellipse cx="32" cy="11" rx="2.5" ry="6" fill="#FFE3E3"/>
+                <circle cx="18" cy="24" r="2.5" fill="#2B2D42"/>
+                <circle cx="19" cy="23" r="0.8" fill="white"/>
+                <circle cx="30" cy="24" r="2.5" fill="#2B2D42"/>
+                <circle cx="31" cy="23" r="0.8" fill="white"/>
+                <circle cx="13" cy="29" r="3" fill="#FFD8A8" opacity="0.8"/>
+                <circle cx="35" cy="29" r="3" fill="#FFD8A8" opacity="0.8"/>
+                <path d="M21 29Q24 33 27 29" stroke="#2B2D42" stroke-width="2" stroke-linecap="round" fill="none"/>
+              </svg>
+            </div>
+            <div class="age-card-content">
+              <div class="age-main-title">小班</div>
+            </div>
+            <div class="btn-card-go">
+              <span>进入</span>
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                <path d="M5 12h14M12 5l7 7-7 7"/>
+              </svg>
+            </div>
+          </div>
+
+          <!-- Middle Class -->
+          <div class="age-card theme-middle" onclick="selectAge('middle')">
+            <div class="age-badge-icon">
+              <svg width="46" height="46" viewBox="0 0 48 48" fill="none">
+                <defs>
+                  <linearGradient id="bearGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                    <stop offset="0%" stop-color="#34D399"/>
+                    <stop offset="100%" stop-color="#059669"/>
+                  </linearGradient>
+                </defs>
+                <circle cx="13" cy="14" r="7" fill="#047857"/>
+                <circle cx="13" cy="14" r="3.5" fill="#A7F3D0"/>
+                <circle cx="35" cy="14" r="7" fill="#047857"/>
+                <circle cx="35" cy="14" r="3.5" fill="#A7F3D0"/>
+                <circle cx="24" cy="26" r="18" fill="url(#bearGrad)"/>
+                <ellipse cx="24" cy="30" rx="8" ry="6" fill="#D1FAE5"/>
+                <ellipse cx="24" cy="27" rx="3" ry="2" fill="#064E3B"/>
+                <path d="M22 31Q24 33 26 31" stroke="#064E3B" stroke-width="1.8" stroke-linecap="round" fill="none"/>
+                <circle cx="17" cy="23" r="2.5" fill="#064E3B"/>
+                <circle cx="18" cy="22" r="0.8" fill="white"/>
+                <circle cx="31" cy="23" r="2.5" fill="#064E3B"/>
+                <circle cx="32" cy="22" r="0.8" fill="white"/>
+              </svg>
+            </div>
+            <div class="age-card-content">
+              <div class="age-main-title">中班</div>
+            </div>
+            <div class="btn-card-go">
+              <span>进入</span>
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                <path d="M5 12h14M12 5l7 7-7 7"/>
+              </svg>
+            </div>
+          </div>
+
+          <!-- Large Class -->
+          <div class="age-card theme-large" onclick="selectAge('large')">
+            <div class="age-badge-icon">
+              <svg width="46" height="46" viewBox="0 0 48 48" fill="none">
+                <defs>
+                  <linearGradient id="crownGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                    <stop offset="0%" stop-color="#60A5FA"/>
+                    <stop offset="100%" stop-color="#2563EB"/>
+                  </linearGradient>
+                  <linearGradient id="goldCap" x1="0%" y1="0%" x2="100%" y2="100%">
+                    <stop offset="0%" stop-color="#FDE047"/>
+                    <stop offset="100%" stop-color="#F59E0B"/>
+                  </linearGradient>
+                </defs>
+                <circle cx="24" cy="26" r="18" fill="url(#crownGrad)"/>
+                <path d="M12 16L16 8L24 13L32 8L36 16Z" fill="url(#goldCap)"/>
+                <circle cx="16" cy="7" r="2" fill="#EF4444"/>
+                <circle cx="24" cy="12" r="2" fill="#3B82F6"/>
+                <circle cx="32" cy="7" r="2" fill="#10B981"/>
+                <circle cx="18" cy="26" r="2.5" fill="#1E293B"/>
+                <circle cx="19" cy="25" r="0.8" fill="white"/>
+                <circle cx="30" cy="26" r="2.5" fill="#1E293B"/>
+                <circle cx="31" cy="25" r="0.8" fill="white"/>
+                <path d="M19 32Q24 37 29 32" stroke="#1E293B" stroke-width="2.5" stroke-linecap="round" fill="none"/>
+              </svg>
+            </div>
+            <div class="age-card-content">
+              <div class="age-main-title">大班</div>
+            </div>
+            <div class="btn-card-go">
+              <span>进入</span>
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                <path d="M5 12h14M12 5l7 7-7 7"/>
+              </svg>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- STEP 2: Picture Book Cover Gallery -->
+      <section id="stepStory" class="step-panel">
+        <div class="hero-box compact-hero" style="display:flex; justify-content:space-between; align-items:center;">
+          <div>
+            <h2 class="hero-title">挑选绘本封面</h2>
+            <p class="hero-desc">点击封面图片，直接开始看图讲故事</p>
+          </div>
+          <button class="btn-shuffle-stories" onclick="shuffleCurrentStories()" title="随机换一批绘本">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M16 3h5v5M4 20L21 3M21 16v5h-5M15 15l6 6M4 4l5 5"/>
+            </svg>
+            <span>换一批</span>
+          </button>
+        </div>
+        <div id="storyListGrid" class="story-cover-grid">
+          <!-- Dynamic Cover Cards -->
+        </div>
+      </section>
+
+      <!-- STEP 3: Integrated Agent Dialogue Workspace -->
+      <section id="stepStage" class="step-panel">
+        <div class="single-big-picture-stage">
+          <div class="stage-info-bar">
+            <div class="stage-info-left">
+              <span id="stageStoryTitle" class="stage-title-text">绘本故事</span>
+              <span id="currentStepIndicator" class="stage-progress-badge">4 幅连环画</span>
+            </div>
+            <span class="stage-hint-pill">轻触任意图片放大</span>
+          </div>
+
+          <!-- Multi-Image Comic Storyboard Gallery -->
+          <div id="storyboardGallery" class="storyboard-gallery">
+            <!-- Rendered dynamically by app.js: 1, 2, 3 or 4 comic frames -->
+          </div>
+        </div>
+
+        <div class="full-agent-chat-wrapper">
+          <div id="chatMessageFlow" class="agent-chat-flow">
+            <!-- Messages -->
+          </div>
+
+          <div class="agent-input-dock">
+            <div class="chat-input-bar">
+              <button id="btnInputModeToggle" class="btn-mode-toggle" onclick="toggleInputMode()" title="切换打字/语音输入">
+                <span id="modeToggleIcon">
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <rect x="2" y="4" width="20" height="16" rx="2.5"></rect>
+                    <path d="M6 8h.01M10 8h.01M14 8h.01M18 8h.01M6 12h.01M10 12h.01M14 12h.01M18 12h.01M8 16h8"></path>
+                  </svg>
+                </span>
+              </button>
+
+              <div id="voiceInputContainer" class="input-mode-container voice-mode active">
+                <button id="btnVoiceRecord" class="btn-voice-record" onclick="toggleVoiceRecording()" type="button">
+                  <div class="voice-wave-pulse"></div>
+                  <span id="voiceRecordIcon" class="voice-mic-icon">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                      <path d="M12 2a3 3 0 0 0-3 3v7a3 3 0 0 0 6 0V5a3 3 0 0 0-3-3Z"></path>
+                      <path d="M19 10v2a7 7 0 0 1-14 0v-2"></path>
+                      <line x1="12" y1="19" x2="12" y2="22"></line>
+                    </svg>
+                  </span>
+                  <span id="voiceRecordText" class="voice-btn-text">点击开始说话</span>
+                </button>
+              </div>
+
+              <form id="textInputContainer" class="input-mode-container text-mode" onsubmit="event.preventDefault(); submitChildAnswer();">
+                <input type="text" id="childTextInput" class="child-text-area" placeholder="输入你想说的话..." enterkeyhint="send" autocomplete="off" autocorrect="off">
+                <button type="submit" id="btnSendText" class="btn-send-main">
+                  <svg width="16" height="16" viewBox="0 0 32 32" fill="none">
+                    <path d="M28 4L4 14.5L14.5 17.5L17.5 28L28 4Z" fill="white"/>
+                  </svg>
+                </button>
+              </form>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- STEP 4: Reward Celebration Modal -->
+      <div id="grandCompletionModal" class="celebration-modal-backdrop">
+        <div class="celebration-card-pop">
+          <div class="fireworks-badge">
+            <svg width="44" height="44" viewBox="0 0 24 24" fill="none" stroke="#FF9F1C" stroke-width="2">
+              <circle cx="12" cy="8" r="6" fill="#FFF4E0"/>
+              <path d="M12 2v2M12 14v8M7.8 4.2l1.4 1.4M14.8 11.2l1.4 1.4M2 12h2M20 12h2M4.2 16.2l1.4-1.4M11.2 9.2l1.4-1.4M16.2 19.8l1.4-1.4M9.2 12.8l1.4-1.4"/>
+            </svg>
+          </div>
+          <div id="modalRewardContent"></div>
+        </div>
+      </div>
+    </main>
+
+    <div id="toastContainer" class="toast-hub"></div>
+    <div id="celebrationAnim" class="celebration-layer hidden"></div>
+  </div>
+
+  <!-- Settings & Theme Preview Modal (Fixed Isolated Overlay) -->
+  <div id="llmModal" class="settings-modal-overlay hidden" onclick="if(event.target===this)closeLLMModal()">
+    <div class="llm-config-card">
+      <div class="modal-card-header">
+        <div style="display:flex; align-items:center; gap:8px;">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="12" cy="12" r="3"></circle>
+            <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"></path>
+          </svg>
+          <h3 style="margin:0; font-size:16px;">系统设置与个性化</h3>
+        </div>
+        <button class="btn-close-modal" onclick="closeLLMModal()">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+            <line x1="18" y1="6" x2="6" y2="18"></line>
+            <line x1="6" y1="6" x2="18" y2="18"></line>
+          </svg>
+        </button>
+      </div>
+      <p class="modal-card-desc">挑选你喜欢的界面皮肤，或配置 AI 大模型与查看排查日志。</p>
+
+      <!-- 1. Theme Selection & Visual Previews -->
+      <div class="settings-theme-block">
+        <label class="section-label" style="display:flex; align-items:center; gap:6px;">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <circle cx="12" cy="12" r="10"></circle>
+            <path d="M12 2a4.5 4.5 0 0 0 0 9 4.5 4.5 0 0 1 0 9 10 10 0 0 1 0-18z"></path>
+          </svg>
+          <span>界面皮肤与视觉主题</span>
+        </label>
+        <div class="theme-previews-grid">
+          <!-- Candy -->
+          <div class="theme-preview-card active" data-theme="candy" onclick="selectAppTheme('candy')">
+            <div class="preview-mini-banner candy-banner">
+              <span class="preview-color-dot" style="background:#FF6B4A"></span>
+              <span class="preview-color-dot" style="background:#FFB300"></span>
+              <span class="preview-color-dot" style="background:#FFF9F6"></span>
+            </div>
+            <div class="preview-card-info">
+              <span class="preview-theme-title">糖果乐园</span>
+              <span class="preview-theme-sub">活力珊瑚橙 · 默认</span>
+            </div>
+            <span class="theme-selected-badge">
+              <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3">
+                <polyline points="20 6 9 17 4 12"></polyline>
+              </svg>
+            </span>
+          </div>
+
+          <!-- Forest -->
+          <div class="theme-preview-card" data-theme="forest" onclick="selectAppTheme('forest')">
+            <div class="preview-mini-banner forest-banner">
+              <span class="preview-color-dot" style="background:#10B981"></span>
+              <span class="preview-color-dot" style="background:#059669"></span>
+              <span class="preview-color-dot" style="background:#F0FDF4"></span>
+            </div>
+            <div class="preview-card-info">
+              <span class="preview-theme-title">森林秘境</span>
+              <span class="preview-theme-sub">清新薄荷绿 · 自然</span>
+            </div>
+            <span class="theme-selected-badge">
+              <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3">
+                <polyline points="20 6 9 17 4 12"></polyline>
+              </svg>
+            </span>
+          </div>
+
+          <!-- Galaxy -->
+          <div class="theme-preview-card" data-theme="galaxy" onclick="selectAppTheme('galaxy')">
+            <div class="preview-mini-banner galaxy-banner">
+              <span class="preview-color-dot" style="background:#38BDF8"></span>
+              <span class="preview-color-dot" style="background:#F43F5E"></span>
+              <span class="preview-color-dot" style="background:#0F172A"></span>
+            </div>
+            <div class="preview-card-info">
+              <span class="preview-theme-title">星空探索</span>
+              <span class="preview-theme-sub">深邃星空蓝 · 护眼</span>
+            </div>
+            <span class="theme-selected-badge">
+              <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3">
+                <polyline points="20 6 9 17 4 12"></polyline>
+              </svg>
+            </span>
+          </div>
+
+          <!-- Craft -->
+          <div class="theme-preview-card" data-theme="craft" onclick="selectAppTheme('craft')">
+            <div class="preview-mini-banner craft-banner">
+              <span class="preview-color-dot" style="background:#8B5CF6"></span>
+              <span class="preview-color-dot" style="background:#EC4899"></span>
+              <span class="preview-color-dot" style="background:#FAF5FF"></span>
+            </div>
+            <div class="preview-card-info">
+              <span class="preview-theme-title">传统剪纸</span>
+              <span class="preview-theme-sub">梦幻丁香紫 · 艺术</span>
+            </div>
+            <span class="theme-selected-badge">
+              <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3">
+                <polyline points="20 6 9 17 4 12"></polyline>
+              </svg>
+            </span>
+          </div>
+        </div>
+      </div>
+
+      <!-- 2. Voice Persona Selection & Online Audio Previews -->
+      <div class="settings-theme-block">
+        <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:8px;">
+          <label class="section-label" style="margin:0; display:flex; align-items:center; gap:6px;">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2">
+              <path d="M12 2a3 3 0 0 0-3 3v7a3 3 0 0 0 6 0V5a3 3 0 0 0-3-3Z"></path>
+              <path d="M19 10v2a7 7 0 0 1-14 0v-2"></path>
+            </svg>
+            <span>精选中文幼教名师音色 (4款)</span>
+          </label>
+          <span style="font-size:12px; color:var(--primary); font-weight:700; display:flex; align-items:center; gap:4px;">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+              <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon>
+              <path d="M15.54 8.46a5 5 0 0 1 0 7.07"></path>
+            </svg>
+            <span>点击试听并切换</span>
+          </span>
+        </div>
+        <div id="voiceCardsGrid" class="voice-cards-grid">
+          <!-- Voice cards rendered dynamically by app.js -->
+        </div>
+      </div>
+
+      <div class="settings-logs-section">
+        <div class="settings-logs-header" onclick="toggleSettingsLogs()">
+          <span class="logs-header-title">内部运行与排查日志 (<span id="settingsLogCount">0</span>)</span>
+          <span id="settingsLogToggleIcon" class="logs-toggle-arrow">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+              <polyline points="6 9 12 15 18 9"></polyline>
+            </svg>
+          </span>
+        </div>
+        <div id="settingsLogsContainer" class="settings-logs-container hidden">
+          <div class="settings-logs-actions">
+            <button class="btn-mini-log-clear" onclick="clearLogs()">清空日志</button>
+          </div>
+          <div id="settingsLogBody" class="settings-log-stream"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Fullscreen Modal (Tap Anywhere to Exit) -->
+  <div id="imageModal" class="image-modal hidden" onclick="closeImageModal()">
+    <button class="btn-modal-close-corner" onclick="event.stopPropagation(); closeImageModal()" title="关闭大图">✕</button>
+    <img id="modalImage" src="" alt="放大图" class="modal-img">
+    <div class="modal-close-hint">轻触任意处退出放大</div>
+  </div>
+
+  <script src="audio_manifest.js?v=20260902_42"></script>
+  <script src="story_data.js?v=20260902_42"></script>
+  <script src="app.js?v=20260902_42"></script>
+</body>
+</html>

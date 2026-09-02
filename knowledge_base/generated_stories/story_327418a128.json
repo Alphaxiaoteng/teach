@@ -1,0 +1,117 @@
+{
+  "schema_version": "2.0",
+  "story_id": "story_327418a128",
+  "title": "小熊猫学剪纸",
+  "category": "4张图的故事",
+  "suitable_age": [
+    "large"
+  ],
+  "scene_theme": "非遗 / 学习 / 耐心",
+  "themes": [
+    "非遗",
+    "学习",
+    "耐心"
+  ],
+  "quality": {
+    "status": "ready",
+    "flags": [],
+    "notes": []
+  },
+  "sequence_policy": {
+    "use_image_order": true,
+    "allow_inference": true,
+    "must_mark_uncertain": true,
+    "do_not_override_visible_facts_with_title": true
+  },
+  "images": [
+    {
+      "image_id": "story_327418a128_frame_1",
+      "order": 1,
+      "file": "1.jpg",
+      "image_url": "/story-assets/4张图的故事/小熊猫学剪纸/1.jpg",
+      "private_annotations": {
+        "visible_summary": "老人坐在桌边剪红纸，小熊猫站在旁边观看。",
+        "tags": [
+          "角色:老人",
+          "角色:小熊猫",
+          "动作:观看剪纸",
+          "物体:剪刀",
+          "物体:红纸",
+          "场景:手工作坊"
+        ],
+        "uncertainties": [],
+        "sensitivity": []
+      },
+      "visual_clues": [
+        "老人手里拿着什么工具？",
+        "红纸发生了什么变化？"
+      ]
+    },
+    {
+      "image_id": "story_327418a128_frame_2",
+      "order": 2,
+      "file": "2.jpg",
+      "image_url": "/story-assets/4张图的故事/小熊猫学剪纸/2.jpg",
+      "private_annotations": {
+        "visible_summary": "小熊猫拿着剪刀，开始在红纸上练习剪纸。",
+        "tags": [
+          "角色:小熊猫",
+          "动作:练习剪纸",
+          "物体:剪刀",
+          "物体:红纸",
+          "场景:手工作坊"
+        ],
+        "uncertainties": [],
+        "sensitivity": []
+      },
+      "visual_clues": [
+        "轮到小熊猫时，它怎样拿着剪刀？"
+      ]
+    },
+    {
+      "image_id": "story_327418a128_frame_3",
+      "order": 3,
+      "file": "3.jpg",
+      "image_url": "/story-assets/4张图的故事/小熊猫学剪纸/3.jpg",
+      "private_annotations": {
+        "visible_summary": "小熊猫在桌上整理剪好的红色纸片和图案。",
+        "tags": [
+          "角色:小熊猫",
+          "动作:整理剪纸",
+          "物体:红纸图案",
+          "物体:桌子",
+          "场景:手工作坊"
+        ],
+        "uncertainties": [],
+        "sensitivity": []
+      },
+      "visual_clues": [
+        "桌上出现了哪些剪好的形状？"
+      ]
+    },
+    {
+      "image_id": "story_327418a128_frame_4",
+      "order": 4,
+      "file": "4.jpg",
+      "image_url": "/story-assets/4张图的故事/小熊猫学剪纸/4.jpg",
+      "private_annotations": {
+        "visible_summary": "小熊猫举起完成的红色剪纸，老人竖起大拇指。",
+        "tags": [
+          "角色:小熊猫",
+          "角色:老人",
+          "动作:展示剪纸",
+          "动作:竖大拇指",
+          "物体:红色剪纸",
+          "场景:手工作坊",
+          "表情:开心"
+        ],
+        "uncertainties": [],
+        "sensitivity": []
+      },
+      "visual_clues": [
+        "小熊猫最后展示了什么？",
+        "老人怎样表扬它？"
+      ]
+    }
+  ]
+}

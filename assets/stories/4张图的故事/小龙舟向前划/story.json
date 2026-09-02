@@ -1,0 +1,116 @@
+{
+  "schema_version": "2.0",
+  "story_id": "story_4cb30fcc52",
+  "title": "小龙舟向前划",
+  "category": "4张图的故事",
+  "suitable_age": [
+    "large"
+  ],
+  "scene_theme": "端午 / 龙舟 / 传统文化",
+  "themes": [
+    "端午",
+    "龙舟",
+    "传统文化"
+  ],
+  "quality": {
+    "status": "ready",
+    "flags": [],
+    "notes": []
+  },
+  "sequence_policy": {
+    "use_image_order": true,
+    "allow_inference": true,
+    "must_mark_uncertain": true,
+    "do_not_override_visible_facts_with_title": true
+  },
+  "images": [
+    {
+      "image_id": "story_4cb30fcc52_frame_1",
+      "order": 1,
+      "file": "1.jpg",
+      "image_url": "/story-assets/4张图的故事/小龙舟向前划/1.jpg",
+      "private_annotations": {
+        "visible_summary": "老师和孩子们围着桌子，桌上放着粽子和手工材料。",
+        "tags": [
+          "角色:老师",
+          "角色:孩子们",
+          "动作:认识端午物品",
+          "物体:粽子",
+          "物体:手工材料",
+          "场景:教室"
+        ],
+        "uncertainties": [],
+        "sensitivity": []
+      },
+      "visual_clues": [
+        "桌上哪一种食物用叶子包着？"
+      ]
+    },
+    {
+      "image_id": "story_4cb30fcc52_frame_2",
+      "order": 2,
+      "file": "2.jpg",
+      "image_url": "/story-assets/4张图的故事/小龙舟向前划/2.jpg",
+      "private_annotations": {
+        "visible_summary": "孩子们在河边观看多人划龙舟。",
+        "tags": [
+          "角色:孩子们",
+          "角色:划船队员",
+          "动作:观看划龙舟",
+          "物体:龙舟",
+          "场景:河边"
+        ],
+        "uncertainties": [],
+        "sensitivity": []
+      },
+      "visual_clues": [
+        "河面上的长船像什么动物？",
+        "船上的人怎样让船前进？"
+      ]
+    },
+    {
+      "image_id": "story_4cb30fcc52_frame_3",
+      "order": 3,
+      "file": "3.jpg",
+      "image_url": "/story-assets/4张图的故事/小龙舟向前划/3.jpg",
+      "private_annotations": {
+        "visible_summary": "孩子们回到桌边，用纸和工具制作小龙舟。",
+        "tags": [
+          "角色:孩子们",
+          "动作:制作纸龙舟",
+          "物体:纸",
+          "物体:剪刀",
+          "物体:小龙舟",
+          "场景:教室"
+        ],
+        "uncertainties": [],
+        "sensitivity": []
+      },
+      "visual_clues": [
+        "看过比赛后，孩子们又动手做什么？"
+      ]
+    },
+    {
+      "image_id": "story_4cb30fcc52_frame_4",
+      "order": 4,
+      "file": "4.jpg",
+      "image_url": "/story-assets/4张图的故事/小龙舟向前划/4.jpg",
+      "private_annotations": {
+        "visible_summary": "一个孩子举起完成的纸龙舟，伙伴们围在旁边观看。",
+        "tags": [
+          "角色:孩子",
+          "角色:伙伴们",
+          "动作:展示纸龙舟",
+          "物体:纸龙舟",
+          "场景:教室",
+          "表情:开心"
+        ],
+        "uncertainties": [],
+        "sensitivity": []
+      },
+      "visual_clues": [
+        "最后孩子手里举起了什么作品？"
+      ]
+    }
+  ]
+}

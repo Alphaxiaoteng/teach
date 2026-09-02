@@ -1,0 +1,133 @@
+{
+  "schema_version": "2.0",
+  "story_id": "story_a407a13ce0",
+  "title": "暴躁的小火柴",
+  "category": "4张图的故事",
+  "suitable_age": [
+    "large"
+  ],
+  "scene_theme": "消防安全 / 情绪管理 / 求助",
+  "themes": [
+    "消防安全",
+    "情绪管理",
+    "求助"
+  ],
+  "quality": {
+    "status": "teacher_review_required",
+    "flags": [
+      "fire_hazard",
+      "teacher_review_required"
+    ],
+    "notes": [
+      "多张图包含明火和蔓延场景，必须在教师陪同的安全模式下使用。"
+    ]
+  },
+  "sequence_policy": {
+    "use_image_order": true,
+    "allow_inference": true,
+    "must_mark_uncertain": true,
+    "do_not_override_visible_facts_with_title": true
+  },
+  "images": [
+    {
+      "image_id": "story_a407a13ce0_frame_1",
+      "order": 1,
+      "file": "1.jpg",
+      "image_url": "/story-assets/4张图的故事/暴躁的小火柴/1.jpg",
+      "private_annotations": {
+        "visible_summary": "一根燃烧的火柴皱眉站在桌面上，旁边的蜡烛正在融化并露出害怕表情。",
+        "tags": [
+          "角色:燃烧的火柴",
+          "角色:蜡烛",
+          "动作:靠近蜡烛",
+          "物体:火焰",
+          "场景:桌面",
+          "表情:生气",
+          "表情:害怕"
+        ],
+        "uncertainties": [],
+        "sensitivity": [
+          "明火危险；明确不能模仿点火"
+        ]
+      },
+      "visual_clues": [
+        "画面里哪里有明火？",
+        "蜡烛的表情看起来怎么样？"
+      ]
+    },
+    {
+      "image_id": "story_a407a13ce0_frame_2",
+      "order": 2,
+      "file": "2.jpg",
+      "image_url": "/story-assets/4张图的故事/暴躁的小火柴/2.jpg",
+      "private_annotations": {
+        "visible_summary": "燃烧的火柴跑向一盏灯，灯旁也出现了火焰。",
+        "tags": [
+          "角色:燃烧的火柴",
+          "角色:灯",
+          "动作:跑向灯",
+          "物体:火焰",
+          "场景:室内",
+          "表情:吃惊"
+        ],
+        "uncertainties": [],
+        "sensitivity": [
+          "明火蔓延；不呈现为有趣游戏"
+        ]
+      },
+      "visual_clues": [
+        "火柴靠近以后，火焰出现在了哪些地方？"
+      ]
+    },
+    {
+      "image_id": "story_a407a13ce0_frame_3",
+      "order": 3,
+      "file": "3.jpg",
+      "image_url": "/story-assets/4张图的故事/暴躁的小火柴/3.jpg",
+      "private_annotations": {
+        "visible_summary": "一个带笑脸的洒水壶向火焰喷水。",
+        "tags": [
+          "角色:洒水壶",
+          "动作:喷水",
+          "物体:水",
+          "物体:火焰",
+          "场景:室内"
+        ],
+        "uncertainties": [],
+        "sensitivity": [
+          "真实火灾应远离、呼叫成人并报警，不鼓励幼儿自行灭火"
+        ]
+      },
+      "visual_clues": [
+        "谁赶来喷水了？",
+        "遇到真的火灾应该先找谁求助？"
+      ]
+    },
+    {
+      "image_id": "story_a407a13ce0_frame_4",
+      "order": 4,
+      "file": "4.jpg",
+      "image_url": "/story-assets/4张图的故事/暴躁的小火柴/4.jpg",
+      "private_annotations": {
+        "visible_summary": "燃烧的火柴跑过房间，窗帘、纸巾盒、扫帚和地面多处着火。",
+        "tags": [
+          "角色:燃烧的火柴",
+          "动作:跑过房间",
+          "物体:多处火焰",
+          "物体:窗帘",
+          "物体:纸巾盒",
+          "场景:室内",
+          "状态:火势蔓延"
+        ],
+        "uncertainties": [],
+        "sensitivity": [
+          "严重火灾场景；只做安全教育，不让幼儿描述模仿步骤"
+        ]
+      },
+      "visual_clues": [
+        "最后火焰只在一个地方吗？",
+        "看到这样的危险，第一件事应该怎样安全离开并呼叫大人？"
+      ]
+    }
+  ]
+}

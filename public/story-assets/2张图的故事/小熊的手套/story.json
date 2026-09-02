@@ -1,0 +1,71 @@
+{
+  "schema_version": "2.0",
+  "story_id": "story_a3755dbbef",
+  "title": "小熊的手套",
+  "category": "2张图的故事",
+  "suitable_age": [
+    "small",
+    "middle"
+  ],
+  "scene_theme": "互助 / 物归原主",
+  "themes": [
+    "互助",
+    "物归原主"
+  ],
+  "quality": {
+    "status": "ready",
+    "flags": [],
+    "notes": []
+  },
+  "sequence_policy": {
+    "use_image_order": true,
+    "allow_inference": true,
+    "must_mark_uncertain": true,
+    "do_not_override_visible_facts_with_title": true
+  },
+  "images": [
+    {
+      "image_id": "story_a3755dbbef_frame_1",
+      "order": 1,
+      "file": "1.jpg",
+      "image_url": "/story-assets/2张图的故事/小熊的手套/1.jpg",
+      "private_annotations": {
+        "visible_summary": "小熊在路上发现一只红色手套。",
+        "tags": [
+          "角色:小熊",
+          "动作:发现手套",
+          "物体:红手套",
+          "场景:小路"
+        ],
+        "uncertainties": [],
+        "sensitivity": []
+      },
+      "visual_clues": [
+        "小熊在地上发现了什么？",
+        "这只手套是什么颜色？"
+      ]
+    },
+    {
+      "image_id": "story_a3755dbbef_frame_2",
+      "order": 2,
+      "file": "2.jpg",
+      "image_url": "/story-assets/2张图的故事/小熊的手套/2.jpg",
+      "private_annotations": {
+        "visible_summary": "小熊把红手套递给小兔，小兔伸手接过。",
+        "tags": [
+          "角色:小熊",
+          "角色:小兔",
+          "动作:递还手套",
+          "物体:红手套",
+          "场景:户外",
+          "关系:帮助"
+        ],
+        "uncertainties": [],
+        "sensitivity": []
+      },
+      "visual_clues": [
+        "第二张图里，小熊把手套交给了谁？"
+      ]
+    }
+  ]
+}

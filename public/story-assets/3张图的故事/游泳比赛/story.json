@@ -1,0 +1,91 @@
+{
+  "schema_version": "2.0",
+  "story_id": "story_fab9d1e1af",
+  "title": "游泳比赛",
+  "category": "3张图的故事",
+  "suitable_age": [
+    "middle"
+  ],
+  "scene_theme": "运动 / 坚持 / 规则",
+  "themes": [
+    "运动",
+    "坚持",
+    "规则"
+  ],
+  "quality": {
+    "status": "ready",
+    "flags": [],
+    "notes": []
+  },
+  "sequence_policy": {
+    "use_image_order": true,
+    "allow_inference": true,
+    "must_mark_uncertain": true,
+    "do_not_override_visible_facts_with_title": true
+  },
+  "images": [
+    {
+      "image_id": "story_fab9d1e1af_frame_1",
+      "order": 1,
+      "file": "1.jpg",
+      "image_url": "/story-assets/3张图的故事/游泳比赛/1.jpg",
+      "private_annotations": {
+        "visible_summary": "小动物们在泳池边的起点准备下水比赛。",
+        "tags": [
+          "角色:小动物们",
+          "动作:准备游泳",
+          "物体:泳池",
+          "物体:起点",
+          "场景:游泳池"
+        ],
+        "uncertainties": [],
+        "sensitivity": []
+      },
+      "visual_clues": [
+        "小动物们站在水池的哪一边？",
+        "它们准备参加什么比赛？"
+      ]
+    },
+    {
+      "image_id": "story_fab9d1e1af_frame_2",
+      "order": 2,
+      "file": "2.jpg",
+      "image_url": "/story-assets/3张图的故事/游泳比赛/2.jpg",
+      "private_annotations": {
+        "visible_summary": "几只小动物在泳道里向前游。",
+        "tags": [
+          "角色:参赛动物",
+          "动作:游泳比赛",
+          "物体:泳道",
+          "场景:游泳池"
+        ],
+        "uncertainties": [],
+        "sensitivity": []
+      },
+      "visual_clues": [
+        "比赛开始后，小动物们怎样向前移动？"
+      ]
+    },
+    {
+      "image_id": "story_fab9d1e1af_frame_3",
+      "order": 3,
+      "file": "3.jpg",
+      "image_url": "/story-assets/3张图的故事/游泳比赛/3.jpg",
+      "private_annotations": {
+        "visible_summary": "参赛动物游到泳池另一端，池边的伙伴看着它们。",
+        "tags": [
+          "角色:参赛动物",
+          "角色:伙伴",
+          "动作:到达终点",
+          "物体:泳池边",
+          "场景:游泳池"
+        ],
+        "uncertainties": [],
+        "sensitivity": []
+      },
+      "visual_clues": [
+        "最后它们游到了泳池的哪一端？"
+      ]
+    }
+  ]
+}

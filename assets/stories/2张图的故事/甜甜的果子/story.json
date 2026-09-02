@@ -1,0 +1,71 @@
+{
+  "schema_version": "2.0",
+  "story_id": "story_059a4ec595",
+  "title": "甜甜的果子",
+  "category": "2张图的故事",
+  "suitable_age": [
+    "small",
+    "middle"
+  ],
+  "scene_theme": "分享 / 收获",
+  "themes": [
+    "分享",
+    "收获"
+  ],
+  "quality": {
+    "status": "ready",
+    "flags": [],
+    "notes": []
+  },
+  "sequence_policy": {
+    "use_image_order": true,
+    "allow_inference": true,
+    "must_mark_uncertain": true,
+    "do_not_override_visible_facts_with_title": true
+  },
+  "images": [
+    {
+      "image_id": "story_059a4ec595_frame_1",
+      "order": 1,
+      "file": "1.jpg",
+      "image_url": "/story-assets/2张图的故事/甜甜的果子/1.jpg",
+      "private_annotations": {
+        "visible_summary": "小刺猬站在许多红苹果旁。",
+        "tags": [
+          "角色:小刺猬",
+          "动作:发现苹果",
+          "物体:红苹果",
+          "场景:果园"
+        ],
+        "uncertainties": [],
+        "sensitivity": []
+      },
+      "visual_clues": [
+        "小刺猬身边有许多什么水果？"
+      ]
+    },
+    {
+      "image_id": "story_059a4ec595_frame_2",
+      "order": 2,
+      "file": "2.jpg",
+      "image_url": "/story-assets/2张图的故事/甜甜的果子/2.jpg",
+      "private_annotations": {
+        "visible_summary": "小刺猬带着苹果来到小兔面前，把果子分享给它。",
+        "tags": [
+          "角色:小刺猬",
+          "角色:小兔",
+          "动作:分享苹果",
+          "物体:苹果",
+          "场景:户外",
+          "关系:分享"
+        ],
+        "uncertainties": [],
+        "sensitivity": []
+      },
+      "visual_clues": [
+        "小刺猬把苹果带给了谁？",
+        "两只小动物的表情怎么样？"
+      ]
+    }
+  ]
+}

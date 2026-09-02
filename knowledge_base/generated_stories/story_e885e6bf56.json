@@ -1,0 +1,93 @@
+{
+  "schema_version": "2.0",
+  "story_id": "story_e885e6bf56",
+  "title": "胆小的小松鼠",
+  "category": "3张图的故事",
+  "suitable_age": [
+    "middle"
+  ],
+  "scene_theme": "勇气 / 尝试 / 友谊",
+  "themes": [
+    "勇气",
+    "尝试",
+    "友谊"
+  ],
+  "quality": {
+    "status": "ready",
+    "flags": [],
+    "notes": []
+  },
+  "sequence_policy": {
+    "use_image_order": true,
+    "allow_inference": true,
+    "must_mark_uncertain": true,
+    "do_not_override_visible_facts_with_title": true
+  },
+  "images": [
+    {
+      "image_id": "story_e885e6bf56_frame_1",
+      "order": 1,
+      "file": "1.jpg",
+      "image_url": "/story-assets/3张图的故事/胆小的小松鼠/1.jpg",
+      "private_annotations": {
+        "visible_summary": "小松鼠从树洞里探出头，观察外面的树林。",
+        "tags": [
+          "角色:小松鼠",
+          "动作:从树洞探头",
+          "物体:树洞",
+          "场景:树林",
+          "表情:小心"
+        ],
+        "uncertainties": [],
+        "sensitivity": []
+      },
+      "visual_clues": [
+        "小松鼠躲在哪里看外面？",
+        "它露出了身体的哪一部分？"
+      ]
+    },
+    {
+      "image_id": "story_e885e6bf56_frame_2",
+      "order": 2,
+      "file": "2.jpg",
+      "image_url": "/story-assets/3张图的故事/胆小的小松鼠/2.jpg",
+      "private_annotations": {
+        "visible_summary": "小松鼠爬下树，靠近地上的松果和一只小鸟。",
+        "tags": [
+          "角色:小松鼠",
+          "角色:小鸟",
+          "动作:爬下树靠近",
+          "物体:松果",
+          "场景:树林"
+        ],
+        "uncertainties": [],
+        "sensitivity": []
+      },
+      "visual_clues": [
+        "小松鼠离开树洞以后，向谁走近了？"
+      ]
+    },
+    {
+      "image_id": "story_e885e6bf56_frame_3",
+      "order": 3,
+      "file": "3.jpg",
+      "image_url": "/story-assets/3张图的故事/胆小的小松鼠/3.jpg",
+      "private_annotations": {
+        "visible_summary": "小松鼠和小鸟待在一起，旁边放着松果。",
+        "tags": [
+          "角色:小松鼠",
+          "角色:小鸟",
+          "动作:一起相处",
+          "物体:松果",
+          "场景:树林",
+          "关系:朋友"
+        ],
+        "uncertainties": [],
+        "sensitivity": []
+      },
+      "visual_clues": [
+        "最后小松鼠身边多了哪位朋友？"
+      ]
+    }
+  ]
+}

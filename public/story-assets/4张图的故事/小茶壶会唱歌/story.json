@@ -1,0 +1,118 @@
+{
+  "schema_version": "2.0",
+  "story_id": "story_70b497ea00",
+  "title": "小茶壶会唱歌",
+  "category": "4张图的故事",
+  "suitable_age": [
+    "large"
+  ],
+  "scene_theme": "茶文化 / 生活观察 / 安全",
+  "themes": [
+    "茶文化",
+    "生活观察",
+    "安全"
+  ],
+  "quality": {
+    "status": "ready",
+    "flags": [],
+    "notes": []
+  },
+  "sequence_policy": {
+    "use_image_order": true,
+    "allow_inference": true,
+    "must_mark_uncertain": true,
+    "do_not_override_visible_facts_with_title": true
+  },
+  "images": [
+    {
+      "image_id": "story_70b497ea00_frame_1",
+      "order": 1,
+      "file": "1.jpg",
+      "image_url": "/story-assets/4张图的故事/小茶壶会唱歌/1.jpg",
+      "private_annotations": {
+        "visible_summary": "成人和孩子们围着茶桌，桌上摆着茶壶、茶杯和茶叶。",
+        "tags": [
+          "角色:成人",
+          "角色:孩子们",
+          "动作:准备泡茶",
+          "物体:茶壶",
+          "物体:茶杯",
+          "场景:茶室"
+        ],
+        "uncertainties": [],
+        "sensitivity": []
+      },
+      "visual_clues": [
+        "茶桌上摆着哪些泡茶用具？"
+      ]
+    },
+    {
+      "image_id": "story_70b497ea00_frame_2",
+      "order": 2,
+      "file": "2.jpg",
+      "image_url": "/story-assets/4张图的故事/小茶壶会唱歌/2.jpg",
+      "private_annotations": {
+        "visible_summary": "成人把热水倒进陶茶壶，孩子们在旁边观看。",
+        "tags": [
+          "角色:成人",
+          "角色:孩子们",
+          "动作:向茶壶倒热水",
+          "物体:热水",
+          "物体:茶壶",
+          "场景:茶室"
+        ],
+        "uncertainties": [],
+        "sensitivity": [
+          "热水烫伤风险；强调由成人操作"
+        ]
+      },
+      "visual_clues": [
+        "水倒进茶壶时，孩子们站在哪里看？"
+      ]
+    },
+    {
+      "image_id": "story_70b497ea00_frame_3",
+      "order": 3,
+      "file": "3.jpg",
+      "image_url": "/story-assets/4张图的故事/小茶壶会唱歌/3.jpg",
+      "private_annotations": {
+        "visible_summary": "孩子们坐在矮桌旁，看着茶壶和茶杯。",
+        "tags": [
+          "角色:孩子们",
+          "动作:围桌观察",
+          "物体:茶壶",
+          "物体:茶杯",
+          "场景:茶室"
+        ],
+        "uncertainties": [],
+        "sensitivity": []
+      },
+      "visual_clues": [
+        "泡好茶以后，大家围坐在哪里？"
+      ]
+    },
+    {
+      "image_id": "story_70b497ea00_frame_4",
+      "order": 4,
+      "file": "4.jpg",
+      "image_url": "/story-assets/4张图的故事/小茶壶会唱歌/4.jpg",
+      "private_annotations": {
+        "visible_summary": "一个孩子双手拿着茶杯品茶，其他人坐在旁边。",
+        "tags": [
+          "角色:孩子",
+          "角色:同伴",
+          "动作:双手拿杯品茶",
+          "物体:茶杯",
+          "场景:茶室"
+        ],
+        "uncertainties": [],
+        "sensitivity": [
+          "确认饮品温度合适后再饮用"
+        ]
+      },
+      "visual_clues": [
+        "喝茶时，孩子用几只手拿杯子？"
+      ]
+    }
+  ]
+}

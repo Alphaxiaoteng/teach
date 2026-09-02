@@ -1,0 +1,16 @@
+{
+  "name": "teach-agent",
+  "version": "1.0.0",
+  "description": "幼儿看图讲故事轻量智能体与分龄互动 H5 系统",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "test": "node test/agent_regression_test.js",
+    "story-cli": "node scripts/story_asset_cli.js"
+  },
+  "dependencies": {
+    "cors": "^2.8.6",
+    "express": "^4.22.2",
+    "ws": "^8.21.3"
+  }
+}

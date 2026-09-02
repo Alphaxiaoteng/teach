@@ -1,0 +1,15 @@
+# Dependencies
+node_modules/
+
+# Cloudflare & Build Cache
+.wrangler/
+.mf/
+
+# Logs & Environment
+*.log
+.env
+.env.local
+
+# OS Generated
+.DS_Store
+Thumbs.db

@@ -1,0 +1,96 @@
+{
+  "schema_version": "2.0",
+  "story_id": "story_c55fc4ca8d",
+  "title": "小月亮找朋友",
+  "category": "3张图的故事",
+  "suitable_age": [
+    "middle"
+  ],
+  "scene_theme": "想象 / 陪伴",
+  "themes": [
+    "想象",
+    "陪伴"
+  ],
+  "quality": {
+    "status": "ready",
+    "flags": [],
+    "notes": []
+  },
+  "sequence_policy": {
+    "use_image_order": true,
+    "allow_inference": true,
+    "must_mark_uncertain": true,
+    "do_not_override_visible_facts_with_title": true
+  },
+  "images": [
+    {
+      "image_id": "story_c55fc4ca8d_frame_1",
+      "order": 1,
+      "file": "1.jpg",
+      "image_url": "/story-assets/3张图的故事/小月亮找朋友/1.jpg",
+      "private_annotations": {
+        "visible_summary": "一轮带笑脸的月亮挂在夜空中，下面是安静的房屋。",
+        "tags": [
+          "角色:月亮",
+          "动作:挂在天空",
+          "物体:房屋",
+          "场景:村庄",
+          "时间:夜晚",
+          "表情:微笑"
+        ],
+        "uncertainties": [],
+        "sensitivity": []
+      },
+      "visual_clues": [
+        "夜空中谁露出了笑脸？",
+        "月亮下面有什么？"
+      ]
+    },
+    {
+      "image_id": "story_c55fc4ca8d_frame_2",
+      "order": 2,
+      "file": "2.jpg",
+      "image_url": "/story-assets/3张图的故事/小月亮找朋友/2.jpg",
+      "private_annotations": {
+        "visible_summary": "小猫在屋里望着月亮的图案，并把它抱在怀里。",
+        "tags": [
+          "角色:小猫",
+          "动作:抱着月亮图案",
+          "物体:月亮图案",
+          "场景:室内",
+          "时间:夜晚"
+        ],
+        "uncertainties": [],
+        "sensitivity": []
+      },
+      "visual_clues": [
+        "小猫怀里抱着什么形状的东西？"
+      ]
+    },
+    {
+      "image_id": "story_c55fc4ca8d_frame_3",
+      "order": 3,
+      "file": "3.jpg",
+      "image_url": "/story-assets/3张图的故事/小月亮找朋友/3.jpg",
+      "private_annotations": {
+        "visible_summary": "小猫安静地躺着，窗外或上方的月亮继续陪着它。",
+        "tags": [
+          "角色:小猫",
+          "角色:月亮",
+          "动作:躺着休息",
+          "场景:卧室",
+          "时间:夜晚",
+          "关系:陪伴"
+        ],
+        "uncertainties": [
+          "月亮图案是实物还是想象画面不明确"
+        ],
+        "sensitivity": []
+      },
+      "visual_clues": [
+        "最后小猫在做什么？",
+        "谁还在夜空中陪着它？"
+      ]
+    }
+  ]
+}

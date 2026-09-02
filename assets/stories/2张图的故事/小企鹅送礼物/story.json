@@ -1,0 +1,76 @@
+{
+  "schema_version": "2.0",
+  "story_id": "story_3b1d12c8eb",
+  "title": "小企鹅送礼物",
+  "category": "2张图的故事",
+  "suitable_age": [
+    "small",
+    "middle"
+  ],
+  "scene_theme": "友谊 / 分享",
+  "themes": [
+    "友谊",
+    "分享"
+  ],
+  "quality": {
+    "status": "ready",
+    "flags": [],
+    "notes": []
+  },
+  "sequence_policy": {
+    "use_image_order": true,
+    "allow_inference": true,
+    "must_mark_uncertain": true,
+    "do_not_override_visible_facts_with_title": true
+  },
+  "images": [
+    {
+      "image_id": "story_3b1d12c8eb_frame_1",
+      "order": 1,
+      "file": "1.jpg",
+      "image_url": "/story-assets/2张图的故事/小企鹅送礼物/1.jpg",
+      "private_annotations": {
+        "visible_summary": "雪地里，小企鹅拉着装有礼物的雪橇向前走。",
+        "tags": [
+          "角色:小企鹅",
+          "动作:拉雪橇",
+          "物体:礼物",
+          "物体:雪橇",
+          "场景:雪地"
+        ],
+        "uncertainties": [],
+        "sensitivity": []
+      },
+      "visual_clues": [
+        "小企鹅身后拉着什么？",
+        "雪橇上装着什么？"
+      ]
+    },
+    {
+      "image_id": "story_3b1d12c8eb_frame_2",
+      "order": 2,
+      "file": "2.jpg",
+      "image_url": "/story-assets/2张图的故事/小企鹅送礼物/2.jpg",
+      "private_annotations": {
+        "visible_summary": "冰屋旁，小企鹅把礼物送到另一只小动物面前。",
+        "tags": [
+          "角色:小企鹅",
+          "角色:小动物",
+          "动作:送礼物",
+          "物体:礼物",
+          "物体:冰屋",
+          "场景:雪地",
+          "关系:赠送"
+        ],
+        "uncertainties": [
+          "受礼角色种类不作为必答项"
+        ],
+        "sensitivity": []
+      },
+      "visual_clues": [
+        "小企鹅走到了谁的家门口？",
+        "礼物现在放在谁的面前？"
+      ]
+    }
+  ]
+}

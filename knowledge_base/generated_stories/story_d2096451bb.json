@@ -1,0 +1,112 @@
+{
+  "schema_version": "2.0",
+  "story_id": "story_d2096451bb",
+  "title": "小蜗牛的慢慢慢旅行",
+  "category": "4张图的故事",
+  "suitable_age": [
+    "large"
+  ],
+  "scene_theme": "探索 / 坚持 / 自然",
+  "themes": [
+    "探索",
+    "坚持",
+    "自然"
+  ],
+  "quality": {
+    "status": "ready",
+    "flags": [],
+    "notes": []
+  },
+  "sequence_policy": {
+    "use_image_order": true,
+    "allow_inference": true,
+    "must_mark_uncertain": true,
+    "do_not_override_visible_facts_with_title": true
+  },
+  "images": [
+    {
+      "image_id": "story_d2096451bb_frame_1",
+      "order": 1,
+      "file": "1.jpg",
+      "image_url": "/story-assets/4张图的故事/小蜗牛的慢慢慢旅行/1.jpg",
+      "private_annotations": {
+        "visible_summary": "小蜗牛躲在一片叶子下面，准备从草地出发。",
+        "tags": [
+          "角色:小蜗牛",
+          "动作:躲在叶下",
+          "物体:叶子",
+          "场景:草地"
+        ],
+        "uncertainties": [],
+        "sensitivity": []
+      },
+      "visual_clues": [
+        "小蜗牛从什么下面探出来？"
+      ]
+    },
+    {
+      "image_id": "story_d2096451bb_frame_2",
+      "order": 2,
+      "file": "2.jpg",
+      "image_url": "/story-assets/4张图的故事/小蜗牛的慢慢慢旅行/2.jpg",
+      "private_annotations": {
+        "visible_summary": "小蜗牛来到池塘边，遇见一只小蚂蚁。",
+        "tags": [
+          "角色:小蜗牛",
+          "角色:小蚂蚁",
+          "动作:在池塘边相遇",
+          "场景:池塘"
+        ],
+        "uncertainties": [],
+        "sensitivity": []
+      },
+      "visual_clues": [
+        "旅行到池塘边时，小蜗牛遇见了谁？"
+      ]
+    },
+    {
+      "image_id": "story_d2096451bb_frame_3",
+      "order": 3,
+      "file": "3.jpg",
+      "image_url": "/story-assets/4张图的故事/小蜗牛的慢慢慢旅行/3.jpg",
+      "private_annotations": {
+        "visible_summary": "小蜗牛、小蚂蚁和蝴蝶一起在路上前进。",
+        "tags": [
+          "角色:小蜗牛",
+          "角色:小蚂蚁",
+          "角色:蝴蝶",
+          "动作:一起旅行",
+          "场景:小路",
+          "关系:伙伴"
+        ],
+        "uncertainties": [],
+        "sensitivity": []
+      },
+      "visual_clues": [
+        "第三张里，又有谁加入了旅行？"
+      ]
+    },
+    {
+      "image_id": "story_d2096451bb_frame_4",
+      "order": 4,
+      "file": "4.jpg",
+      "image_url": "/story-assets/4张图的故事/小蜗牛的慢慢慢旅行/4.jpg",
+      "private_annotations": {
+        "visible_summary": "小蜗牛和伙伴们到达开满花的草地。",
+        "tags": [
+          "角色:小蜗牛",
+          "角色:伙伴们",
+          "动作:到达花地",
+          "物体:花朵",
+          "场景:花草地",
+          "表情:开心"
+        ],
+        "uncertainties": [],
+        "sensitivity": []
+      },
+      "visual_clues": [
+        "慢慢走了很久以后，它们到达了什么地方？"
+      ]
+    }
+  ]
+}

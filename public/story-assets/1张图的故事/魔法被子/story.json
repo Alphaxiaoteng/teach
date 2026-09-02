@@ -1,0 +1,55 @@
+{
+  "schema_version": "2.0",
+  "story_id": "story_1f6bfd9549",
+  "title": "魔法被子",
+  "category": "1张图的故事",
+  "suitable_age": [
+    "small"
+  ],
+  "scene_theme": "想象 / 睡前故事",
+  "themes": [
+    "想象",
+    "睡前故事"
+  ],
+  "quality": {
+    "status": "ready",
+    "flags": [],
+    "notes": []
+  },
+  "sequence_policy": {
+    "use_image_order": true,
+    "allow_inference": true,
+    "must_mark_uncertain": true,
+    "do_not_override_visible_facts_with_title": true
+  },
+  "images": [
+    {
+      "image_id": "story_1f6bfd9549_frame_1",
+      "order": 1,
+      "file": "1.jpg",
+      "image_url": "/story-assets/1张图的故事/魔法被子/1.jpg",
+      "private_annotations": {
+        "visible_summary": "一个开心的小女孩坐在带有白色星星的蓝色魔法被子上，张开双臂在天空中飞翔。",
+        "tags": [
+          "角色:小女孩",
+          "角色:女孩",
+          "动作:坐在被子上飞",
+          "动作:飞在天上",
+          "动作:张开双臂",
+          "物体:魔法被子",
+          "物体:被子",
+          "物体:星星",
+          "场景:天空",
+          "场景:房屋",
+          "氛围:欢快"
+        ],
+        "uncertainties": [],
+        "sensitivity": []
+      },
+      "visual_clues": [
+        "小女孩坐在什么上面飞在天上呀？",
+        "蓝色被子上面有什么图案？"
+      ]
+    }
+  ]
+}

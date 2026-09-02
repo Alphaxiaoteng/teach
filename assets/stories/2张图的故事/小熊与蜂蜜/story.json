@@ -1,0 +1,73 @@
+{
+  "schema_version": "2.0",
+  "story_id": "story_743f642163",
+  "title": "小熊与蜂蜜",
+  "category": "2张图的故事",
+  "suitable_age": [
+    "small",
+    "middle"
+  ],
+  "scene_theme": "观察 / 动物习性",
+  "themes": [
+    "观察",
+    "动物习性"
+  ],
+  "quality": {
+    "status": "ready",
+    "flags": [],
+    "notes": []
+  },
+  "sequence_policy": {
+    "use_image_order": true,
+    "allow_inference": true,
+    "must_mark_uncertain": true,
+    "do_not_override_visible_facts_with_title": true
+  },
+  "images": [
+    {
+      "image_id": "story_743f642163_frame_1",
+      "order": 1,
+      "file": "1.png",
+      "image_url": "/story-assets/2张图的故事/小熊与蜂蜜/1.png",
+      "private_annotations": {
+        "visible_summary": "小熊拿着蜂蜜罐，旁边有一只蜜蜂飞着。",
+        "tags": [
+          "角色:小熊",
+          "角色:蜜蜂",
+          "动作:拿蜂蜜罐",
+          "物体:蜂蜜罐",
+          "场景:森林"
+        ],
+        "uncertainties": [],
+        "sensitivity": []
+      },
+      "visual_clues": [
+        "小熊手里的罐子装着什么？",
+        "罐子旁边飞着谁？"
+      ]
+    },
+    {
+      "image_id": "story_743f642163_frame_2",
+      "order": 2,
+      "file": "2.png",
+      "image_url": "/story-assets/2张图的故事/小熊与蜂蜜/2.png",
+      "private_annotations": {
+        "visible_summary": "小熊坐在树桩旁看着蜂蜜。",
+        "tags": [
+          "角色:小熊",
+          "动作:看蜂蜜",
+          "物体:蜂蜜",
+          "物体:树桩",
+          "场景:森林",
+          "姿态:坐着"
+        ],
+        "uncertainties": [],
+        "sensitivity": []
+      },
+      "visual_clues": [
+        "小熊最后坐在了哪里？",
+        "它面前放着什么？"
+      ]
+    }
+  ]
+}
