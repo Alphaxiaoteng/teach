@@ -432,7 +432,7 @@ function speakWithWebSpeech(text, triggerBtn = null, onEndCallback = null) {
         if (!chineseVoice) initChineseVoice();
         if (chineseVoice) utterance.voice = chineseVoice;
         utterance.lang = 'zh-CN';
-        utterance.rate = 0.98; // 0.98 倍速，亲切从容、带有生活化呼吸感的幼师语速
+        utterance.rate = 1.1; // 1.1 倍速，轻快干脆、生动活泼的幼师语速
         utterance.pitch = 1.0; // 纯正自然的真人原声音调（杜绝机械尖锐）
 
         utterance.onend = () => {
@@ -1297,8 +1297,8 @@ async function submitChildAnswer() {
 
       appendChatMessage('assistant', fullNarration, false, data.audioUrl, '📖 我的专属有声故事');
 
-      // 根据文本总字数动态计算播放时长（每个字约260ms），确保念完整篇故事后再弹表彰
-      const playbackWaitMs = Math.min(22000, Math.max(6500, fullNarration.length * 260));
+      // 根据文本总字数动态计算播放时长（适应 1.1 倍速，每个字约230ms），确保念完整篇故事后再弹表彰
+      const playbackWaitMs = Math.min(18000, Math.max(5500, fullNarration.length * 230));
       setTimeout(() => {
         const finalCardMsg = cleanRecap || teacherText;
         triggerGrandCompletionModal(finalCardMsg, data.moralBadge, data.turn || 5);
