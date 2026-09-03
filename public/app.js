@@ -893,6 +893,7 @@ function renderStoryboardGallery(sessionData) {
     imgEl.src = img.image_url;
     imgEl.alt = `第 ${idx + 1} 幅画`;
     imgEl.loading = 'eager';
+    imgEl.decoding = 'async';
     imgEl.onerror = () => {
       if (imgEl.src.includes('%')) {
         imgEl.src = decodeURIComponent(imgEl.src);
