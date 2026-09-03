@@ -33,10 +33,11 @@ ${framesSummary}
 2. 【顺应孩子，严禁重复复读】：
    - 结合多轮对话历史，如果孩子刚才已经回答了某个细节，老师必须顺接夸奖，接着顺承推入下一个环节，【绝对严禁重复提问同一个问题】！
    - 如果孩子一口气讲得很完整（起因、经过、结果都齐了），不要再无意义纠缠细节，直接判定通关结业（is_completed: true, status: "PASS"）！
-3. 【自适应引导推进（2-3轮自然通关）】：
+3. 【自适应引导推进与防死锁（2-3轮自然通关）】：
    - 轮次 1：肯定孩子开口讲的部分，聚焦一个关键未提及的画面细节问 1 个小问题（is_completed: false, status: "PROBE"）；
    - 轮次 2：孩子回答了细节后，若整个故事脉络已齐，直接通关结业！若还差核心结局，再问最后一个收尾小问题；
    - 轮次 3 或以上：无论如何必须温馨通关结业，高度赞美，颁发勋章（is_completed: true, status: "PASS"）。
+   - 【暖心接棒防死锁】：若孩子表示“不知道/不会/不想说/不想讲”，绝对严禁继续抛出问号逼问！晓晓老师应主动温暖接棒（“宝贝今天很勇敢啦，晓晓老师把这个好听的故事念给你听好不好呀～”），直接判定结业（is_completed: true, status: "PASS", moral_badge: "勇敢小天使"），并在 story_recap 中完整给出连环画全景小故事！
 4. 【通关时故事汇总（story_recap）】：
    - 当 is_completed: true 时，老师必须在 story_recap 字段中，把孩子刚才讲到的所有零碎细节串联成一段连贯、生动、温暖的小故事（80-120字），开头如“晓晓老师把你讲的故事串起来念给你听哦：有一天……”，让孩子获得极大的成就感！
 5. 【语言风格】：超级温柔亲切、充满童真、多用儿童口语（哇、呀、呢、哦～），每句 teacher_reply 控制在 30-50 字左右。
@@ -45,8 +46,8 @@ ${framesSummary}
 {
   "accuracy_feedback": "🎯 准确捕捉到的具体画面事实",
   "accuracy_score": 96,
-  "teacher_reply": "晓晓老师自然温柔的夸奖与顺畅互动（有且仅有1个具体聚焦小问号，30-50字）",
-  "moral_badge": "爱心小天使 / 观察小达人 / 故事大王",
+  "teacher_reply": "晓晓老师自然温柔的夸奖与顺畅互动（若结业则不带问号；若未结业有且仅有1个具体聚焦小问号，30-50字）",
+  "moral_badge": "爱心小天使 / 观察小达人 / 故事大王 / 勇敢小天使",
   "story_recap": "当 is_completed 为 true 时，汇总孩子讲出的完整故事（80-120字），平时为 string 空字符串",
   "is_completed": true 或 false,
   "status": "PASS 或 PROBE"
@@ -76,7 +77,7 @@ ${framesSummary}
         model: 'qwen3.8-flash',
         messages: messages,
         temperature: 0.35,
-        max_tokens: 280
+        max_tokens: 300
       })
     });
 
@@ -114,6 +115,22 @@ ${framesSummary}
         if (firstQIdx > 0) {
           agentMessage = agentMessage.slice(0, firstQIdx + 1);
         }
+      }
+    }
+
+    // RED-05 暖心防死锁硬熔断：对消极、胆小或达轮次上限的幼儿，主动接棒结业，绝不无限挂起逼问
+    const isPassiveInput = /(不知道|不会|不想说|不想讲|听不懂|算了|别问了)/.test(childInput || "");
+    if ((turns >= 3 && isPassiveInput) || turns >= 4) {
+      isCompleted = true;
+      evalStatus = "PASS";
+      moralBadge = "勇敢小天使";
+      if (!storyRecap && Array.isArray(images) && images.length > 0) {
+        const fullPlot = images.map(img => img.private_annotations?.visible_summary || '').filter(Boolean).join('，');
+        storyRecap = `晓晓老师把《${storyTitle || '绘本故事'}》讲给你听哦：${fullPlot}。你真是一个特别棒的小听众！`;
+      }
+      // 结业时剥离问号，改成温暖肯定的结业语
+      if (agentMessage && (agentMessage.includes('？') || agentMessage.includes('?'))) {
+        agentMessage = "宝贝今天已经很勇敢啦！晓晓老师把这个好听的故事完整讲给你听哦，快仔细听～";
       }
     }
 
