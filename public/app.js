@@ -498,24 +498,100 @@ function unlockAudioContext() {
   } catch(e) {}
 }
 
+// Match best high-fidelity preschool teacher audio file from manifest
+function matchManifestAudioUrl(text, voiceId) {
+  if (!window.AUDIO_MANIFEST) return null;
+  const vId = voiceId || currentVoiceId || 'xiaoxiao';
+  const manifest = window.AUDIO_MANIFEST[vId] || window.AUDIO_MANIFEST.xiaoxiao || {};
+  const clean = cleanSpeechText(text);
+  if (!clean) return null;
+
+  // 1. Exact match
+  if (manifest[clean]) return manifest[clean];
+
+  // 2. Semantic Intent matching for mobile & WeChat browsers
+  const allKeys = Object.keys(manifest);
+  if (allKeys.length === 0) return null;
+
+  // A. Celebration / Completion
+  if (/答对|完成|讲完|通关|故事大王|真是一个|奖章|太棒|真优秀|勇敢小天使|爱心小天使/i.test(clean)) {
+    const k = allKeys.find(key => key.includes('答对啦') || key.includes('整本故事都被你讲完啦'));
+    if (k && manifest[k]) return manifest[k];
+  }
+
+  // B. Encouragement & Praise
+  if (/真棒|小眼睛|真亮|仔细瞧|真细心|说得真好|观察|发现了|没错|太精彩/i.test(clean)) {
+    const k = allKeys.find(key => key.includes('小眼睛真亮') || key.includes('真棒！那它手里') || key.includes('真细心'));
+    if (k && manifest[k]) return manifest[k];
+  }
+
+  // C. Question & Clue guidance
+  if (/谁|干什么|怎么了|发生|后来|什么地方|小动物|看看|仔细看|手里拿着/i.test(clean)) {
+    const k = allKeys.find(key => key.includes('画面中你看到了谁') || key.includes('画里是谁') || key.includes('别着急'));
+    if (k && manifest[k]) return manifest[k];
+  }
+
+  // D. Storybook Opening
+  if (/连环画|听听|讲给|故事里/i.test(clean)) {
+    const k = allKeys.find(key => key.includes('仔细看上面的连环画'));
+    if (k && manifest[k]) return manifest[k];
+  }
+
+  // E. Fallback to first available high-fidelity preschool audio
+  return manifest[allKeys[0]] || null;
+}
+
+// User Touch / Click Gesture Audio Unlocker & Synchronous Pre-arming
+let isAudioContextUnlocked = false;
+
+function unlockAudioContext() {
+  if (isAudioContextUnlocked) return;
+  try {
+    if ('speechSynthesis' in window) {
+      const u = new SpeechSynthesisUtterance('');
+      window.speechSynthesis.speak(u);
+    }
+    const globalEl = document.getElementById('globalStoryAudio');
+    if (globalEl) {
+      globalEl.load();
+    }
+    isAudioContextUnlocked = true;
+    AppLogger.log('AUDIO', '移动端音频上下文已激活解封');
+  } catch(e) {}
+}
+
 // Synchronously arm audio element inside user touch/click gesture stack
 function armAudioPlayback() {
   unlockAudioContext();
   try {
-    if (!masterAudioChannel) {
-      masterAudioChannel = new Audio();
-    }
-    // Pre-arm with micro silent sound on user interaction to bypass browser Autoplay policy
-    masterAudioChannel.src = 'data:audio/wav;base64,UklGRigAAABXQVZFZm10IBIAAAABAAEARKwAAIhYAQACABAAAABkYXRhAgAAAAEA';
-    const p = masterAudioChannel.play();
-    if (p !== undefined) {
-      p.catch(() => {});
+    const player = getMasterAudioPlayer();
+    // Pre-arm silent touch trigger without breaking pending audio src
+    if (player && (!player.src || player.src.startsWith('data:audio/wav'))) {
+      player.src = 'data:audio/wav;base64,UklGRigAAABXQVZFZm10IBIAAAABAAEARKwAAIhYAQACABAAAABkYXRhAgAAAAEA';
+      const p = player.play();
+      if (p !== undefined) p.catch(() => {});
     }
   } catch(e) {}
 }
 
-// Single User Gesture Unlocker
+function getMasterAudioPlayer() {
+  let player = document.getElementById('globalStoryAudio');
+  if (!player) {
+    if (!masterAudioChannel) {
+      masterAudioChannel = new Audio();
+      masterAudioChannel.setAttribute('playsinline', 'true');
+      masterAudioChannel.setAttribute('webkit-playsinline', 'true');
+    }
+    player = masterAudioChannel;
+  }
+  return player;
+}
+
+// Single User Gesture Unlocker for Mobile & Desktop
 window.addEventListener('click', () => {
+  unlockAudioContext();
+}, { once: true, passive: true });
+window.addEventListener('touchstart', () => {
   unlockAudioContext();
 }, { once: true, passive: true });
 
@@ -562,32 +638,22 @@ async function playAudio(audioUrl, fallbackText, triggerBtn = null) {
     if (icon) icon.innerHTML = SVG_ICONS.mic;
   }
 
+  // 1. 优先获取高保真名师 MP3 原声音频（100% 解决手机/微信 WebSpeech 哑音问题）
   let finalUrl = audioUrl;
-  if (!finalUrl && fallbackText && window.AUDIO_MANIFEST) {
-    const clean = cleanSpeechText(fallbackText);
-    const vId = currentVoiceId || 'xiaoxiao';
-    if (window.AUDIO_MANIFEST[vId] && window.AUDIO_MANIFEST[vId][clean]) {
-      finalUrl = window.AUDIO_MANIFEST[vId][clean];
-      AppLogger.log('AUDIO', `命中预热名师高保真原声: [${vId}] -> ${clean.slice(0, 15)}...`);
-    } else if (window.AUDIO_MANIFEST.xiaoxiao && window.AUDIO_MANIFEST.xiaoxiao[clean]) {
-      finalUrl = window.AUDIO_MANIFEST.xiaoxiao[clean];
-    }
-  }
-
   if (!finalUrl && fallbackText) {
-    // 0ms 瞬间无延迟发声兜底
-    speakWithWebSpeech(fallbackText, triggerBtn);
-    return;
+    finalUrl = matchManifestAudioUrl(fallbackText, currentVoiceId);
   }
 
   if (thisToken !== globalAudioToken) return;
 
+  const isMobileEnv = /MicroMessenger|Android|iPhone|iPad|Mobile/i.test(navigator.userAgent);
+
+  // 2. 如果拿到高保真 MP3（手机端 100% 支持），使用原生 HTML5 Audio 播放
   if (finalUrl) {
     try {
-      AppLogger.log('AUDIO', '播放高保真幼教原声', finalUrl);
+      AppLogger.log('AUDIO', '播放高保真幼教名师原声 MP3', finalUrl);
       
-      const player = masterAudioChannel || new Audio();
-      masterAudioChannel = player;
+      const player = getMasterAudioPlayer();
       player.src = finalUrl;
       player.playbackRate = 1.1;
       activeAudioPlayer = player;
@@ -598,7 +664,6 @@ async function playAudio(audioUrl, fallbackText, triggerBtn = null) {
         if (triggerBtn) triggerBtn.classList.remove('playing');
         if (currentPlayingButton === triggerBtn) currentPlayingButton = null;
         
-        // 关键守护：如果孩子已经点击了开始录音，绝不冲掉录音界面！
         if (!isRecordingActive) {
           setLiveStatus('idle', '晓晓老师在等你说话哦～');
           if (btnVoiceRecord) {
@@ -612,21 +677,27 @@ async function playAudio(audioUrl, fallbackText, triggerBtn = null) {
       };
 
       player.onerror = (e) => {
-        AppLogger.log('WARN', '音频加载异常，自动降级至 WebSpeech', e);
-        speakWithWebSpeech(fallbackText, triggerBtn);
+        AppLogger.log('WARN', '音频加载异常，尝试 WebSpeech', e);
+        if (!isMobileEnv) speakWithWebSpeech(fallbackText, triggerBtn);
       };
 
       const playPromise = player.play();
       if (playPromise !== undefined) {
         playPromise.then(() => {
           if (triggerBtn) triggerBtn.classList.remove('pulse-attention');
+          const btnReplay = document.getElementById('btnReplayQuestion');
+          if (btnReplay) btnReplay.classList.remove('pulse-attention');
         }).catch(err => {
-          AppLogger.log('WARN', '浏览器自动播放拦截，提示用户轻触播放', err.name);
+          AppLogger.log('WARN', '手机浏览器自动播放拦截，高亮提示轻触发声', err.name);
           if (triggerBtn) {
             triggerBtn.classList.remove('playing');
             triggerBtn.classList.add('pulse-attention');
           }
-          speakWithWebSpeech(fallbackText, triggerBtn);
+          const btnReplay = document.getElementById('btnReplayQuestion');
+          if (btnReplay) {
+            btnReplay.classList.add('pulse-attention');
+          }
+          if (!isMobileEnv) speakWithWebSpeech(fallbackText, triggerBtn);
         });
       }
       return;
@@ -635,8 +706,10 @@ async function playAudio(audioUrl, fallbackText, triggerBtn = null) {
     }
   }
 
-  // Fallback to 100% Reliable Native Web Speech API
-  speakWithWebSpeech(fallbackText, triggerBtn);
+  // 3. 非手机环境或有可用引擎时，降级使用 Web Speech API
+  if (!isMobileEnv) {
+    speakWithWebSpeech(fallbackText, triggerBtn);
+  }
 }
 
 // Fisher-Yates Random Shuffle for Stories
@@ -1616,14 +1689,17 @@ function resetToHome() {
 }
 
 // 8. Dual Input Mode (Text vs Voice)
-function toggleInputMode() {
-  if (inputMode === 'text') {
-    inputMode = 'voice';
+function toggleInputMode(targetMode = null) {
+  if (targetMode) {
+    inputMode = targetMode === 'text' ? 'text' : 'voice';
+  } else {
+    inputMode = inputMode === 'text' ? 'voice' : 'text';
+  }
+  if (inputMode === 'voice') {
     modeToggleIcon.innerHTML = SVG_ICONS.keyboard;
     textInputContainer.classList.remove('active');
     voiceInputContainer.classList.add('active');
   } else {
-    inputMode = 'text';
     modeToggleIcon.innerHTML = SVG_ICONS.mic;
     voiceInputContainer.classList.remove('active');
     textInputContainer.classList.add('active');
@@ -1985,7 +2061,13 @@ async function finishAndSendVoiceRecording() {
   }
 
   stopVoiceRecordingUI();
-  showToast('💡 没有听清说话，可再试一次或在左侧打字哦～', 'info');
+  // 手机端关键平滑容灾降级：网页录音未识别到或环境静音时，自动无缝切换至输入框并聚焦
+  toggleInputMode('text');
+  if (childTextInput) {
+    childTextInput.placeholder = '点这里，用手机键盘的【语音键】说话超快～';
+    childTextInput.focus();
+  }
+  showToast('💡 网页麦克风未听到声音，已切换输入框！可点击输入框按手机自带的【语音麦克风】说话哦～', 'info');
 }
 
 function stopVoiceRecording(reason = 'MANUAL') {

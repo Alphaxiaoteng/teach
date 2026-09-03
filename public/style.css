@@ -1222,6 +1222,16 @@ body.theme-craft .story-glory-card {
   transform: scale(0.95);
 }
 
+.input-bottom-assist-hint {
+  text-align: center;
+  margin-top: 6px;
+  font-size: 11.5px;
+  color: var(--text-color);
+  opacity: 0.72;
+  font-weight: 600;
+  letter-spacing: 0.2px;
+}
+
 .live-status-bar {
   display: flex;
   align-items: center;
