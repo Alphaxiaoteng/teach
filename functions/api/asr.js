@@ -1,7 +1,12 @@
 export async function onRequestPost(context) {
   const { request, env } = context;
 
-  const apiKey = env.BAILIAN_API_KEY || "sk-sp-H.DRMYDR.f5Oa.MEUCIHL4I2jetSkjh-1VGHGKFvzSYdwo_MFh2CW0KWBvy5OtAiEAsLKQ3JjTkQFBZNtrHdU7xYximtVjRClzh-aea4kl3fg";
+  const apiKey = env.BAILIAN_API_KEY || "";
+  if (!apiKey) {
+    return new Response(JSON.stringify({ success: false, error: '系统未配置 BAILIAN_API_KEY 环境变量' }), {
+      headers: { 'Content-Type': 'application/json', 'Access-Control-Allow-Origin': '*' }
+    });
+  }
 
   try {
     const body = await request.json();
