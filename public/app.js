@@ -415,33 +415,44 @@ function speakWithWebSpeech(text, triggerBtn = null, onEndCallback = null) {
   }
 
   try {
+    if (window.speechSynthesis.paused) {
+      try { window.speechSynthesis.resume(); } catch(e) {}
+    }
     window.speechSynthesis.cancel();
-    const utterance = new SpeechSynthesisUtterance(clean);
-    if (!chineseVoice) initChineseVoice();
-    if (chineseVoice) utterance.voice = chineseVoice;
-    utterance.lang = 'zh-CN';
-    utterance.rate = 0.98; // 0.98 倍速，亲切从容、带有生活化呼吸感的幼师语速
-    utterance.pitch = 1.0; // 纯正自然的真人原声音调（杜绝机械尖锐）
-
-    utterance.onend = () => {
-      AppLogger.log('AUDIO', '语音朗读完毕');
-      if (triggerBtn) triggerBtn.classList.remove('playing');
-      if (currentPlayingButton === triggerBtn) currentPlayingButton = null;
-      if (onEndCallback) onEndCallback();
-    };
-
-    utterance.onerror = (e) => {
-      AppLogger.log('WARN', 'Web Speech 朗读异常', e.error || e.message);
-      if (triggerBtn) triggerBtn.classList.remove('playing');
-      if (currentPlayingButton === triggerBtn) currentPlayingButton = null;
-    };
 
     if (triggerBtn) {
       currentPlayingButton = triggerBtn;
       triggerBtn.classList.add('playing');
     }
 
-    window.speechSynthesis.speak(utterance);
+    // 延迟 40ms 确保浏览器音频上下文释放干净，解决 iOS/Safari/Chrome 偶发吞字哑音
+    setTimeout(() => {
+      try {
+        const utterance = new SpeechSynthesisUtterance(clean);
+        if (!chineseVoice) initChineseVoice();
+        if (chineseVoice) utterance.voice = chineseVoice;
+        utterance.lang = 'zh-CN';
+        utterance.rate = 0.98; // 0.98 倍速，亲切从容、带有生活化呼吸感的幼师语速
+        utterance.pitch = 1.0; // 纯正自然的真人原声音调（杜绝机械尖锐）
+
+        utterance.onend = () => {
+          AppLogger.log('AUDIO', '语音朗读完毕');
+          if (triggerBtn) triggerBtn.classList.remove('playing');
+          if (currentPlayingButton === triggerBtn) currentPlayingButton = null;
+          if (onEndCallback) onEndCallback();
+        };
+
+        utterance.onerror = (e) => {
+          AppLogger.log('WARN', 'Web Speech 朗读异常', e.error || e.message);
+          if (triggerBtn) triggerBtn.classList.remove('playing');
+          if (currentPlayingButton === triggerBtn) currentPlayingButton = null;
+        };
+
+        window.speechSynthesis.speak(utterance);
+      } catch(e) {
+        if (triggerBtn) triggerBtn.classList.remove('playing');
+      }
+    }, 40);
   } catch (err) {
     if (triggerBtn) triggerBtn.classList.remove('playing');
   }
@@ -1268,14 +1279,6 @@ async function submitChildAnswer() {
       currentSession.history.push({ role: 'assistant', content: data.agentMessage || '' });
     }
 
-    const isPass = data.evalStatus === 'CORRECT' || data.evalStatus === 'PASS' || data.advance;
-
-    if (isPass) {
-      triggerCelebration();
-    } else {
-      triggerTryAgainAnim('💡 仔细看画面正中间的小动物哦～');
-    }
-
     const isCompleted = data.state === 'COMPLETED' || data.isCompleted;
 
     const teacherText = data.agentMessage || '';
@@ -1283,6 +1286,9 @@ async function submitChildAnswer() {
     const storyRecap = data.storyRecap || '';
 
     if (isCompleted) {
+      // 动画与全屏庆贺只在最后全部答对、故事通关时才触发，平时中间轮次绝不打扰
+      triggerCelebration();
+
       // 彻底解决一线反馈痛点：将表扬与完整故事融合成连续的单通道语音，保证孩子完整听完
       const cleanRecap = storyRecap.replace(/^晓晓老师把你讲的故事串起来念给你听哦[：:]/g, '').trim();
       const fullNarration = cleanRecap 
