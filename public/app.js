@@ -483,21 +483,6 @@ function stopAllAudio(reason = 'MANUAL') {
   }
 }
 
-// User Touch / Click Gesture Audio Unlocker & Synchronous Pre-arming
-let isAudioContextUnlocked = false;
-
-function unlockAudioContext() {
-  if (isAudioContextUnlocked) return;
-  try {
-    if ('speechSynthesis' in window) {
-      const u = new SpeechSynthesisUtterance('');
-      window.speechSynthesis.speak(u);
-    }
-    isAudioContextUnlocked = true;
-    AppLogger.log('AUDIO', '音频上下文已激活');
-  } catch(e) {}
-}
-
 // Match best high-fidelity preschool teacher audio file from manifest
 function matchManifestAudioUrl(text, voiceId) {
   if (!window.AUDIO_MANIFEST) return null;
