@@ -20,34 +20,54 @@ export async function onRequestPost(context) {
       });
     }
 
-    // 调用百炼 CosyVoice / 通义语音合成
-    const res = await fetch("https://dashscope.aliyuncs.com/api/v1/services/aigc/text-to-speech/generation", {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        'Authorization': `Bearer ${apiKey}`,
-        'X-DashScope-DataInspection': 'enable'
-      },
-      body: JSON.stringify({
-        model: 'cosyvoice-v1',
-        input: {
-          text: cleanText
-        },
-        parameters: {
-          voice: voiceId === 'yunxi' ? 'longshu' : 'longxiaochun',
-          format: 'mp3',
-          sample_rate: 22050,
-          volume: 50,
-          speech_rate: 1.05
-        }
-      })
-    });
+    // 统一调用百炼 Token-Plan 网关 qwen-audio-3.0-tts-plus 模型合成
+    const baseURL = env.BAILIAN_BASE_URL || "https://token-plan.cn-beijing.maas.aliyuncs.com/compatible-mode/v1";
+    
+    // 映射角色音色
+    let voiceName = 'Cherry';
+    if (voiceId === 'xiaoyi') voiceName = 'Serena';
+    else if (voiceId === 'yunjian') voiceName = 'Ethan';
+    else if (voiceId === 'xiaoxia') voiceName = 'Chelsie';
 
-    const data = await res.json();
-    if (data.output && data.output.audio_url) {
+    let audioResultUrl = null;
+
+    try {
+      const res = await fetch(`${baseURL}/chat/completions`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${apiKey}`
+        },
+        body: JSON.stringify({
+          model: 'qwen-audio-3.0-tts-plus',
+          messages: [
+            { role: 'user', content: cleanText }
+          ],
+          audio: {
+            voice: voiceName,
+            format: 'mp3'
+          },
+          modalities: ['text', 'audio']
+        })
+      });
+
+      if (res.ok) {
+        const data = await res.json();
+        if (data.choices && data.choices[0] && data.choices[0].message && data.choices[0].message.audio) {
+          const audioObj = data.choices[0].message.audio;
+          if (audioObj.data) {
+            audioResultUrl = `data:audio/mp3;base64,${audioObj.data}`;
+          } else if (audioObj.url) {
+            audioResultUrl = audioObj.url;
+          }
+        }
+      }
+    } catch (e) {}
+
+    if (audioResultUrl) {
       return new Response(JSON.stringify({
         success: true,
-        audioUrl: data.output.audio_url
+        audioUrl: audioResultUrl
       }), {
         headers: { 'Content-Type': 'application/json', 'Access-Control-Allow-Origin': '*' }
       });
@@ -55,7 +75,7 @@ export async function onRequestPost(context) {
 
     return new Response(JSON.stringify({
       success: false,
-      error: 'TTS generation fallback'
+      error: 'TTS using WebSpeech / audio_manifest fallback'
     }), {
       headers: { 'Content-Type': 'application/json', 'Access-Control-Allow-Origin': '*' }
     });
