@@ -1,9 +1,11 @@
 // State variables
-let currentAge = null;
+let currentAge = 'small';
+let currentStories = [];
+let currentStory = null;
 let currentSession = null;
 let currentStoryData = null;
 let currentTheme = localStorage.getItem('app_theme') || 'candy';
-let currentVoiceId = localStorage.getItem('app_voice') || 'xiaoxiao';
+let currentVoiceId = localStorage.getItem('app_voice') || 'xiaochen';
 let availableVoicePersonas = [];
 let isStartingStory = false;
 let preloadedStories = []; // Client-side preloaded stories cache for 0ms instant display
@@ -194,21 +196,41 @@ function initChineseVoice() {
 
   const zhVoices = voices.filter(v => v.lang && (v.lang.toLowerCase().includes('zh') || v.lang.toLowerCase().includes('cmn')));
   
-  // Top-tier Natural Human Chinese Voices Priority (Reject weird cartoon voices)
-  let priorityKeywords = ['Tingting (Enhanced)', 'Tingting', 'Xiaoxiao', 'Meijia', 'Lili', 'Google 普通话', 'Sinji'];
-  if (currentVoiceId === 'eddy') {
-    priorityKeywords = ['Tingting (Enhanced)', 'Tingting', 'Xiaoyi', 'Eddy'];
-  } else if (currentVoiceId === 'rocko' || currentVoiceId === 'yunxi') {
-    priorityKeywords = ['Reed', 'Rocko', 'Yunjian', 'Tingting'];
-  } else if (currentVoiceId === 'grandma' || currentVoiceId === 'yunxia') {
-    priorityKeywords = ['Tingting (Enhanced)', 'Tingting', 'Sinji'];
+  // 严格优先匹配极度自然的“真人/神经网络/增强版”音色，彻底淘汰机械单调发音
+  let priorityKeywords = [];
+  if (currentVoiceId === 'xiaochen') {
+    priorityKeywords = ['HsiaoChen', 'Xiaochen', '晓臻', 'Natural', 'Enhanced', 'Tingting (Enhanced)', 'Tingting'];
+  } else if (currentVoiceId === 'xiaoyu') {
+    priorityKeywords = ['HsiaoYu', 'Xiaoyu', 'Natural', 'Enhanced', 'Tingting (Enhanced)', 'Tingting'];
+  } else if (currentVoiceId === 'xiaoyi') {
+    priorityKeywords = ['Xiaoyi', 'Natural', 'Enhanced', 'Tingting (Enhanced)', 'Tingting'];
+  } else if (currentVoiceId === 'yunxi') {
+    priorityKeywords = ['Yunjian', 'Yunxi', 'Reed', 'Natural', 'Tingting'];
+  } else {
+    // 默认 晓晓老师：优先选择带 Natural / Enhanced 柔和亲切的女声
+    priorityKeywords = [
+      'Xiaoxiao (Natural)', 'Xiaoxiao', 'HsiaoChen', 'Tingting (Enhanced)', 'Enhanced', 'Natural',
+      'Meijia', 'Lili', 'Tingting'
+    ];
   }
 
+  // 1. 先找既符合关键词、又带有 Natural / Enhanced 的顶级自然真人音色
+  for (const kw of priorityKeywords) {
+    const match = zhVoices.find(v => v.name && v.name.includes(kw) && (v.name.includes('Natural') || v.name.includes('Enhanced') || v.name.includes('Online')));
+    if (match) {
+      chineseVoice = match;
+      AppLogger.log('AUDIO', '匹配到顶级自然真人神经音色', match.name);
+      return;
+    }
+  }
+
+  // 2. 次选一般匹配
   for (const kw of priorityKeywords) {
     const match = zhVoices.find(v => v.name && v.name.includes(kw));
     if (match) {
       chineseVoice = match;
-      break;
+      AppLogger.log('AUDIO', '匹配到中文人声音色', match.name);
+      return;
     }
   }
 
@@ -223,28 +245,14 @@ if ('speechSynthesis' in window) {
 
 async function loadVoicePersonas() {
   const defaultVoices = [
-    { id: 'xiaoxiao', name: '晓晓老师', icon: '🌸', subtitle: '3-6岁特级名师 · 温柔亲切（推荐）' },
-    { id: 'xiaoyi', name: '依依姐姐', icon: '🧸', subtitle: '元气少女声 · 活泼生动伴读' },
-    { id: 'yunxi', name: '云希哥哥', icon: '🚀', subtitle: '清朗少年音 · 阳光探索启发' },
-    { id: 'yunxia', name: '云夏萌宝', icon: '👶', subtitle: '可爱幼童原声 · 同龄互动玩伴' }
+    { id: 'xiaochen', name: '小晨老师', icon: '🌿', subtitle: '台湾自然口语 · 强烈推荐（零AI播音味）' },
+    { id: 'xiaoxiao', name: '晓晓老师', icon: '🌸', subtitle: '3-6岁名师 · 温柔耐心启发' },
+    { id: 'xiaoyi', name: '依依姐姐', icon: '🧸', subtitle: '绘本故事主播 · 活泼灵动亲切' },
+    { id: 'xiaoyu', name: '小雨姐姐', icon: '🍁', subtitle: '慢调轻声伴读 · 治愈温暖陪伴' }
   ];
 
   availableVoicePersonas = defaultVoices;
   renderVoicePersonas(defaultVoices);
-
-  try {
-    const res = await fetch('/api/tts/voices');
-    const data = await res.json();
-    if (data.success && data.voices && data.voices.length > 0) {
-      availableVoicePersonas = data.voices.map(v => ({
-        id: v.id,
-        name: v.name,
-        icon: v.avatar || '🎙️',
-        subtitle: v.tag || v.desc || ''
-      }));
-      renderVoicePersonas(availableVoicePersonas);
-    }
-  } catch (err) {}
 }
 
 function renderVoicePersonas(voices) {
@@ -405,8 +413,8 @@ function speakWithWebSpeech(text, triggerBtn = null, onEndCallback = null) {
     if (!chineseVoice) initChineseVoice();
     if (chineseVoice) utterance.voice = chineseVoice;
     utterance.lang = 'zh-CN';
-    utterance.rate = 1.1; // 1.1 倍速温润舒缓亲切语速
-    utterance.pitch = 1.0; // 纯正自然的真人原声音调（杜绝尖锐变调）
+    utterance.rate = 0.98; // 0.98 倍速，亲切从容、带有生活化呼吸感的幼师语速
+    utterance.pitch = 1.0; // 纯正自然的真人原声音调（杜绝机械尖锐）
 
     utterance.onend = () => {
       AppLogger.log('AUDIO', '语音朗读完毕');
