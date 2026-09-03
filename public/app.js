@@ -147,6 +147,41 @@ const voiceInputContainer = document.getElementById('voiceInputContainer');
 const btnVoiceRecord = document.getElementById('btnVoiceRecord');
 const voiceRecordText = document.getElementById('voiceRecordText');
 
+// Native Speech Recognition Engine (0ms local streaming ASR)
+function initSpeechRecognition() {
+  const SpeechRec = window.SpeechRecognition || window.webkitSpeechRecognition;
+  if (!SpeechRec) return;
+
+  try {
+    speechRecognizer = new SpeechRec();
+    speechRecognizer.continuous = true;
+    speechRecognizer.interimResults = true;
+    speechRecognizer.lang = 'zh-CN';
+
+    speechRecognizer.onresult = (event) => {
+      let interimTranscript = '';
+      for (let i = event.resultIndex; i < event.results.length; ++i) {
+        const transcript = event.results[i][0].transcript;
+        if (event.results[i].isFinal) {
+          currentRecordedText += transcript;
+        } else {
+          interimTranscript += transcript;
+        }
+      }
+      const displayText = currentRecordedText + interimTranscript;
+      if (displayText.trim()) {
+        updateStreamingUserBubble(displayText.trim());
+        if (childTextInput) childTextInput.value = displayText.trim();
+      }
+    };
+
+    speechRecognizer.onerror = (event) => {
+      AppLogger.log('WARN', '原生语音听写事件:', event.error);
+    };
+    AppLogger.log('AUDIO', '浏览器原生语音听写引擎初始化就绪');
+  } catch(e) {}
+}
+
 // Initialize
 window.addEventListener('DOMContentLoaded', () => {
   AppLogger.log('ENGINE', '系统前端初始化就绪');
@@ -1862,7 +1897,15 @@ async function startFreshVoiceRecording() {
   pcmAudioBuffers = [];
   recordedAudioChunks = [];
 
-  // 原生麦克风采集
+  // 1. 优先启动原生语音听写 (如果浏览器支持，实时出字，0延迟)
+  if (speechRecognizer) {
+    try {
+      speechRecognizer.start();
+      AppLogger.log('AUDIO', '原生语音识别已启动监听');
+    } catch(e) {}
+  }
+
+  // 2. 原生麦克风采集 (MediaRecorder + PCM 双录音管道)
   if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
     try {
       mediaStream = await navigator.mediaDevices.getUserMedia({
@@ -1873,14 +1916,23 @@ async function startFreshVoiceRecording() {
         }
       });
 
-      // 1. 优先启动安卓原生 MediaRecorder (Chromium / 微信底层 100% 保障)
+      // 启动 MediaRecorder
       if (typeof MediaRecorder !== 'undefined') {
         try {
           let mime = '';
-          if (MediaRecorder.isTypeSupported('audio/webm;codecs=opus')) mime = 'audio/webm;codecs=opus';
-          else if (MediaRecorder.isTypeSupported('audio/webm')) mime = 'audio/webm';
-          else if (MediaRecorder.isTypeSupported('audio/mp4')) mime = 'audio/mp4';
-          else if (MediaRecorder.isTypeSupported('audio/aac')) mime = 'audio/aac';
+          const preferredTypes = [
+            'audio/webm;codecs=opus',
+            'audio/webm',
+            'audio/mp4',
+            'audio/aac',
+            'audio/ogg'
+          ];
+          for (const t of preferredTypes) {
+            if (MediaRecorder.isTypeSupported && MediaRecorder.isTypeSupported(t)) {
+              mime = t;
+              break;
+            }
+          }
 
           activeMediaRecorder = mime ? new MediaRecorder(mediaStream, { mimeType: mime }) : new MediaRecorder(mediaStream);
           activeMediaRecorder.ondataavailable = (e) => {
@@ -1888,14 +1940,14 @@ async function startFreshVoiceRecording() {
               recordedAudioChunks.push(e.data);
             }
           };
-          activeMediaRecorder.start(100);
-          AppLogger.log('AUDIO', `MediaRecorder 录音启动: ${activeMediaRecorder.mimeType || 'default'}`);
+          activeMediaRecorder.start(250);
+          AppLogger.log('AUDIO', `MediaRecorder 录音管道启动: ${activeMediaRecorder.mimeType || 'default'}`);
         } catch(mErr) {
           activeMediaRecorder = null;
         }
       }
 
-      // 2. 同时启动 WebAudio PCM 采样作为安全备用
+      // 同时启动 WebAudio PCM 采样作为安全备用
       try {
         const AudioCtx = window.AudioContext || window.webkitAudioContext;
         activeAudioContext = new AudioCtx();
@@ -1916,8 +1968,8 @@ async function startFreshVoiceRecording() {
     } catch (err) {
       AppLogger.log('WARN', '麦克风获取受阻:', err.name);
       isRecordingActive = false;
-      showToast('💡 麦克风权限未开启，请允许麦克风或直接打字哦～', 'info');
-      toggleInputMode();
+      stopVoiceRecordingUI();
+      showToast('💡 麦克风权限未开启，请在浏览器或手机设置中允许使用麦克风哦～', 'warn');
       return;
     }
   }
@@ -1953,10 +2005,20 @@ async function finishAndSendVoiceRecording() {
     if (txt) txt.textContent = '⏳ 正在识别说话...';
   }
 
-  // 1. 停止 MediaRecorder 并收集录音 Blob
+  // 1. 停止原生语音识别
+  if (speechRecognizer) {
+    try { speechRecognizer.stop(); } catch(e) {}
+  }
+
+  // 2. 停止 MediaRecorder 并收集录音 Blob
   let mediaBlob = null;
   let mediaFormat = 'webm';
   if (activeMediaRecorder && activeMediaRecorder.state !== 'inactive') {
+    try {
+      if (activeMediaRecorder.state === 'recording') {
+        activeMediaRecorder.requestData();
+      }
+    } catch(e) {}
     await new Promise((resolve) => {
       activeMediaRecorder.onstop = () => {
         if (recordedAudioChunks.length > 0) {
@@ -1987,7 +2049,15 @@ async function finishAndSendVoiceRecording() {
     mediaStream = null;
   }
 
-  // 2. 准备最终上传的音频 Blob 与 Base64
+  // 3. 优先检查原生 SpeechRecognition 是否已经听到文字（0延迟直接提交）
+  if (currentRecordedText && currentRecordedText.trim()) {
+    if (childTextInput) childTextInput.value = currentRecordedText.trim();
+    stopVoiceRecordingUI();
+    submitChildAnswer();
+    return;
+  }
+
+  // 4. 准备最终上传的音频 Blob 与 Base64
   let finalBlob = mediaBlob;
   let finalFormat = mediaFormat;
 
@@ -2045,14 +2115,9 @@ async function finishAndSendVoiceRecording() {
     }
   }
 
+  // 绝不擅自切到键盘！保持语音录音界面，提示靠近麦克风重试
   stopVoiceRecordingUI();
-  // 手机端关键平滑容灾降级：网页录音未识别到或环境静音时，自动无缝切换至输入框并聚焦
-  toggleInputMode('text');
-  if (childTextInput) {
-    childTextInput.placeholder = '点这里，用手机键盘的【语音键】说话超快～';
-    childTextInput.focus();
-  }
-  showToast('💡 网页麦克风未听到声音，已切换输入框！可点击输入框按手机自带的【语音麦克风】说话哦～', 'info');
+  showToast('💡 刚才声音有点小或没听清哦，靠近手机再讲一次吧～', 'info');
 }
 
 function stopVoiceRecording(reason = 'MANUAL') {
