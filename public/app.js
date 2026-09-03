@@ -10,6 +10,13 @@ let availableVoicePersonas = [];
 let isStartingStory = false;
 let preloadedStories = []; // Client-side preloaded stories cache for 0ms instant display
 
+// Standard Professional SVG Icons (Strictly No Emojis for Controls)
+const SVG_ICONS = {
+  mic: `<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2a3 3 0 0 0-3 3v7a3 3 0 0 0 6 0V5a3 3 0 0 0-3-3Z"></path><path d="M19 10v2a7 7 0 0 1-14 0v-2"></path><line x1="12" y1="19" x2="12" y2="22"></line></svg>`,
+  micRecording: `<svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><circle cx="12" cy="12" r="7" fill="#ef4444"></circle></svg>`,
+  keyboard: `<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2.5"></rect><path d="M6 8h.01M10 8h.01M14 8h.01M18 8h.01M6 12h.01M10 12h.01M14 12h.01M18 12h.01M8 16h8"></path></svg>`
+};
+
 // Robust Single Audio Manager
 let activeAudioPlayer = null;
 let masterAudioChannel = null;
@@ -332,7 +339,7 @@ function selectVoicePersona(voiceId) {
   const matched = availableVoicePersonas.find(v => v.id === voiceId);
   if (matched) {
     AppLogger.log('USER', `切换幼教音色为: ${matched.name}`);
-    showToast(`已选用【${matched.name}】原声 🎙️`, 'success');
+    showToast(`已选用【${matched.name}】原声`, 'success');
   }
 
   // Refresh visual cards
@@ -520,7 +527,7 @@ async function playAudio(audioUrl, fallbackText, triggerBtn = null) {
   if (triggerBtn && currentPlayingButton === triggerBtn) {
     if (('speechSynthesis' in window && window.speechSynthesis.speaking) || (activeAudioPlayer && !activeAudioPlayer.paused)) {
       stopAllAudio('TOGGLE_PAUSE');
-      setLiveStatus('idle', '🎙️ 晓晓老师在等你说话哦～');
+      setLiveStatus('idle', '晓晓老师在等你说话哦～');
       return;
     }
   }
@@ -535,13 +542,13 @@ async function playAudio(audioUrl, fallbackText, triggerBtn = null) {
   }
 
   stopVoiceRecording('TEACHER_SPEAKING');
-  setLiveStatus('speaking', '🔊 晓晓老师正在讲故事...');
+  setLiveStatus('speaking', '晓晓老师正在讲故事...');
   if (btnVoiceRecord) {
     btnVoiceRecord.classList.remove('recording');
     const txt = document.getElementById('voiceRecordText');
     const icon = document.getElementById('voiceRecordIcon');
     if (txt) txt.textContent = '点击开始说话';
-    if (icon) icon.textContent = '🎙️';
+    if (icon) icon.innerHTML = SVG_ICONS.mic;
   }
 
   let finalUrl = audioUrl;
@@ -582,13 +589,13 @@ async function playAudio(audioUrl, fallbackText, triggerBtn = null) {
         
         // 关键守护：如果孩子已经点击了开始录音，绝不冲掉录音界面！
         if (!isRecordingActive) {
-          setLiveStatus('idle', '🎙️ 晓晓老师在等你说话哦～');
+          setLiveStatus('idle', '晓晓老师在等你说话哦～');
           if (btnVoiceRecord) {
             btnVoiceRecord.classList.remove('recording');
             const txt = document.getElementById('voiceRecordText');
             const icon = document.getElementById('voiceRecordIcon');
             if (txt) txt.textContent = '点击开始说话';
-            if (icon) icon.textContent = '🎙️';
+            if (icon) icon.innerHTML = SVG_ICONS.mic;
           }
         }
       };
@@ -1585,12 +1592,12 @@ function resetToHome() {
 function toggleInputMode() {
   if (inputMode === 'text') {
     inputMode = 'voice';
-    modeToggleIcon.textContent = '⌨️';
+    modeToggleIcon.innerHTML = SVG_ICONS.keyboard;
     textInputContainer.classList.remove('active');
     voiceInputContainer.classList.add('active');
   } else {
     inputMode = 'text';
-    modeToggleIcon.textContent = '🎙️';
+    modeToggleIcon.innerHTML = SVG_ICONS.mic;
     voiceInputContainer.classList.remove('active');
     textInputContainer.classList.add('active');
     stopVoiceRecording();
@@ -1831,10 +1838,10 @@ async function startFreshVoiceRecording() {
     btnVoiceRecord.classList.add('recording');
     const txt = document.getElementById('voiceRecordText');
     const icon = document.getElementById('voiceRecordIcon');
-    if (txt) txt.textContent = '🔴 正在录音，讲完点击发送';
-    if (icon) icon.textContent = '🔴';
+    if (txt) txt.textContent = '正在录音，讲完点击发送';
+    if (icon) icon.innerHTML = SVG_ICONS.micRecording;
   }
-  setLiveStatus('listening', '👂 晓晓老师正在听你说～');
+  setLiveStatus('listening', '晓晓老师正在认真听你说～');
 }
 
 function toggleVoiceRecording() {
@@ -1980,9 +1987,9 @@ function stopVoiceRecordingUI() {
     const txt = document.getElementById('voiceRecordText');
     const icon = document.getElementById('voiceRecordIcon');
     if (txt) txt.textContent = '点击开始说话';
-    if (icon) icon.textContent = '🎙️';
+    if (icon) icon.innerHTML = SVG_ICONS.mic;
   }
-  setLiveStatus('idle', '🎙️ 晓晓老师在等你说话哦～');
+  setLiveStatus('idle', '晓晓老师在等你说话哦～');
 }
 
 // 9. Global Keyboard Shortcuts & Modal Closer
