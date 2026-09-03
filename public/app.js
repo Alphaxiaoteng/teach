@@ -1283,21 +1283,20 @@ async function submitChildAnswer() {
     const storyRecap = data.storyRecap || '';
 
     if (isCompleted) {
-      // 1. 先在界面上呈现老师的夸奖
-      appendChatMessage('assistant', teacherText, false, data.audioUrl, badge);
-      
-      // 2. 若大模型汇总出了小朋友口播的完整故事，串联播报给孩子听！
-      if (storyRecap) {
-        setTimeout(() => {
-          appendChatMessage('assistant', `📖【完整小故事】\n${storyRecap}`, false, null, '🎉 故事大团圆');
-        }, 1200);
-      }
+      // 彻底解决一线反馈痛点：将表扬与完整故事融合成连续的单通道语音，保证孩子完整听完
+      const cleanRecap = storyRecap.replace(/^晓晓老师把你讲的故事串起来念给你听哦[：:]/g, '').trim();
+      const fullNarration = cleanRecap 
+        ? `${teacherText} 现在，晓晓老师把你讲的故事串起来念给你听哦：${cleanRecap}`
+        : teacherText;
 
-      // 3. 预留充足时间让小朋友听完老师的温情故事，随后弹全屏通关表彰！
+      appendChatMessage('assistant', fullNarration, false, data.audioUrl, '📖 我的专属有声故事');
+
+      // 根据文本总字数动态计算播放时长（每个字约260ms），确保念完整篇故事后再弹表彰
+      const playbackWaitMs = Math.min(22000, Math.max(6500, fullNarration.length * 260));
       setTimeout(() => {
-        const finalCardMsg = storyRecap || teacherText;
+        const finalCardMsg = cleanRecap || teacherText;
         triggerGrandCompletionModal(finalCardMsg, data.moralBadge, data.turn || 5);
-      }, storyRecap ? 4800 : 3500);
+      }, playbackWaitMs);
     } else {
       appendChatMessage('assistant', teacherText, data.isClue, data.audioUrl, badge);
       
