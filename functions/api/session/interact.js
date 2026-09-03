@@ -27,27 +27,27 @@ export async function onRequestPost(context) {
 ${framesSummary}
 
 【特级名师儿童自适应对话核心原则】
-1. 【顺应孩子，绝不机械死板】：
-   - 严禁机械死板地逼孩子“必须按第1幅、第2幅一幅一幅汇报”！
-   - 孩子可能一口气讲了多个画面的内容，也可能只说了一句感兴趣的细节。老师必须【基于孩子刚才说的具体内容】进行自然的顺接与互动！
-2. 【智能自适应交互策略】：
-   - 【情况 A：孩子讲得比较完整（提到了主要角色、起因和结局）】：
-     * 先用超级热情的语气大力夸奖孩子的表达能力（“哇！你一口气把小兔子被救、变成小鹿感谢的故事讲得好生动呀！”）；
-     * 然后抛出一个启发想象或深层理解的趣味互动提问（如“那你觉得小鹿为什么会来送给他们礼物呀？”）；
-     * 判定为接近完成或通关。
-   - 【情况 B：孩子只讲了开头或局部（如只说了救小兔子）】：
-     * 肯定孩子讲的部分（“对呀，小男孩看到小兔子受伤好心疼！”）；
-     * 然后顺着情节自然好奇地追问后面的发展（“那小兔子被带回家之后怎么样啦？后面发生了什么神奇的事呀？”）。
-   - 【情况 C：孩子在回答老师的追问 / 对话已达 2~4 轮且情节已完整】：
-     * 给出充满爱意的大结业总结（30-45字），高度赞美孩子的爱心、观察力与表达力，为孩子颁发通关勋章！ -> is_completed: true, status: "PASS"
-3. 【语言风格】：超级温柔亲切、充满童真、多用儿童口语（哇、呀、呢、哦～），每句 30-50 字左右，朗读起来像真人在和孩子聊天一样动听。
+1. 【单问号聚焦铁律（最核心）】：
+   - 3-6 岁幼儿思维简单，每次回复【有且仅能提出 1 个具体的焦点小问号】！绝对严禁一次抛出两个或多个问题（如“有没有泥点？是谁帮它洗澡？泡泡出来了吗？”这样会让孩子大脑死机）！
+   - 严禁提泛泛的宽泛大问题（严禁问“发生了什么呀？”、“这幅画怎么了？”）！必须聚焦在画面某个具体人物、动作或道具上提问（例如：“快看，是谁正拿着毛巾帮小鸭子洗澡呀？”）。
+2. 【顺应孩子，严禁重复复读】：
+   - 结合多轮对话历史，如果孩子刚才已经回答了某个细节，老师必须顺接夸奖，接着顺承推入下一个环节，【绝对严禁重复提问同一个问题】！
+   - 如果孩子一口气讲得很完整（起因、经过、结果都齐了），不要再无意义纠缠细节，直接判定通关结业（is_completed: true, status: "PASS"）！
+3. 【自适应引导推进（2-3轮自然通关）】：
+   - 轮次 1：肯定孩子开口讲的部分，聚焦一个关键未提及的画面细节问 1 个小问题（is_completed: false, status: "PROBE"）；
+   - 轮次 2：孩子回答了细节后，若整个故事脉络已齐，直接通关结业！若还差核心结局，再问最后一个收尾小问题；
+   - 轮次 3 或以上：无论如何必须温馨通关结业，高度赞美，颁发勋章（is_completed: true, status: "PASS"）。
+4. 【通关时故事汇总（story_recap）】：
+   - 当 is_completed: true 时，老师必须在 story_recap 字段中，把孩子刚才讲到的所有零碎细节串联成一段连贯、生动、温暖的小故事（80-120字），开头如“晓晓老师把你讲的故事串起来念给你听哦：有一天……”，让孩子获得极大的成就感！
+5. 【语言风格】：超级温柔亲切、充满童真、多用儿童口语（哇、呀、呢、哦～），每句 teacher_reply 控制在 30-50 字左右。
 
-【输出格式】请严格返回纯 JSON：
+【输出格式】请严格返回纯 JSON，严禁任何额外解释：
 {
-  "accuracy_feedback": "🎯 准确捕捉到小男孩善良救助的关键情节！",
+  "accuracy_feedback": "🎯 准确捕捉到的具体画面事实",
   "accuracy_score": 96,
-  "teacher_reply": "晓晓老师自然温柔的夸奖与顺畅互动（30-50字）",
+  "teacher_reply": "晓晓老师自然温柔的夸奖与顺畅互动（有且仅有1个具体聚焦小问号，30-50字）",
   "moral_badge": "爱心小天使 / 观察小达人 / 故事大王",
+  "story_recap": "当 is_completed 为 true 时，汇总孩子讲出的完整故事（80-120字），平时为 string 空字符串",
   "is_completed": true 或 false,
   "status": "PASS 或 PROBE"
 }`;
@@ -56,9 +56,11 @@ ${framesSummary}
       { role: 'system', content: systemPrompt }
     ];
 
-    if (Array.isArray(history)) {
+    if (Array.isArray(history) && history.length > 0) {
       history.slice(-8).forEach(h => {
-        messages.push({ role: h.role, content: h.content });
+        if (h && h.role && h.content) {
+          messages.push({ role: h.role, content: h.content });
+        }
       });
     }
 
@@ -74,7 +76,7 @@ ${framesSummary}
         model: 'qwen3.8-flash',
         messages: messages,
         temperature: 0.35,
-        max_tokens: 180
+        max_tokens: 280
       })
     });
 
@@ -85,6 +87,7 @@ ${framesSummary}
     let moralBadge = "故事大王";
     let accuracyFeedback = "🎯 观察非常准确！";
     let accuracyScore = 95;
+    let storyRecap = "";
 
     if (llmData.choices && llmData.choices[0] && llmData.choices[0].message) {
       const content = llmData.choices[0].message.content.replace(/```json\s*|\s*```/g, '').trim();
@@ -96,14 +99,27 @@ ${framesSummary}
         moralBadge = parsed.moral_badge || moralBadge;
         accuracyFeedback = parsed.accuracy_feedback || accuracyFeedback;
         accuracyScore = parsed.accuracy_score || accuracyScore;
+        storyRecap = parsed.story_recap || "";
       } catch(e) {
         agentMessage = content;
       }
     }
 
+    // 强行规整：如果不是结业，保证只保留 1 个问号，避免多问
+    if (!isCompleted && agentMessage) {
+      const questionMarks = (agentMessage.match(/[？?]/g) || []).length;
+      if (questionMarks > 1) {
+        // 若大模型依然返回了多个问号，截取至第一个问号并保留亲和力
+        const firstQIdx = agentMessage.indexOf('？') !== -1 ? agentMessage.indexOf('？') : agentMessage.indexOf('?');
+        if (firstQIdx > 0) {
+          agentMessage = agentMessage.slice(0, firstQIdx + 1);
+        }
+      }
+    }
+
     if (!agentMessage) {
       if (turns === 1) {
-        agentMessage = "哇！你讲得真生动，小男孩真有爱心！那小兔子带回家后又发生了什么神奇的事情呢？快告诉晓晓老师吧～";
+        agentMessage = "哇，你说得真好！那后来又发生了什么神奇的事呀？";
         accuracyFeedback = "🎯 准确捕捉到故事起点！";
       } else {
         agentMessage = `太精彩啦！你用自己的话把《${storyTitle || '故事'}》讲得既完整又动听，真是一个优秀的小小故事家！`;
@@ -122,7 +138,8 @@ ${framesSummary}
       advance: true,
       evalStatus,
       moralBadge,
-      isCompleted
+      isCompleted,
+      storyRecap
     }), {
       headers: { 'Content-Type': 'application/json', 'Access-Control-Allow-Origin': '*' }
     });
@@ -131,12 +148,13 @@ ${framesSummary}
     return new Response(JSON.stringify({
       success: true,
       turn: 1,
-      agentMessage: "哇！你说得真好，那后来又发生了什么神奇的事呀？快跟老师说说看～",
+      agentMessage: "哇！你说得真好，那后来小动物们做了什么呀？",
       accuracyFeedback: "🎯 表达非常生动！",
       accuracyScore: 92,
       advance: true,
       evalStatus: "PROBE",
-      isCompleted: false
+      isCompleted: false,
+      storyRecap: ""
     }), {
       headers: { 'Content-Type': 'application/json', 'Access-Control-Allow-Origin': '*' }
     });

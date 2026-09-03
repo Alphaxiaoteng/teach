@@ -812,7 +812,8 @@ async function startStorySession(storyId, cardElement = null) {
       totalImages: totalImgs,
       images: foundStory.images || [],
       agentMessage: fixedOpening,
-      childQuotes: []
+      childQuotes: [],
+      history: []
     };
 
     if (stageStoryTitle) stageStoryTitle.textContent = currentSession.storyTitle;
@@ -1137,10 +1138,13 @@ async function evaluateAnswerClientSide(session, userInput) {
     } else {
       const nextIndex = currentIdx + 1;
       const nextImg = session.images && session.images[nextIndex];
+      const specificClue = (nextImg && nextImg.visual_clues && nextImg.visual_clues[0]) 
+        ? `观察得真仔细！快瞧第 ${nextIndex + 1} 幅画，${nextImg.visual_clues[0]}`
+        : `观察得真仔细！快瞧第 ${nextIndex + 1} 幅画里的小动物在做什么呀？`;
       return {
         success: true,
         evalStatus: 'CORRECT',
-        agentMessage: `观察得真仔细！快瞧第 ${nextIndex + 1} 幅画，发生了什么呀？`,
+        agentMessage: specificClue,
         isCorrect: true,
         isClue: false,
         currentImageIndex: nextIndex,
@@ -1237,6 +1241,7 @@ async function submitChildAnswer() {
         images: currentSession && currentSession.images ? currentSession.images : [],
         childInput: text,
         userInput: text,
+        history: (currentSession && currentSession.history) || [],
         failCount: (currentSession && currentSession.frameFailCount) || 0
       })
     });
@@ -1256,6 +1261,13 @@ async function submitChildAnswer() {
   if (data && data.success) {
     AppLogger.log('ENGINE', `收到判定响应 (状态: ${data.evalStatus}, 耗时 ${Date.now() - t0}ms)`);
 
+    // 记录多轮对话上下文历史，避免后续失忆与重复发问
+    if (currentSession) {
+      if (!currentSession.history) currentSession.history = [];
+      currentSession.history.push({ role: 'user', content: text });
+      currentSession.history.push({ role: 'assistant', content: data.agentMessage || '' });
+    }
+
     const isPass = data.evalStatus === 'CORRECT' || data.evalStatus === 'PASS' || data.advance;
 
     if (isPass) {
@@ -1268,15 +1280,24 @@ async function submitChildAnswer() {
 
     const teacherText = data.agentMessage || '';
     const badge = data.accuracyFeedback || null;
+    const storyRecap = data.storyRecap || '';
 
     if (isCompleted) {
-      // 1. 先在界面上完整呈现并播放晓晓老师对本故事的教育意义讲解
+      // 1. 先在界面上呈现老师的夸奖
       appendChatMessage('assistant', teacherText, false, data.audioUrl, badge);
       
-      // 2. 预留充足时间让小朋友听完老师的温情鼓励，随后弹全屏通关表彰！
+      // 2. 若大模型汇总出了小朋友口播的完整故事，串联播报给孩子听！
+      if (storyRecap) {
+        setTimeout(() => {
+          appendChatMessage('assistant', `📖【完整小故事】\n${storyRecap}`, false, null, '🎉 故事大团圆');
+        }, 1200);
+      }
+
+      // 3. 预留充足时间让小朋友听完老师的温情故事，随后弹全屏通关表彰！
       setTimeout(() => {
-        triggerGrandCompletionModal(teacherText, data.moralBadge, data.turn || 5);
-      }, 3500);
+        const finalCardMsg = storyRecap || teacherText;
+        triggerGrandCompletionModal(finalCardMsg, data.moralBadge, data.turn || 5);
+      }, storyRecap ? 4800 : 3500);
     } else {
       appendChatMessage('assistant', teacherText, data.isClue, data.audioUrl, badge);
       
