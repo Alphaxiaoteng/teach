@@ -14,7 +14,7 @@ const VOICE_CONFIGS = {
     edgeVoice: 'zh-CN-XiaoxiaoNeural',
     rate: '+10%',
     macVoice: 'Tingting',
-    sampleText: '哇～小眼睛真亮！快瞧瞧画面正中间是谁呀？'
+    sampleText: '哇～小眼睛真亮！快瞧瞧第①幅图里是谁呀？'
   },
   xiaoyi: {
     id: 'xiaoyi',

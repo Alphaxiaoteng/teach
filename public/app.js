@@ -5,7 +5,7 @@ let currentStory = null;
 let currentSession = null;
 let currentStoryData = null;
 let currentTheme = localStorage.getItem('app_theme') || 'candy';
-let currentVoiceId = localStorage.getItem('app_voice') || 'xiaochen';
+let currentVoiceId = localStorage.getItem('app_voice_qwen') || 'xiaoxiao';
 let availableVoicePersonas = [];
 let isStartingStory = false;
 let preloadedStories = []; // Client-side preloaded stories cache for 0ms instant display
@@ -17,11 +17,17 @@ const SVG_ICONS = {
   keyboard: `<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2.5"></rect><path d="M6 8h.01M10 8h.01M14 8h.01M18 8h.01M6 12h.01M10 12h.01M14 12h.01M18 12h.01M8 16h8"></path></svg>`
 };
 
-// Robust Single Audio Manager
+// Robust Dual-Engine Audio Manager (Web Audio API + HTML5 Audio Fallback)
+let activeAudioContext = null;
+let activeWebAudioSource = null;
 let activeAudioPlayer = null;
 let masterAudioChannel = null;
 let globalAudioToken = 0;
 let currentPlayingButton = null;
+let currentPlayingAudioUrl = null;
+const audioBufferCache = new Map();
+const presetArrayBuffers = new Map();
+let isPresetLoadingInitiated = false;
 
 // Trace Logger (Inside Settings Modal - Safe TextContent Only)
 const logsList = [];
@@ -182,6 +188,12 @@ function initSpeechRecognition() {
   } catch(e) {}
 }
 
+function preloadStories() {
+  if (window.STATIC_STORY_DATA && Array.isArray(window.STATIC_STORY_DATA.stories)) {
+    preloadedStories = window.STATIC_STORY_DATA.stories;
+  }
+}
+
 // Initialize
 window.addEventListener('DOMContentLoaded', () => {
   AppLogger.log('ENGINE', '系统前端初始化就绪');
@@ -287,10 +299,10 @@ if ('speechSynthesis' in window) {
 
 async function loadVoicePersonas() {
   const defaultVoices = [
-    { id: 'xiaochen', name: '小晨老师', icon: '🌿', subtitle: '台湾自然口语 · 强烈推荐（零AI播音味）' },
-    { id: 'xiaoxiao', name: '晓晓老师', icon: '🌸', subtitle: '3-6岁名师 · 温柔耐心启发' },
-    { id: 'xiaoyi', name: '依依姐姐', icon: '🧸', subtitle: '绘本故事主播 · 活泼灵动亲切' },
-    { id: 'xiaoyu', name: '小雨姐姐', icon: '🍁', subtitle: '慢调轻声伴读 · 治愈温暖陪伴' }
+    { id: 'xiaoxiao', name: '晓晓老师', icon: '🌸', subtitle: 'qwen-audio-3.0-tts-plus 旗舰名师音色（默认推荐）' },
+    { id: 'xiaoyi', name: '依依姐姐', icon: '🧸', subtitle: '通义千问灵动音色 · 活泼亲切' },
+    { id: 'xiaochen', name: '小晨老师', icon: '🌿', subtitle: '晨光伴读 · 温和自然' },
+    { id: 'xiaoyu', name: '小雨姐姐', icon: '🍁', subtitle: '轻声伴读 · 治愈温暖陪伴' }
   ];
 
   availableVoicePersonas = defaultVoices;
@@ -363,6 +375,7 @@ function renderVoicePersonas(voices) {
 
 function selectVoicePersona(voiceId) {
   currentVoiceId = voiceId;
+  localStorage.setItem('app_voice_qwen', voiceId);
   localStorage.setItem('app_voice', voiceId);
   initChineseVoice();
 
@@ -391,40 +404,40 @@ function selectVoicePersona(voiceId) {
 }
 
 function previewVoicePersona(voiceId, sampleAudioUrl, sampleText, btn) {
+  ensureAudioUnlocked();
   stopAllAudio('PREVIEW_VOICE');
   AppLogger.log('USER', `试听音色: ${voiceId}`);
   if (btn) btn.classList.add('playing');
 
   const greetingText = sampleText || "你好呀！我是你的伴读伙伴，今天想听什么故事呀？";
-  let audioUrl = sampleAudioUrl;
-
-  if (!audioUrl && window.AUDIO_MANIFEST && window.AUDIO_MANIFEST[voiceId]) {
-    audioUrl = window.AUDIO_MANIFEST[voiceId][greetingText];
+  
+  // 1. 如果已显式提供音频 URL，直接播放
+  if (sampleAudioUrl) {
+    playAudio(sampleAudioUrl, greetingText, btn);
+    return;
   }
 
-  if (audioUrl) {
-    const audio = masterAudioChannel || new Audio();
-    masterAudioChannel = audio;
-    audio.src = audioUrl;
-    audio.playbackRate = 1.1;
-    activeAudioPlayer = audio;
-    if (btn) currentPlayingButton = btn;
-
-    audio.onended = () => {
-      if (btn) btn.classList.remove('playing');
-      if (activeAudioPlayer === audio) activeAudioPlayer = null;
-      if (currentPlayingButton === btn) currentPlayingButton = null;
-    };
-    audio.onerror = () => {
-      if (btn) btn.classList.remove('playing');
+  // 2. 现场实时请求阿里百炼官方 Qwen-Audio-TTS 情感名师引擎生成试听
+  fetch('/api/tts', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ text: greetingText, voiceId: voiceId })
+  })
+  .then(res => res.json())
+  .then(data => {
+    if (data && data.success && data.audioUrl) {
+      playAudio(data.audioUrl, greetingText, btn);
+    } else {
       speakWithWebSpeech(greetingText, btn);
-    };
-    audio.play().catch(() => {
-      speakWithWebSpeech(greetingText, btn);
-    });
-  } else {
+    }
+  })
+  .catch(() => {
     speakWithWebSpeech(greetingText, btn);
-  }
+  });
+}
+
+function playAuditionUrl(url, fallbackText, btn) {
+  playAudio(url, fallbackText, btn);
 }
 
 function cleanSpeechText(text) {
@@ -493,21 +506,76 @@ function speakWithWebSpeech(text, triggerBtn = null, onEndCallback = null) {
   }
 }
 
+// Preload Preset MP3s into memory ArrayBuffers for 0ms decoding
+function preloadPresetAudioBuffers() {
+  if (isPresetLoadingInitiated) return;
+  isPresetLoadingInitiated = true;
+  const list = [
+    '/audio_cache/qwen_opening_single.mp3',
+    '/audio_cache/qwen_opening_xiaoxiao.mp3'
+  ];
+  list.forEach((url) => {
+    try {
+      // 1. 原生 HTML5 Audio 预载（利用移动端内核 media 缓存，点进绘本瞬间发声）
+      const a = new Audio();
+      a.preload = 'auto';
+      a.src = url;
+      a.load();
+      // 2. Web Audio 二进制预载
+      fetch(url).then(res => res.ok ? res.arrayBuffer() : null).then(ab => {
+        if (ab) {
+          presetArrayBuffers.set(url, ab);
+          if (activeAudioContext && activeAudioContext.state !== 'closed') {
+            activeAudioContext.decodeAudioData(ab.slice(0)).then(buf => {
+              audioBufferCache.set(url, buf);
+              AppLogger.log('AUDIO', `开篇音轨预载就绪: ${url}`);
+            }).catch(() => {});
+          }
+        }
+      }).catch(() => {});
+    } catch(e) {}
+  });
+}
+
+function decodePresetBuffers() {
+  if (!activeAudioContext || activeAudioContext.state === 'closed') return;
+  presetArrayBuffers.forEach((ab, url) => {
+    if (!audioBufferCache.has(url)) {
+      activeAudioContext.decodeAudioData(ab.slice(0)).then(buf => {
+        audioBufferCache.set(url, buf);
+        AppLogger.log('AUDIO', `开篇音轨解码就绪: ${url}`);
+      }).catch(() => {});
+    }
+  });
+}
+
+// 立即触发预载
+preloadPresetAudioBuffers();
+
 function stopAllAudio(reason = 'MANUAL') {
   globalAudioToken++;
   if ('speechSynthesis' in window) {
     try { window.speechSynthesis.cancel(); } catch(e) {}
   }
-  if (activeAudioPlayer) {
+  if (activeWebAudioSource) {
     try {
-      activeAudioPlayer.onended = null;
-      activeAudioPlayer.onerror = null;
-      activeAudioPlayer.pause();
-      activeAudioPlayer.currentTime = 0;
-      activeAudioPlayer.src = '';
+      activeWebAudioSource.onended = null;
+      activeWebAudioSource.stop();
     } catch(e) {}
-    activeAudioPlayer = null;
+    activeWebAudioSource = null;
   }
+  const player = getMasterAudioPlayer();
+  if (player) {
+    try {
+      player.onended = null;
+      player.onerror = null;
+      player.pause();
+      player.currentTime = 0;
+      // 绝对不能清空 player.src = ''，清空会立刻注销 WebKit/微信内核已获取的用户点击播放凭据
+    } catch(e) {}
+  }
+  activeAudioPlayer = null;
+  currentPlayingAudioUrl = null;
   if (currentPlayingButton) {
     currentPlayingButton.classList.remove('playing');
     currentPlayingButton = null;
@@ -518,7 +586,7 @@ function stopAllAudio(reason = 'MANUAL') {
   }
 }
 
-// Match best high-fidelity preschool teacher audio file from manifest
+// Match high-fidelity preschool teacher audio file from manifest (100% Exact Text Match ONLY)
 function matchManifestAudioUrl(text, voiceId) {
   if (!window.AUDIO_MANIFEST) return null;
   const vId = voiceId || currentVoiceId || 'xiaoxiao';
@@ -526,72 +594,68 @@ function matchManifestAudioUrl(text, voiceId) {
   const clean = cleanSpeechText(text);
   if (!clean) return null;
 
-  // 1. Exact match
+  // 严格精确匹配：文本与录音必须 100% 毫无二致，严禁张冠李戴模糊替换！
   if (manifest[clean]) return manifest[clean];
 
-  // 2. Semantic Intent matching for mobile & WeChat browsers
-  const allKeys = Object.keys(manifest);
-  if (allKeys.length === 0) return null;
-
-  // A. Celebration / Completion
-  if (/答对|完成|讲完|通关|故事大王|真是一个|奖章|太棒|真优秀|勇敢小天使|爱心小天使/i.test(clean)) {
-    const k = allKeys.find(key => key.includes('答对啦') || key.includes('整本故事都被你讲完啦'));
-    if (k && manifest[k]) return manifest[k];
-  }
-
-  // B. Encouragement & Praise
-  if (/真棒|小眼睛|真亮|仔细瞧|真细心|说得真好|观察|发现了|没错|太精彩/i.test(clean)) {
-    const k = allKeys.find(key => key.includes('小眼睛真亮') || key.includes('真棒！那它手里') || key.includes('真细心'));
-    if (k && manifest[k]) return manifest[k];
-  }
-
-  // C. Question & Clue guidance
-  if (/谁|干什么|怎么了|发生|后来|什么地方|小动物|看看|仔细看|手里拿着/i.test(clean)) {
-    const k = allKeys.find(key => key.includes('画面中你看到了谁') || key.includes('画里是谁') || key.includes('别着急'));
-    if (k && manifest[k]) return manifest[k];
-  }
-
-  // D. Storybook Opening
-  if (/连环画|听听|讲给|故事里/i.test(clean)) {
-    const k = allKeys.find(key => key.includes('仔细看上面的连环画'));
-    if (k && manifest[k]) return manifest[k];
-  }
-
-  // E. Fallback to first available high-fidelity preschool audio
-  return manifest[allKeys[0]] || null;
+  return null;
 }
 
-// User Touch / Click Gesture Audio Unlocker & Synchronous Pre-arming
+// User Touch / Click Gesture Audio Unlocker & Synchronous Pre-warming
 let isAudioContextUnlocked = false;
+let isUnmuteHooked = false;
+let lastSilentPingTime = 0;
 
-function unlockAudioContext() {
-  if (isAudioContextUnlocked) return;
+function getOrInitAudioContext() {
   try {
-    if ('speechSynthesis' in window) {
-      const u = new SpeechSynthesisUtterance('');
-      window.speechSynthesis.speak(u);
+    const AudioCtx = window.AudioContext || window.webkitAudioContext;
+    if (!AudioCtx) return null;
+    if (!activeAudioContext || activeAudioContext.state === 'closed') {
+      activeAudioContext = new AudioCtx();
     }
-    const globalEl = document.getElementById('globalStoryAudio');
-    if (globalEl) {
-      globalEl.load();
+    if (activeAudioContext.state === 'suspended') {
+      activeAudioContext.resume().catch(() => {});
+    }
+    if (window.unmute && !isUnmuteHooked) {
+      try {
+        window.unmute(activeAudioContext, true, true);
+        isUnmuteHooked = true;
+      } catch(e) {}
+    }
+    return activeAudioContext;
+  } catch(e) {
+    return null;
+  }
+}
+
+function ensureAudioUnlocked() {
+  const ctx = getOrInitAudioContext();
+  if (ctx) {
+    if (ctx.state === 'suspended') {
+      ctx.resume().catch(() => {});
+    }
+    const now = Date.now();
+    if (now - lastSilentPingTime > 2000) {
+      lastSilentPingTime = now;
+      try {
+        const silentBuf = ctx.createBuffer(1, 1, 22050);
+        const silentSrc = ctx.createBufferSource();
+        silentSrc.buffer = silentBuf;
+        silentSrc.connect(ctx.destination);
+        silentSrc.start(0);
+      } catch(e) {}
     }
     isAudioContextUnlocked = true;
-    AppLogger.log('AUDIO', '移动端音频上下文已激活解封');
-  } catch(e) {}
+    decodePresetBuffers();
+  }
 }
 
-// Synchronously arm audio element inside user touch/click gesture stack
+function unlockAudioContext() {
+  ensureAudioUnlocked();
+}
+
+// Deprecated dummy player, safely replaced with Web Audio unblocking
 function armAudioPlayback() {
-  unlockAudioContext();
-  try {
-    const player = getMasterAudioPlayer();
-    // Pre-arm silent touch trigger without breaking pending audio src
-    if (player && (!player.src || player.src.startsWith('data:audio/wav'))) {
-      player.src = 'data:audio/wav;base64,UklGRigAAABXQVZFZm10IBIAAAABAAEARKwAAIhYAQACABAAAABkYXRhAgAAAAEA';
-      const p = player.play();
-      if (p !== undefined) p.catch(() => {});
-    }
-  } catch(e) {}
+  ensureAudioUnlocked();
 }
 
 function getMasterAudioPlayer() {
@@ -607,13 +671,31 @@ function getMasterAudioPlayer() {
   return player;
 }
 
+// WeChat & Mobile Browser Auto-play Permission Unblocker
+if (typeof WeixinJSBridge !== 'undefined') {
+  try {
+    WeixinJSBridge.invoke('getNetworkType', {}, () => {
+      ensureAudioUnlocked();
+    });
+  } catch(e) {
+    ensureAudioUnlocked();
+  }
+} else {
+  document.addEventListener('WeixinJSBridgeReady', () => {
+    try {
+      WeixinJSBridge.invoke('getNetworkType', {}, () => {
+        ensureAudioUnlocked();
+      });
+    } catch(e) {
+      ensureAudioUnlocked();
+    }
+  }, { once: true, passive: true });
+}
+
 // Single User Gesture Unlocker for Mobile & Desktop
-window.addEventListener('click', () => {
-  unlockAudioContext();
-}, { once: true, passive: true });
-window.addEventListener('touchstart', () => {
-  unlockAudioContext();
-}, { once: true, passive: true });
+window.addEventListener('touchstart', ensureAudioUnlocked, { passive: true });
+window.addEventListener('touchend', ensureAudioUnlocked, { passive: true });
+window.addEventListener('click', ensureAudioUnlocked, { passive: true });
 
 function setLiveStatus(state, text) {
   const bar = document.getElementById('liveInteractionStatus');
@@ -629,14 +711,144 @@ function setLiveStatus(state, text) {
   txtEl.textContent = text;
 }
 
+// Web Audio Engine (穿透 iOS 硬件静音开关，0ms 解码播放)
+async function playViaWebAudio(url, onEnded, onError) {
+  try {
+    const ctx = getOrInitAudioContext();
+    if (!ctx) throw new Error('Web Audio context unavailable');
+    if (ctx.state === 'suspended') {
+      await ctx.resume();
+    }
+
+    let audioBuffer = audioBufferCache.get(url);
+    if (!audioBuffer) {
+      let ab = presetArrayBuffers.get(url);
+      if (!ab) {
+        const res = await fetch(url);
+        if (!res.ok) throw new Error(`HTTP ${res.status}`);
+        ab = await res.arrayBuffer();
+      }
+      audioBuffer = await ctx.decodeAudioData(ab.slice(0));
+      audioBufferCache.set(url, audioBuffer);
+    }
+
+    if (activeWebAudioSource) {
+      try {
+        activeWebAudioSource.onended = null;
+        activeWebAudioSource.stop();
+      } catch(e) {}
+      activeWebAudioSource = null;
+    }
+
+    const source = ctx.createBufferSource();
+    source.buffer = audioBuffer;
+    source.connect(ctx.destination);
+    activeWebAudioSource = source;
+    currentPlayingAudioUrl = url;
+
+    source.onended = () => {
+      if (activeWebAudioSource === source) {
+        activeWebAudioSource = null;
+        currentPlayingAudioUrl = null;
+        if (onEnded) onEnded();
+      }
+    };
+    source.start(0);
+    AppLogger.log('AUDIO', 'Web Audio 引擎成功起播', url);
+    return true;
+  } catch (err) {
+    AppLogger.log('WARN', 'Web Audio 引擎播放异常', err.message);
+    activeWebAudioSource = null;
+    currentPlayingAudioUrl = null;
+    if (onError) onError(err);
+    return false;
+  }
+}
+
+// HTML5 Audio Engine (原生回退通道)
+function playViaHtmlAudio(url, fallbackText, triggerBtn, onEnded, onError) {
+  const player = getMasterAudioPlayer();
+  if (!player || !url) {
+    if (onError) onError(new Error('No player or url'));
+    return;
+  }
+  try {
+    player.onended = () => {
+      activeAudioPlayer = null;
+      currentPlayingAudioUrl = null;
+      if (onEnded) onEnded();
+    };
+    player.onerror = (e) => {
+      activeAudioPlayer = null;
+      currentPlayingAudioUrl = null;
+      if (onError) onError(e);
+    };
+    player.src = url;
+    player.volume = 1.0;
+    player.muted = false;
+    activeAudioPlayer = player;
+    currentPlayingAudioUrl = url;
+
+    const playPromise = player.play();
+    if (playPromise !== undefined) {
+      playPromise.then(() => {
+        AppLogger.log('AUDIO', 'HTML5 Audio 引擎起播成功', url);
+        if (triggerBtn) {
+          triggerBtn.classList.add('playing');
+          triggerBtn.classList.remove('pulse-attention');
+        }
+      }).catch(err => {
+        AppLogger.log('WARN', 'HTML5 Audio 播放被拦截', err.name);
+        activeAudioPlayer = null;
+        currentPlayingAudioUrl = null;
+        if (onError) onError(err);
+      });
+    }
+  } catch (err) {
+    activeAudioPlayer = null;
+    currentPlayingAudioUrl = null;
+    if (onError) onError(err);
+  }
+}
+
 async function playAudio(audioUrl, fallbackText, triggerBtn = null) {
   // If already playing this, toggle pause/stop
   if (triggerBtn && currentPlayingButton === triggerBtn) {
-    if (('speechSynthesis' in window && window.speechSynthesis.speaking) || (activeAudioPlayer && !activeAudioPlayer.paused)) {
+    const isPlaying = ('speechSynthesis' in window && window.speechSynthesis.speaking) ||
+                      Boolean(activeWebAudioSource) ||
+                      Boolean(activeAudioPlayer && !activeAudioPlayer.paused);
+    if (isPlaying) {
       stopAllAudio('TOGGLE_PAUSE');
       setLiveStatus('idle', '晓晓老师在等你说话哦～');
       return;
     }
+  }
+
+  // 1. 优先获取高保真名师 MP3 原声音频
+  let finalUrl = audioUrl;
+  if (!finalUrl && fallbackText) {
+    finalUrl = matchManifestAudioUrl(fallbackText, currentVoiceId);
+  }
+
+  // 2. 检查当前主播放器或 WebAudio 是否已在手势中起播同一段音频
+  const isCurrentlyPlaying = Boolean(
+    finalUrl && currentPlayingAudioUrl === finalUrl &&
+    (activeWebAudioSource || (activeAudioPlayer && !activeAudioPlayer.paused))
+  );
+
+  if (isCurrentlyPlaying) {
+    AppLogger.log('AUDIO', '当前音频已在播放，平滑绑定按钮状态');
+    if (triggerBtn) {
+      if (currentPlayingButton && currentPlayingButton !== triggerBtn) {
+        currentPlayingButton.classList.remove('playing');
+      }
+      currentPlayingButton = triggerBtn;
+      triggerBtn.classList.add('playing');
+      triggerBtn.classList.remove('pulse-attention');
+    }
+    stopVoiceRecording('TEACHER_SPEAKING');
+    setLiveStatus('speaking', '晓晓老师正在讲故事...');
+    return;
   }
 
   stopAllAudio('NEW_PLAY_REQUEST');
@@ -658,78 +870,83 @@ async function playAudio(audioUrl, fallbackText, triggerBtn = null) {
     if (icon) icon.innerHTML = SVG_ICONS.mic;
   }
 
-  // 1. 优先获取高保真名师 MP3 原声音频（100% 解决手机/微信 WebSpeech 哑音问题）
-  let finalUrl = audioUrl;
-  if (!finalUrl && fallbackText) {
-    finalUrl = matchManifestAudioUrl(fallbackText, currentVoiceId);
-  }
-
   if (thisToken !== globalAudioToken) return;
 
-  const isMobileEnv = /MicroMessenger|Android|iPhone|iPad|Mobile/i.test(navigator.userAgent);
-
-  // 2. 如果拿到高保真 MP3（手机端 100% 支持），使用原生 HTML5 Audio 播放
-  if (finalUrl) {
-    try {
-      AppLogger.log('AUDIO', '播放高保真幼教名师原声 MP3', finalUrl);
-      
-      const player = getMasterAudioPlayer();
-      player.src = finalUrl;
-      player.playbackRate = 1.1;
-      activeAudioPlayer = player;
-      
-      player.onended = () => {
-        AppLogger.log('AUDIO', '音频播毕');
-        if (activeAudioPlayer === player) activeAudioPlayer = null;
-        if (triggerBtn) triggerBtn.classList.remove('playing');
-        if (currentPlayingButton === triggerBtn) currentPlayingButton = null;
-        
-        if (!isRecordingActive) {
-          setLiveStatus('idle', '晓晓老师在等你说话哦～');
-          if (btnVoiceRecord) {
-            btnVoiceRecord.classList.remove('recording');
-            const txt = document.getElementById('voiceRecordText');
-            const icon = document.getElementById('voiceRecordIcon');
-            if (txt) txt.textContent = '点击开始说话';
-            if (icon) icon.innerHTML = SVG_ICONS.mic;
-          }
-        }
-      };
-
-      player.onerror = (e) => {
-        AppLogger.log('WARN', '音频加载异常，尝试 WebSpeech', e);
-        if (!isMobileEnv) speakWithWebSpeech(fallbackText, triggerBtn);
-      };
-
-      const playPromise = player.play();
-      if (playPromise !== undefined) {
-        playPromise.then(() => {
-          if (triggerBtn) triggerBtn.classList.remove('pulse-attention');
-          const btnReplay = document.getElementById('btnReplayQuestion');
-          if (btnReplay) btnReplay.classList.remove('pulse-attention');
-        }).catch(err => {
-          AppLogger.log('WARN', '手机浏览器自动播放拦截，高亮提示轻触发声', err.name);
-          if (triggerBtn) {
-            triggerBtn.classList.remove('playing');
-            triggerBtn.classList.add('pulse-attention');
-          }
-          const btnReplay = document.getElementById('btnReplayQuestion');
-          if (btnReplay) {
-            btnReplay.classList.add('pulse-attention');
-          }
-          if (!isMobileEnv) speakWithWebSpeech(fallbackText, triggerBtn);
-        });
+  const onEndedHandler = () => {
+    if (thisToken !== globalAudioToken) return;
+    AppLogger.log('AUDIO', '音频播毕');
+    activeWebAudioSource = null;
+    activeAudioPlayer = null;
+    currentPlayingAudioUrl = null;
+    if (triggerBtn) triggerBtn.classList.remove('playing');
+    if (currentPlayingButton === triggerBtn) currentPlayingButton = null;
+    
+    if (!isRecordingActive) {
+      setLiveStatus('idle', '晓晓老师在等你说话哦～');
+      if (btnVoiceRecord) {
+        btnVoiceRecord.classList.remove('recording');
+        const txt = document.getElementById('voiceRecordText');
+        const icon = document.getElementById('voiceRecordIcon');
+        if (txt) txt.textContent = '点击开始说话';
+        if (icon) icon.innerHTML = SVG_ICONS.mic;
       }
-      return;
-    } catch (err) {
-      AppLogger.log('WARN', '音频播放异常', err.message);
     }
+  };
+
+  const onErrorHandler = (err) => {
+    if (thisToken !== globalAudioToken) return;
+    AppLogger.log('WARN', 'Web Audio 播放受阻，尝试原生 HTML5 回退', err ? (err.message || err.name) : '');
+    playViaHtmlAudio(finalUrl, fallbackText, triggerBtn, onEndedHandler, () => {
+      activeWebAudioSource = null;
+      activeAudioPlayer = null;
+      currentPlayingAudioUrl = null;
+      if (triggerBtn) {
+        triggerBtn.classList.remove('playing');
+        triggerBtn.classList.add('pulse-attention');
+      }
+      const btnReplay = document.getElementById('btnReplayQuestion');
+      if (btnReplay) btnReplay.classList.add('pulse-attention');
+      speakWithWebSpeech(fallbackText, triggerBtn);
+    });
+  };
+
+  // 3. 核心：Web Audio 优先驱动所有 MP3 音频（穿透 iOS 硬件静音开关与后台限制）
+  if (finalUrl) {
+    currentPlayingAudioUrl = finalUrl;
+    const ok = await playViaWebAudio(finalUrl, onEndedHandler, onErrorHandler);
+    if (ok) return;
   }
 
-  // 3. 非手机环境或有可用引擎时，降级使用 Web Speech API
-  if (!isMobileEnv) {
-    speakWithWebSpeech(fallbackText, triggerBtn);
+  // 4. 动态文本无预录音频时：实时调用阿里百炼极速 Qwen-Audio-TTS 合成原声 MP3
+  const cleanTtsText = cleanSpeechText(fallbackText);
+  if (cleanTtsText) {
+    if (triggerBtn) triggerBtn.classList.add('playing');
+    try {
+      const res = await fetch('/api/tts', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ text: cleanTtsText, voiceId: currentVoiceId })
+      });
+      const data = await res.json();
+      if (thisToken !== globalAudioToken) return;
+      if (data && data.success && data.audioUrl) {
+        AppLogger.log('AUDIO', '百炼极速 Qwen-Audio-TTS 生成成功，开始 Web Audio 播放', data.audioUrl);
+        currentPlayingAudioUrl = data.audioUrl;
+        if (triggerBtn) triggerBtn.dataset.audioUrl = data.audioUrl;
+        const ok = await playViaWebAudio(data.audioUrl, onEndedHandler, onErrorHandler);
+        if (ok) return;
+      } else {
+        speakWithWebSpeech(fallbackText, triggerBtn);
+      }
+    } catch(err) {
+      if (thisToken !== globalAudioToken) return;
+      speakWithWebSpeech(fallbackText, triggerBtn);
+    }
+    return;
   }
+
+  // 5. 最终兜底系统 WebSpeech
+  speakWithWebSpeech(fallbackText, triggerBtn);
 }
 
 // Fisher-Yates Random Shuffle for Stories
@@ -825,7 +1042,12 @@ function renderPictureStoryCards(stories) {
   stories.forEach((s) => {
     const card = document.createElement('div');
     card.className = 'story-cover-card';
-    card.onclick = () => startStorySession(s.story_id, card);
+    card.onclick = () => {
+      // 1. 在用户真实手势的第一时刻，同步解封 AudioContext 与 Web Audio（iOS 穿透静音键）
+      ensureAudioUnlocked();
+
+      startStorySession(s.story_id, card);
+    };
     
     const coverSrc = s.cover_url || (s.images && s.images[0] && s.images[0].image_url) || '';
     const totalCount = s.total_images || (s.images ? s.images.length : 1);
@@ -865,7 +1087,7 @@ function renderPictureStoryCards(stories) {
     btn.innerHTML = `<span>开始</span><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polygon points="5 3 19 12 5 21 5 3"></polygon></svg>`;
     btn.onclick = (e) => {
       e.stopPropagation();
-      startStorySession(s.story_id, card);
+      card.onclick();
     };
 
     footerDiv.appendChild(infoDiv);
@@ -881,14 +1103,12 @@ function renderPictureStoryCards(stories) {
 
 // 5. Start Session (Step 3: 0ms Optimistic Instant Start)
 async function startStorySession(storyId, cardElement = null) {
-  armAudioPlayback();
   if (isStartingStory) {
     AppLogger.log('WARN', '拦截重复快速点击');
     return;
   }
 
   isStartingStory = true;
-  stopAllAudio('START_NEW_STORY');
 
   if (!currentAge) currentAge = 'small';
   const t0 = Date.now();
@@ -900,11 +1120,11 @@ async function startStorySession(storyId, cardElement = null) {
 
   if (foundStory) {
     const totalImgs = foundStory.images ? foundStory.images.length : (foundStory.total_images || 1);
-    
-    // 亲切自然的特级名师开篇导语
     let fixedOpening = `小朋友，仔细看上面的连环画，故事里发生了什么？快把这个完整的故事讲给晓晓老师听听吧～`;
+    let openingAudio = '/audio_cache/qwen_opening_xiaoxiao.mp3';
     if (totalImgs === 1) {
       fixedOpening = `小朋友，画面中你看到了谁？在什么地方干什么呀？`;
+      openingAudio = '/audio_cache/qwen_opening_single.mp3';
     }
 
     currentSession = {
@@ -923,12 +1143,24 @@ async function startStorySession(storyId, cardElement = null) {
     if (stageStoryTitle) stageStoryTitle.textContent = currentSession.storyTitle;
     if (chatMessageFlow) chatMessageFlow.innerHTML = '';
     
+    // 0ms 高优先级并发预加载当前绘本所有连环画大图
+    if (foundStory.images && foundStory.images.length > 0) {
+      foundStory.images.forEach(img => {
+        if (img && img.image_url) {
+          const preImg = new Image();
+          preImg.decoding = 'async';
+          if ('fetchPriority' in preImg) preImg.fetchPriority = 'high';
+          preImg.src = img.image_url;
+        }
+      });
+    }
+
     // 0ms 瞬间把所有连环画图片一起完整渲染出来！
     renderStoryboardGallery(currentSession);
     switchStep('stepStage');
     window.scrollTo({ top: 0, behavior: 'instant' });
     
-    appendChatMessage('assistant', fixedOpening, false, null);
+    appendChatMessage('assistant', fixedOpening, false, openingAudio);
     AppLogger.log('ENGINE', `0ms 瞬间进入绘本《${currentSession.storyTitle}》，一次性展示全部 ${totalImgs} 张连环画`);
   }
 
@@ -987,6 +1219,7 @@ function renderStoryboardGallery(sessionData) {
     imgEl.alt = `第 ${idx + 1} 幅画`;
     imgEl.loading = 'eager';
     imgEl.decoding = 'async';
+    imgEl.setAttribute('fetchpriority', 'high');
     imgEl.onerror = () => {
       if (imgEl.src.includes('%')) {
         imgEl.src = decodeURIComponent(imgEl.src);
@@ -1026,7 +1259,7 @@ function closeImageModal() {
 let latestTeacherPrompt = { text: '', audioUrl: null };
 
 function replayLatestQuestion() {
-  armAudioPlayback();
+  ensureAudioUnlocked();
   const btn = document.getElementById('btnReplayQuestion');
   if (latestTeacherPrompt && latestTeacherPrompt.text) {
     AppLogger.log('USER', '点击【听老师说】重播当前提问');
@@ -1036,7 +1269,9 @@ function replayLatestQuestion() {
 
 function appendChatMessage(role, text, isClue = false, audioUrl = null, accuracyBadge = null) {
   if (!text || !text.trim()) return;
-  const clean = text.trim();
+  // 保证屏幕端气泡只展示干净温馨的儿童文本，剥离底层情感微表情标签
+  const clean = text.replace(/\[[a-zA-Z\s_]+\]/g, '').trim();
+  if (!clean) return;
 
   // 严禁同角色连续重复插入一模一样的气泡
   const container = getChatContainer();
@@ -1074,8 +1309,8 @@ function appendChatMessage(role, text, isClue = false, audioUrl = null, accuracy
     latestTeacherPrompt = { text: clean, audioUrl };
 
     const voiceBtn = document.createElement('button');
-    voiceBtn.className = 'btn-bubble-voice';
-    voiceBtn.title = '播放声音';
+    voiceBtn.className = 'btn-bubble-voice' + (!audioUrl ? ' pulse-attention' : '');
+    voiceBtn.title = audioUrl ? '播放声音' : '晓晓老师正在准备声音...';
     voiceBtn.innerHTML = `
       <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
         <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon>
@@ -1085,12 +1320,17 @@ function appendChatMessage(role, text, isClue = false, audioUrl = null, accuracy
     `;
     voiceBtn.onclick = (e) => {
       e.stopPropagation();
-      playAudio(audioUrl, clean, voiceBtn);
+      ensureAudioUnlocked();
+      const currentAudio = voiceBtn.dataset.audioUrl || audioUrl;
+      playAudio(currentAudio, clean, voiceBtn);
     };
     contentWrap.appendChild(voiceBtn);
 
     // Auto Play with safety fallback
-    playAudio(audioUrl, clean, voiceBtn);
+    if (audioUrl) {
+      voiceBtn.dataset.audioUrl = audioUrl;
+      playAudio(audioUrl, clean, voiceBtn);
+    }
   }
 
   bubble.appendChild(contentWrap);
@@ -1098,6 +1338,38 @@ function appendChatMessage(role, text, isClue = false, audioUrl = null, accuracy
   if (container) {
     container.appendChild(bubble);
     container.scrollTop = container.scrollHeight;
+  }
+  return bubble;
+}
+
+// 极速双阶段秒回：后台并发获取 Qwen-Audio-TTS 高清真人语音并自动起播
+async function fetchTtsAndAutoPlay(text, bubbleEl) {
+  if (!text) return;
+  const voiceBtn = bubbleEl ? bubbleEl.querySelector('.btn-bubble-voice') : null;
+  try {
+    const res = await fetch('/api/tts', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ text, voiceId: currentVoiceId })
+    });
+    if (res.ok) {
+      const data = await res.json();
+      if (data.success && data.audioUrl) {
+        if (voiceBtn) {
+          voiceBtn.classList.remove('pulse-attention');
+          voiceBtn.dataset.audioUrl = data.audioUrl;
+          voiceBtn.title = '播放声音';
+          voiceBtn.onclick = (e) => {
+            e.stopPropagation();
+            ensureAudioUnlocked();
+            playAudio(data.audioUrl, text, voiceBtn);
+          };
+        }
+        playAudio(data.audioUrl, text, voiceBtn);
+      }
+    }
+  } catch(e) {
+    if (voiceBtn) voiceBtn.classList.remove('pulse-attention');
   }
 }
 
@@ -1124,10 +1396,15 @@ async function evaluateAnswerClientSide(session, userInput) {
 
   // 2. 1:1 Stuck / Help Intent Detection -> 0ms if-else
   if (/(不知道|不会|认不出|帮帮|提示)/.test(input)) {
+    const frameBadge = ['①', '②', '③', '④', '⑤', '⑥'][currentIdx] || (currentIdx + 1);
+    const clue = (currentImg && currentImg.visual_clues && currentImg.visual_clues[0]) || '小主角在做什么呀？';
+    const msg = session.totalImages > 1 
+      ? `小提示：快看第${frameBadge}幅图，${clue}`
+      : `小提示：仔细看画面，${clue}`;
     return {
       success: true,
       evalStatus: 'STUCK',
-      agentMessage: '小提示：仔细看看画面正中间的小伙伴是谁呀？',
+      agentMessage: msg,
       isCorrect: false,
       isClue: true,
       currentImageIndex: currentIdx,
@@ -1138,10 +1415,15 @@ async function evaluateAnswerClientSide(session, userInput) {
 
   // 3. Generic words interception (e.g. "小动物", "做游戏") -> Guide child to specify
   if (/^(小动物|动物|小家伙|小宝贝|在做|在玩|做游戏)$/.test(input)) {
+    const frameBadge = ['①', '②', '③', '④', '⑤', '⑥'][currentIdx] || (currentIdx + 1);
+    const clue = (currentImg && currentImg.visual_clues && currentImg.visual_clues[0]) || '快瞧瞧它是什么样子呀～';
+    const msg = session.totalImages > 1
+      ? `观察真仔细！那快看第${frameBadge}幅图，${clue}`
+      : `观察真仔细！那画面中的小主角具体是谁呀？快瞧瞧它的样子～`;
     return {
       success: true,
       evalStatus: 'STUCK',
-      agentMessage: '观察真仔细！那正中间这只毛茸茸的小动物具体是谁呀？快瞧瞧它的样子～',
+      agentMessage: msg,
       isCorrect: false,
       isClue: true,
       currentImageIndex: currentIdx,
@@ -1226,13 +1508,13 @@ async function evaluateAnswerClientSide(session, userInput) {
         title: rawStory ? rawStory.title : session.storyTitle,
         childQuotes: [...session.childQuotes],
         assembledStory,
-        feedback: `真棒！你用自己的话完整讲完了《${session.storyTitle}》！`,
+        feedback: `你用自己的话完整讲完了《${session.storyTitle}》的故事！`,
         completedAt: new Date().toISOString()
       };
       return {
         success: true,
         evalStatus: 'CORRECT',
-        agentMessage: '答对啦！整本故事都被你讲完啦！太棒啦～',
+        agentMessage: '整本故事都讲完啦，讲得很清楚呢！',
         isCorrect: true,
         isClue: false,
         currentImageIndex: currentIdx,
@@ -1243,9 +1525,10 @@ async function evaluateAnswerClientSide(session, userInput) {
     } else {
       const nextIndex = currentIdx + 1;
       const nextImg = session.images && session.images[nextIndex];
+      const frameBadge = ['①', '②', '③', '④', '⑤', '⑥'][nextIndex] || (nextIndex + 1);
       const specificClue = (nextImg && nextImg.visual_clues && nextImg.visual_clues[0]) 
-        ? `观察得真仔细！快瞧第 ${nextIndex + 1} 幅画，${nextImg.visual_clues[0]}`
-        : `观察得真仔细！快瞧第 ${nextIndex + 1} 幅画里的小动物在做什么呀？`;
+        ? `那你看第${frameBadge}幅画，${nextImg.visual_clues[0]}`
+        : `那你看第${frameBadge}幅画里的小动物在做什么呀？`;
       return {
         success: true,
         evalStatus: 'CORRECT',
@@ -1259,8 +1542,29 @@ async function evaluateAnswerClientSide(session, userInput) {
     }
   }
 
-  // 动态温和启发，绝不重复机械套话
-  const dynamicClue = (currentImg && currentImg.visual_clues && currentImg.visual_clues[0]) || '别着急，看画面中间的小动物在做什么呀？';
+  // 智能全景跨图联想启发：若孩子提到后面画面的线索（如放风筝/看风筝），自然接话并聚焦引导
+  if (session.images && session.images.length > 1) {
+    if (/风筝|纸鸢/.test(input)) {
+      return {
+        success: true,
+        evalStatus: 'PROBE',
+        agentMessage: '对，大家在草地上放风筝呢。那你看第①幅图，桌上的风筝画的是什么小动物呀？',
+        isCorrect: false,
+        isClue: true,
+        currentImageIndex: currentIdx,
+        currentImage: currentImg,
+        state: 'IN_PROGRESS'
+      };
+    }
+  }
+
+  const frameBadge = ['①', '②', '③', '④', '⑤', '⑥'][currentIdx] || (currentIdx + 1);
+  const specificClue = (currentImg && currentImg.visual_clues && currentImg.visual_clues[0]) 
+    ? currentImg.visual_clues[0] 
+    : '小动物们在做什么呀？';
+  const dynamicClue = session.totalImages > 1
+    ? `那你看第${frameBadge}幅图，${specificClue}`
+    : `那你看画面里，${specificClue}`;
 
   return {
     success: true,
@@ -1298,7 +1602,7 @@ async function submitChildAnswer() {
   isSubmittingAnswer = true;
   lastSubmitTime = now;
   lastSubmitText = text;
-  armAudioPlayback();
+  ensureAudioUnlocked();
   AppLogger.log('USER', '小朋友发言', text);
   
   // 气泡生命周期绝对单一：固化当前流式气泡，若无则新建单气泡
@@ -1332,7 +1636,7 @@ async function submitChildAnswer() {
 
   try {
     const controller = new AbortController();
-    const timeoutId = setTimeout(() => controller.abort(), 15000);
+    const timeoutId = setTimeout(() => controller.abort(), 20000);
 
     const res = await fetch('/api/session/interact', {
       method: 'POST',
@@ -1344,10 +1648,12 @@ async function submitChildAnswer() {
         storyTitle: currentSession ? currentSession.storyTitle : '',
         totalImages: currentSession ? currentSession.totalImages : 1,
         images: currentSession && currentSession.images ? currentSession.images : [],
+        currentImageIndex: currentSession ? (currentSession.currentImageIndex || 0) : 0,
         childInput: text,
         userInput: text,
         history: (currentSession && currentSession.history) || [],
-        failCount: (currentSession && currentSession.frameFailCount) || 0
+        failCount: (currentSession && currentSession.frameFailCount) || 0,
+        skipTts: true
       })
     });
     clearTimeout(timeoutId);
@@ -1376,29 +1682,31 @@ async function submitChildAnswer() {
     const isCompleted = data.state === 'COMPLETED' || data.isCompleted;
 
     const teacherText = data.agentMessage || '';
-    const badge = data.accuracyFeedback || null;
     const storyRecap = data.storyRecap || '';
 
     if (isCompleted) {
-      // 动画与全屏庆贺只在最后全部答对、故事通关时才触发，平时中间轮次绝不打扰
       triggerCelebration();
 
-      // 彻底解决一线反馈痛点：将表扬与完整故事融合成连续的单通道语音，保证孩子完整听完
-      const cleanRecap = storyRecap.replace(/^晓晓老师把你讲的故事串起来念给你听哦[：:]/g, '').trim();
-      const fullNarration = cleanRecap 
-        ? `${teacherText} 现在，晓晓老师把你讲的故事串起来念给你听哦：${cleanRecap}`
-        : teacherText;
+      // 彻底解决最后总结啰嗦问题：精炼生动的单次结业总结，绝不重复拼接冗余套话
+      const cleanRecap = (storyRecap || '').replace(/^晓晓老师把你讲的故事串起来念给你听哦[：:]/g, '').trim();
+      const finalSummary = (cleanRecap || teacherText || '今天的故事讲完啦，你真棒！').trim();
 
-      appendChatMessage('assistant', fullNarration, false, data.audioUrl, '📖 我的专属有声故事');
+      const compBubble = appendChatMessage('assistant', finalSummary, false, data.audioUrl, null);
+      if (!data.audioUrl) {
+        fetchTtsAndAutoPlay(finalSummary, compBubble);
+      }
 
-      // 根据文本总字数动态计算播放时长（适应 1.1 倍速，每个字约230ms），确保念完整篇故事后再弹表彰
-      const playbackWaitMs = Math.min(18000, Math.max(5500, fullNarration.length * 230));
+      // 根据文本总字数动态计算播放时长（适应 1.1 倍速，每个字约200ms）
+      const playbackWaitMs = Math.min(10000, Math.max(3500, finalSummary.length * 200));
       setTimeout(() => {
-        const finalCardMsg = cleanRecap || teacherText;
-        triggerGrandCompletionModal(finalCardMsg, data.moralBadge, data.turn || 5);
+        triggerGrandCompletionModal(finalSummary, data.moralBadge, data.turn || 4);
       }, playbackWaitMs);
     } else {
-      appendChatMessage('assistant', teacherText, data.isClue, data.audioUrl, badge);
+      // 绝不输出“孩子未回应绘本内容”等内部分析标签，保持纯净自然的对话气泡
+      const bubbleEl = appendChatMessage('assistant', teacherText, data.isClue, data.audioUrl, null);
+      if (!data.audioUrl) {
+        fetchTtsAndAutoPlay(teacherText, bubbleEl);
+      }
       
       if (currentSession && data.advance && typeof data.currentImageIndex === 'number') {
         const isPageTurn = data.currentImageIndex !== currentSession.currentImageIndex;
@@ -1730,6 +2038,8 @@ function toggleInputMode(targetMode = null) {
 
 let speechSilenceTimer = null;
 let isRecordingActive = false;
+let isRecordingInitializing = false;
+let recordingStartTime = 0;
 let currentRecordedText = '';
 let activeStreamingBubbleEl = null;
 
@@ -1815,7 +2125,6 @@ function removeAgentThinkingBubble() {
 }
 
 let mediaStream = null;
-let activeAudioContext = null;
 let activeScriptProcessor = null;
 let pcmAudioBuffers = [];
 let audioSampleRate = 16000;
@@ -1890,9 +2199,11 @@ function downsampleBuffer(buffer, inputRate, outputRate) {
 }
 
 async function startFreshVoiceRecording() {
-  if (isRecordingActive) return;
+  if (isRecordingActive || isRecordingInitializing) return;
 
+  isRecordingInitializing = true;
   isRecordingActive = true;
+  recordingStartTime = Date.now();
   currentRecordedText = '';
   pcmAudioBuffers = [];
   recordedAudioChunks = [];
@@ -1947,10 +2258,12 @@ async function startFreshVoiceRecording() {
         }
       }
 
-      // 同时启动 WebAudio PCM 采样作为安全备用
+      // 同时启动 WebAudio PCM 采样（配置静音 Gain 节点，彻底杜绝麦克风扬声器回环与系统级硬件降噪衰减）
       try {
         const AudioCtx = window.AudioContext || window.webkitAudioContext;
-        activeAudioContext = new AudioCtx();
+        if (!activeAudioContext || activeAudioContext.state === 'closed') {
+          activeAudioContext = new AudioCtx();
+        }
         audioSampleRate = activeAudioContext.sampleRate || 48000;
         if (activeAudioContext.state === 'suspended') {
           await activeAudioContext.resume();
@@ -1961,16 +2274,23 @@ async function startFreshVoiceRecording() {
           if (!isRecordingActive) return;
           pcmAudioBuffers.push(new Float32Array(e.inputBuffer.getChannelData(0)));
         };
+
+        const muteNode = activeAudioContext.createGain();
+        muteNode.gain.value = 0; // 零增益静音输出：保证 onaudioprocess 持续被调度拉取，同时手机喇叭 100% 毫无杂音
         source.connect(activeScriptProcessor);
-        activeScriptProcessor.connect(activeAudioContext.destination);
+        activeScriptProcessor.connect(muteNode);
+        muteNode.connect(activeAudioContext.destination);
       } catch(e) {}
 
     } catch (err) {
       AppLogger.log('WARN', '麦克风获取受阻:', err.name);
       isRecordingActive = false;
+      isRecordingInitializing = false;
       stopVoiceRecordingUI();
       showToast('💡 麦克风权限未开启，请在浏览器或手机设置中允许使用麦克风哦～', 'warn');
       return;
+    } finally {
+      isRecordingInitializing = false;
     }
   }
 
@@ -1984,11 +2304,20 @@ async function startFreshVoiceRecording() {
   setLiveStatus('listening', '晓晓老师正在认真听你说～');
 }
 
-function toggleVoiceRecording() {
-  armAudioPlayback();
+async function toggleVoiceRecording() {
+  ensureAudioUnlocked();
   stopAllAudio('USER_BARGE_IN');
 
   if (isRecordingActive) {
+    // 竞态保护：若麦克风仍在建立流，等待极短片刻确保首包就绪
+    if (isRecordingInitializing) {
+      await new Promise(r => setTimeout(r, 200));
+    }
+    // 防误触保护：录音不足 400ms 时微等片刻，杜绝误点微秒级空音频被 ASR 拒识
+    const elapsed = Date.now() - recordingStartTime;
+    if (elapsed < 400) {
+      await new Promise(r => setTimeout(r, 400 - elapsed));
+    }
     finishAndSendVoiceRecording();
   } else {
     startFreshVoiceRecording();
@@ -1997,13 +2326,17 @@ function toggleVoiceRecording() {
 
 async function finishAndSendVoiceRecording() {
   if (!isRecordingActive) return;
-  isRecordingActive = false;
+  isRecordingInitializing = false;
 
   if (btnVoiceRecord) {
     btnVoiceRecord.classList.remove('recording');
     const txt = document.getElementById('voiceRecordText');
     if (txt) txt.textContent = '⏳ 正在识别说话...';
   }
+
+  // 关键保护：缓冲 250ms 尾音，等待声卡硬件缓冲区内小朋友最后说完的音节完整流入 PCM 数组，避免“末字截断”
+  await new Promise(r => setTimeout(r, 250));
+  isRecordingActive = false;
 
   // 1. 停止原生语音识别
   if (speechRecognizer) {
@@ -2020,18 +2353,24 @@ async function finishAndSendVoiceRecording() {
       }
     } catch(e) {}
     await new Promise((resolve) => {
-      activeMediaRecorder.onstop = () => {
-        if (recordedAudioChunks.length > 0) {
-          const type = activeMediaRecorder.mimeType || 'audio/webm';
-          mediaBlob = new Blob(recordedAudioChunks, { type });
-          if (type.includes('mp4') || type.includes('m4a')) mediaFormat = 'mp4';
-          else if (type.includes('aac')) mediaFormat = 'aac';
-          else if (type.includes('ogg')) mediaFormat = 'ogg';
-          else mediaFormat = 'webm';
+      let resolved = false;
+      const done = () => {
+        if (!resolved) {
+          resolved = true;
+          if (recordedAudioChunks.length > 0) {
+            const type = activeMediaRecorder.mimeType || 'audio/webm';
+            mediaBlob = new Blob(recordedAudioChunks, { type });
+            if (type.includes('mp4') || type.includes('m4a')) mediaFormat = 'mp4';
+            else if (type.includes('aac')) mediaFormat = 'aac';
+            else if (type.includes('ogg')) mediaFormat = 'ogg';
+            else mediaFormat = 'webm';
+          }
+          resolve();
         }
-        resolve();
       };
-      try { activeMediaRecorder.stop(); } catch(e) { resolve(); }
+      activeMediaRecorder.onstop = done;
+      try { activeMediaRecorder.stop(); } catch(e) { done(); }
+      setTimeout(done, 800); // 兜底超时，防止个别 WebView 挂起
     });
     activeMediaRecorder = null;
   }
@@ -2039,10 +2378,6 @@ async function finishAndSendVoiceRecording() {
   if (activeScriptProcessor) {
     try { activeScriptProcessor.disconnect(); } catch(e) {}
     activeScriptProcessor = null;
-  }
-  if (activeAudioContext) {
-    try { activeAudioContext.close(); } catch(e) {}
-    activeAudioContext = null;
   }
   if (mediaStream) {
     mediaStream.getTracks().forEach(t => t.stop());
@@ -2058,11 +2393,11 @@ async function finishAndSendVoiceRecording() {
   }
 
   // 4. 准备最终上传的音频 Blob 与 Base64
-  let finalBlob = mediaBlob;
-  let finalFormat = mediaFormat;
+  let finalBlob = null;
+  let finalFormat = 'wav';
 
-  // 如果 MediaRecorder 没产生数据，回退到 PCM 16kHz WAV
-  if (!finalBlob && pcmAudioBuffers.length > 0) {
+  // 严格优先采用 16kHz PCM WAV（工业级标准无损采样，100% 兼容 iOS/Android/微信及百炼 ASR 引擎）
+  if (pcmAudioBuffers && pcmAudioBuffers.length > 0) {
     try {
       let totalLen = 0;
       for (const b of pcmAudioBuffers) totalLen += b.length;
@@ -2072,6 +2407,20 @@ async function finishAndSendVoiceRecording() {
         merged.set(b, offset);
         offset += b.length;
       }
+
+      // 幼儿轻声说话智能数字前级自适应增益与平滑限幅（Adaptive Pre-amp Boost）
+      let maxPeak = 0;
+      for (let i = 0; i < merged.length; i++) {
+        const abs = Math.abs(merged[i]);
+        if (abs > maxPeak) maxPeak = abs;
+      }
+      if (maxPeak > 0.0005 && maxPeak < 0.7) {
+        const boostGain = Math.min(15.0, 0.85 / maxPeak);
+        for (let i = 0; i < merged.length; i++) {
+          merged[i] = Math.max(-1.0, Math.min(1.0, merged[i] * boostGain));
+        }
+      }
+
       const targetRate = 16000;
       const downsampled = downsampleBuffer(merged, audioSampleRate || 48000, targetRate);
       finalBlob = encodeWAV(downsampled, targetRate);
@@ -2079,6 +2428,45 @@ async function finishAndSendVoiceRecording() {
     } catch(err) {
       AppLogger.log('WARN', 'PCM 编码 WAV 异常', err.message);
     }
+  }
+
+  // 关键兜底：如果 PCM 为空，通过浏览器原生 decodeAudioData 将 mediaBlob (iOS mp4/aac 或 webm) 强转为 16kHz WAV！
+  if (!finalBlob && mediaBlob && mediaBlob.size > 200) {
+    try {
+      const DecodeContext = window.AudioContext || window.webkitAudioContext;
+      const decodeCtx = new DecodeContext();
+      const ab = await mediaBlob.arrayBuffer();
+      const audioBuf = await decodeCtx.decodeAudioData(ab);
+      const rawData = audioBuf.getChannelData(0);
+
+      // 轻声说话前级增益与自适应放大
+      let maxPeak = 0;
+      for (let i = 0; i < rawData.length; i++) {
+        const abs = Math.abs(rawData[i]);
+        if (abs > maxPeak) maxPeak = abs;
+      }
+      const boosted = new Float32Array(rawData.length);
+      const boostGain = (maxPeak > 0.0005 && maxPeak < 0.7) ? Math.min(15.0, 0.85 / maxPeak) : 1.0;
+      for (let i = 0; i < rawData.length; i++) {
+        boosted[i] = Math.max(-1.0, Math.min(1.0, rawData[i] * boostGain));
+      }
+
+      const targetRate = 16000;
+      const downsampled = downsampleBuffer(boosted, audioBuf.sampleRate || 44100, targetRate);
+      finalBlob = encodeWAV(downsampled, targetRate);
+      finalFormat = 'wav';
+      try { decodeCtx.close(); } catch(e) {}
+      AppLogger.log('AUDIO', `mediaBlob 成功转换为 16kHz WAV (${finalBlob.size} 字节)`);
+    } catch(err) {
+      AppLogger.log('WARN', '媒体录音转码 WAV 失败', err.message);
+      finalBlob = mediaBlob;
+      finalFormat = mediaFormat;
+    }
+  }
+
+  if (!finalBlob) {
+    finalBlob = mediaBlob;
+    finalFormat = mediaFormat;
   }
 
   if (finalBlob && finalBlob.size > 100) {
@@ -2204,10 +2592,14 @@ function handleEscapeAction() {
 
 // 10. Settings & Personalization Modal
 function openLLMModal() {
-  selectAppTheme(currentTheme);
-  loadVoicePersonas();
-  loadCustomApiConfig();
   if (llmModal) llmModal.classList.remove('hidden');
+  try {
+    selectAppTheme(currentTheme);
+    loadVoicePersonas();
+    loadCustomApiConfig();
+  } catch (err) {
+    console.warn('Settings initialization warning:', err);
+  }
 }
 
 function closeLLMModal() {

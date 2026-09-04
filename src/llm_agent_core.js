@@ -23,9 +23,9 @@ class LLMAgentCore {
         if (tp && tp.options && (tp.options.apiKey || tp.options.key)) {
           this.apiKey = tp.options.apiKey || tp.options.key;
           this.baseURL = tp.options.baseURL || 'https://token-plan.cn-beijing.maas.aliyuncs.com/compatible-mode/v1';
-          this.model = 'qwen3.8-flash';
+          this.model = 'qwen3.8-max';
           this.timeout = 10000;
-          console.log('[LLMAgentCore] 成功自动注入 OpenCode tongyi-tp (qwen3.8-flash) 配置！');
+          console.log('[LLMAgentCore] 成功自动注入 OpenCode tongyi-tp (qwen3.8-max) 配置！');
           return;
         }
       }
@@ -36,7 +36,7 @@ class LLMAgentCore {
     // 备用系统环境变量
     this.apiKey = process.env.DASHSCOPE_API_KEY || process.env.QWEN_API_KEY || process.env.LLM_API_KEY || '';
     this.baseURL = process.env.DASHSCOPE_BASE_URL || 'https://dashscope.aliyuncs.com/compatible-mode/v1';
-    this.model = process.env.QWEN_MODEL || 'qwen3.8-flash';
+    this.model = process.env.QWEN_MODEL || 'qwen3.8-max';
     this.timeout = 10000;
   }
 
